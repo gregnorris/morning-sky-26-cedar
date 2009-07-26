@@ -1,0 +1,9 @@
+%h2
+  = "New Recipient:"
+-#= render(:partial => "shared/flashes")
+- form_for(@recipient, :url => {:action => "create"}) do |f|
+  %fieldset
+    %ul
+      = render :partial => "form", :locals => {:f => f}
+      %li.form-field
+        = f.submit "Create"

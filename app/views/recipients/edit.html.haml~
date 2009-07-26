@@ -1,0 +1,9 @@
+%h2
+  = "Edit Recipient: #{@recipient.name}"
+= render(:partial => "shared/flashes")
+- form_for @recipient, :url => {:action => "update"}, :html => {:method => :put} do |f|
+  %fieldset
+    %ul
+      = render :partial => "form", :locals => {:f => f}
+      %li.form-field
+        = f.submit "Save"

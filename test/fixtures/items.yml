@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  category: MyString
+  title: MyString
+  description: MyString
+  warehouse_section: 1
+  date_recieved: 2009-07-26
+  date_given: 2009-07-26
+
+two:
+  category: MyString
+  title: MyString
+  description: MyString
+  warehouse_section: 1
+  date_recieved: 2009-07-26
+  date_given: 2009-07-26

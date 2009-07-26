@@ -1,0 +1,10 @@
+%tr
+  %td
+    = recipient.first_name
+  %td
+    = recipient.last_name
+  %td
+    = "#{recipient.phone_primary} <br>  #{recipient.phone_secondary}"
+  %td
+    = "#{link_to('Show', recipients_path(recipient))}"
+    = " | #{link_to('Edit', edit_recipient_path(recipient))}"

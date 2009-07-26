@@ -1,0 +1,1 @@
+= index_display("Manufacturers","Add manufacturer",[:fulfillment_admin, :manufacturer],'search_manufacturers','manufacturer_index')
