@@ -43,8 +43,6 @@ class RecipientsController < ApplicationController
   # POST /recipients.xml
   def create
     @recipient = Recipient.new(params[:recipient])
-    
-    raise @recipient.inspect
 
     respond_to do |format|
       if @recipient.save

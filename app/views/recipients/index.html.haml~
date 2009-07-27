@@ -1,1 +1,3 @@
-= index_display("Manufacturers","Add manufacturer",[:fulfillment_admin, :manufacturer],'search_manufacturers','manufacturer_index')
+= index_display("Recipients","Add recipient", 'recipient_index')
+
+- jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])

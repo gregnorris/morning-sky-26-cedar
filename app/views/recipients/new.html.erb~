@@ -1,0 +1,6 @@
+<% form_for(@recipient, :url => {:action => "create"}, :builder => SemanticFormBuilder, :html => {:method => :post}) do |f|
+  field_set_tag "New Recipient" do %>
+    <%= f.text_field :first_name, :label => "First Name", :required => true %>
+    <%= f.text_field :last_name, :label => "Last Name", :required => true %>
+    <%= f.submit("Save") %>
+<% end %>

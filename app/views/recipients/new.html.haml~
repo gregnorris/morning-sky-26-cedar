@@ -1,6 +1,19 @@
 %h2
-  = "New Recipient:"
--#= render(:partial => "shared/flashes")
-- form_for(@recipient, :url => {:action => "create"}) do |f|
-  = render :partial => "form", :locals => {:f => f}
-    = f.submit "Create"
+  
+- semantic_form_for(@recipient, :url => {:action => "create"}, :html => {:method => :post}) do |f|
+  - field_set_tag "Create Recipient" do
+    %li
+      = f.input :first_name
+    = f.input :last_name
+    = f.input :phone_primary
+    = f.input :phone_secondary, :required => false
+    = f.input :email, :required => false
+    = f.input :health_care_number, :required => false
+    = f.input :status
+    = f.input :case_worker_id, :required => false
+    = f.input :bedrooms, :required => false
+    = f.input :number_of_adults, :required => false
+    = f.input :number_of_children, :required => false
+    = f.input :comments, :as => :text, :required => false
+    - f.buttons do
+      = f.commit_button
