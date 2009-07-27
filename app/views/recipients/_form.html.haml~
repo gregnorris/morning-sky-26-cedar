@@ -1,9 +1,54 @@
 %li.form-field.required
   = f.label :first_name
-  = f.text_field :last_name
+  = f.text_field :first_name
 %li.form-field.required
   = f.label :last_name
   = f.text_field :last_name
 %li.form-field
   = f.label :phone_primary, "Phone Number (primary)"
   = f.text_field :phone_primary
+%li.form-field
+  = f.label :phone_secondary, "Phone Number (secondary)"
+  = f.text_field :phone_secondary
+%li.form-field
+  = f.label :email
+  = f.text_field :email
+%li.form-field
+  = f.label :health_care_number
+  = f.text_field :health_care_number
+%li.form-field
+  = f.label :status
+  = f.text_field :status
+%li.form-field
+  = f.label 'Case Worker'
+  -# select from case workers, or add new
+  
+%li.form-field
+  = f.label :bedrooms
+  = f.text_field :bedrooms
+
+%li.form-field
+  = f.label :number_of_adults
+  = f.text_field :number_of_adults
+  
+%li.form-field
+  = f.label :number_of_children
+  = f.text_field :number_of_children
+
+%li.form-field
+  = f.label :comments
+  = f.text_area :comments
+  
+  
+    = f.input :first_name
+  = f.input :last_name
+  = f.input :phone_primary
+  = f.input :phone_secondary, :required => false
+  = f.input :email, :required => false
+  = f.input :health_care_number, :required => false
+  = f.input :status
+  = f.input :case_worker_id, :required => false
+  = f.input :bedrooms, :required => false
+  = f.input :number_of_adults, :required => false
+  = f.input :number_of_children, :required => false
+  = f.input :comments, :as => :text, :required => false

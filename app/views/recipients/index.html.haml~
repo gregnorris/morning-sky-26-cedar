@@ -1,3 +1,2 @@
-= index_display("Recipients","Add recipient", 'recipient_index')
-
-- jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])
+-#= index_display("Recipients","Add recipient", 'recipient_index')
+= jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])

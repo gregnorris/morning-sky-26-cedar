@@ -1,0 +1,3 @@
+- column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', 'Actions']
+
+= collection_index_display(column_titles, @recipients, 'Recipient', 'recipient')
