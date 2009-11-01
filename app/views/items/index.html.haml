@@ -1,0 +1,14 @@
+%h2
+  Items
+= render(:partial => "shared/flashes")
+
+= button_to("Create a new Item", new_item_path, :method => :get)
+<br>
+
+%table.data
+  - column_titles = ['ID', 'Item Code', 'Name', 'Description', 'Icon', 'Image', 'Actions']
+  -for title in column_titles
+    %th
+      = title
+  = render(:partial => 'item', :collection => @the_things)
+

@@ -1,2 +1,54 @@
+%h2
+  Recipients
+= render(:partial => "shared/flashes")
+
+= button_to("Create a new Recipient", new_recipient_path, :method => :get)
+<br>
+
+%table.data
+  - column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', '# Adults', '# Children', 'Actions']
+  -for title in column_titles
+    %th
+      = title
+  = render(:partial => 'recipient', :collection => @the_things)
 -#= index_display("Recipients","Add recipient", 'recipient_index')
-= jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])
+-#= jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])
+
+%br
+%br
+%h3
+  Search:
+
+-# from: http://winnipeg.ca/census/2006/
+= image_tag "winnipeg_neighborhood_sections.gif", :border => "0", :width => "420", :height => "457", :usemap => "#Map", :alt => "Map of Neighbourhood Clusters"
+<map name="Map">
+<area shape="poly" coords="35,110,34,162,9,164,11,192,16,191,17,209,29,205,34,199,42,200,44,207,59,211,69,213,74,220,76,212,77,204,78,201,78,193,79,153,91,151,91,108,70,107" href="Community Areas/St. James-Assiniboia Neighbourhood Cluster/Neighbourhoods/St. James-Assiniboia West/default.asp" />
+<area shape="poly" coords="94,132,93,156,83,158,82,202,100,197,111,194,124,191,134,195,145,193,150,191,151,183,155,179,157,166,164,165,165,152,169,139,161,131,150,130,146,116,129,109,127,132" href="Community Areas/St. James-Assiniboia Neighbourhood Cluster/Neighbourhoods/St. James-Assiniboia East/default.asp" />
+<area shape="poly" coords="9,260,8,302,59,302,75,299,84,297,106,295,116,292,139,293,158,281,152,270,162,238,151,239,155,195,140,199,130,196,80,205,79,218,79,224,72,223,67,215,58,213,50,210,42,205,34,204,35,259" href="Community Areas/Assiniboine South Neighbourhood Cluster/default.asp" />
+<area shape="poly" coords="143,295,144,316,172,300,184,289,202,281,218,278,214,267,217,262,225,264,231,261,230,255,224,248,230,245,238,245,242,242,232,228,223,233,217,231,214,229,167,239,158,269,161,285" href="Community Areas/Fort Garry Neighbourhood Cluster/Neighbourhoods/Fort Garry North/default.asp" />
+
+<area shape="poly" coords="152,447,239,399,228,388,226,358,216,363,212,357,216,353,233,347,232,339,231,328,238,317,246,322,248,316,239,304,247,297,252,290,245,288,233,293,225,291,221,282,206,285,187,293,176,302,150,316" href="Community Areas/Fort Garry Neighbourhood Cluster/Neighbourhoods/Fort Garry South/default.asp" />
+<area shape="poly" coords="245,405,243,399,234,386,232,356,238,349,239,340,235,333,239,321,248,325,253,321,252,311,243,305,254,294,254,285,241,286,231,288,228,279,277,254,304,297,339,280,342,311,323,327,322,337,330,342,327,349,291,371,289,387" href="Community Areas/St. Vital Neighbourhood Cluster/Neighbourhoods/St. Vital South/default.asp" />
+<area shape="poly" coords="246,201,256,196,261,208,263,228,273,246,223,279,217,268,227,268,233,262,230,254,227,249,235,249,244,246,244,236,236,233,234,229" href="Community Areas/St. Vital Neighbourhood Cluster/Neighbourhoods/St. Vital North/default.asp" />
+<area shape="poly" coords="308,292,339,275,341,198,333,173,261,159,270,196,275,215,277,233,284,241,283,255" href="Community Areas/St. Boniface Neighbourhood Cluster/Neighbourhoods/St. Boniface East/default.asp" />
+<area shape="poly" coords="250,156,233,157,234,168,232,180,225,190,227,200,239,195,247,197,254,190" href="Community Areas/St. Boniface Neighbourhood Cluster/Neighbourhoods/St. Boniface West/default.asp" />
+<area shape="poly" coords="301,161,333,170,344,194,385,193,387,171,410,171,413,152,402,127,340,127,310,138" href="Community Areas/Transcona Neighbourhood Cluster/default.asp" />
+<area shape="poly" coords="360,98" href="#" />
+<area shape="poly" coords="364,98,320,74,277,134,294,146,308,134,335,123,337,102" href="Community Areas/River East Neighbourhood Cluster/Neighbourhoods/River East East/default.asp" />
+<area shape="poly" coords="296,56,317,70,276,125,255,115,257,95,269,88,269,82,270,75,280,74" href="Community Areas/River East Neighbourhood Cluster/Neighbourhoods/River East West/default.asp" />
+
+<area shape="poly" coords="249,118,266,129,263,136,287,150,291,155,289,160,272,156,256,153,251,146,241,139,235,129" href="Community Areas/River East Neighbourhood Cluster/Neighbourhoods/River East South/default.asp" />
+<area shape="poly" coords="286,57,271,45,253,62,226,48,221,58,203,52,202,78,201,85,247,107,249,92,263,87,261,73,269,69,275,70" href="Community Areas/Seven Oaks Neighbourhood Cluster/Neighbourhoods/Seven Oaks East/default.asp" />
+<area shape="poly" coords="266,42,254,57,232,43,219,52,199,49,199,80,197,85,167,69,170,58,129,58,131,37,200,36,204,10,209,6" href="Community Areas/Seven Oaks Neighbourhood Cluster/Neighbourhoods/Seven Oaks West/default.asp" />
+<area shape="poly" coords="129,61,161,60,163,112,131,103" href="Community Areas/Inkster Neighbourhood Cluster/Neighbourhoods/Inkster West/default.asp" />
+<area shape="poly" coords="168,74,192,88,188,100,190,105,190,114,191,120,191,129,190,141,174,135,165,127,158,126,157,112,166,115" href="Community Areas/Inkster Neighbourhood Cluster/Neighbourhoods/Inkster East/default.asp" />
+<area shape="poly" coords="176,143,171,153,169,166,161,169,161,182,161,189,181,184,190,190,198,186,198,174,201,171,200,155" href="Community Areas/Downtown Neighbourhood Cluster/Neighbourhoods/Downtown West/default.asp" />
+<area shape="poly" coords="206,193,201,185,205,174,202,153,192,145,193,131,222,146,228,155,229,163,233,171,225,176,214,182,207,183" href="Community Areas/Downtown Neighbourhood Cluster/Neighbourhoods/Downtown East/default.asp" />
+<area shape="poly" coords="199,88,192,102,193,117,203,123,209,114,233,125,249,111" href="Community Areas/Point Douglas Neighbourhood Cluster/Neighbourhoods/Point Douglas North/default.asp" />
+<area shape="poly" coords="211,114,205,125,196,122,202,130,217,140,227,146,231,154,241,150,250,150,242,144,234,135,231,126" href="Community Areas/Point Douglas Neighbourhood Cluster/Neighbourhoods/Point Douglas South/default.asp" />
+
+<area shape="poly" coords="160,194,155,235,207,225,215,198,201,205,195,201,199,196,197,190,188,194,177,190" href="Community Areas/River Heights Neighbourhood Cluster/Neighbourhoods/River Heights West/default.asp" />
+<area shape="poly" coords="226,180,205,188,206,196,215,197,212,214,209,227,222,226,237,224,242,214,244,201,228,204,222,200,222,191" href="Community Areas/River Heights Neighbourhood Cluster/Neighbourhoods/River Heights East/default.asp" />
+<area shape="rect" coords="313,10,396,47" href="javascript: alert('Click on a section to list all people on file living in that area.');" title="How to search using the map" />
+</map>
+

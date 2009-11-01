@@ -1,9 +1,17 @@
+- @recipient = @the_thing
 %h2
   = "Edit Recipient: #{@recipient.name}"
 = render(:partial => "shared/flashes")
-- form_for @recipient, :url => {:action => "update"}, :html => {:method => :put} do |f|
-  %fieldset
-    %ul
-      = render :partial => "form", :locals => {:f => f}
-      %li.form-field
-        = f.submit "Save"
+%div.left_half
+  - form_for @recipient, :url => {:action => "update"}, :html => {:method => :put} do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+        
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', recipient_path(@recipient)
+%div.right_half
+  = image_tag "winnipeg_neighborhood_sections.gif", :border => "0", :width => "420", :height => "457", :usemap => "#Map", :alt => "Map of Neighbourhood Clusters"
+
+

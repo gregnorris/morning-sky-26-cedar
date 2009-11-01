@@ -1,0 +1,19 @@
+%tr
+  %td
+    = item.id
+  %td
+    = item.item_code
+  %td
+    = item.name
+  %td
+    = item.description
+  %td
+    = item.icon_path
+  %td
+    = item.image_path
+  %td
+    = link_to_icon(:view, item_path(item))
+    |
+    = link_to_icon(:edit, edit_item_path(item))
+    |
+    = link_to_icon(:delete, polymorphic_path([item]))

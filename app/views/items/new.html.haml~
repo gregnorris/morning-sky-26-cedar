@@ -1,0 +1,11 @@
+%h3
+  Create New Item
+%div.left_half
+  - form_for(@item, :url => {:action => "create"}, :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', items_path
+

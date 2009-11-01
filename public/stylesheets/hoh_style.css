@@ -1,0 +1,20 @@
+/*med_blue = #086CA2
+light_blue = #3C9DD0
+lighter_blue = #64AAD0
+dark_blue = #034569
+dark_orange = #A63E00
+*/
+
+fieldset {
+  background-color: #64AAD0; 
+  }
+  
+td.form_label {
+  float: right;
+  font-weight: bold;
+  }
+  
+tr.form_field.required {
+  color: #A63E00;
+  }
+

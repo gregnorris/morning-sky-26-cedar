@@ -1,6 +1,45 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  CITY_SECTIONS = {
+    'Downtown East' => 1,
+    'Downtown West' => 2,
+    'Point Douglas North' => 3,
+    'Point Douglas South' => 4,
+    'St. Boniface West' => 5,
+    'St. Boniface East' => 6,
+    'River Heights East' => 7,
+    'River Heights West' => 8,
+    'River East South' => 9,
+    'River East West' => 10,
+    'River East East' => 11,
+    'Transcona' => 12,
+    'St. Vital North' => 13,
+    'St. Vital South' => 14,
+    'Fort Garry North' => 15,
+    'Fort Garry South' => 16,
+    'Assiniboine South' => 17,
+    'St. James-Assiniboia West' => 18,
+    'St. James-Assiniboia East' => 19,
+    'Inkster West' => 20,
+    'Inkster East' => 21,
+    'Seven Oaks West' => 22,
+    'Seven Oaks East' => 23
+  }
+  
+  
+  # valid png icons are: edit, view, index, delete, package, deliver
+  def link_to_icon(icon, the_path)
+    html_options = (icon == :delete) ? {
+                    :method   => :delete,
+                    :confirm  => "Are you sure? Clicking 'OK' will remove this record permanently!",
+                    :title    => "Delete",
+                    :alt_text => "Delete"
+                    } : {}
+    link_to(image_tag("#{icon.to_s}.png", :alt => "#{icon.to_s.upcase}"), the_path, {:title => "#{icon.to_s.upcase}"}.merge(html_options))
+  end
+  
+  
   #--------------------------------------------------------------------------
   # Common display formatting for pagination links and descriptive text.
   # (Meant for use in the thead and tfoot of an index table.)
@@ -40,7 +79,7 @@ module ApplicationHelper
   #       search_partial         The name (or path) of the search partial that will be rendered above the index table
   #       index_partial          The name (or path) of the index partial that will be rendered
   #
-  def index_display(page_title, title_for_add_button, search_partial, index_partial)
+  def index_display(page_title, title_for_add_button, index_partial)
     src = ''
     src << "<h2> #{page_title}</h2>"
     src << render(:partial => "shared/flashes")
@@ -91,5 +130,14 @@ module ApplicationHelper
     src
   end
   #--------------------------------------------------------------------------
+  
+  def show_field(field, title)
+    src = ''
+    src = '<li>'
+    src = "<label>#{title}</label>"
+    src = "#{field}"
+    src = '&nbsp;</li>'
+    
+  end
 
 end

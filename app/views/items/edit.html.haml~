@@ -1,0 +1,11 @@
+%h3
+  Edit Item
+%div.left_half
+  - @item = @the_thing
+  - form_for(@item, :url => {:action => "update"}, :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', item_path(@item)
