@@ -8,4 +8,4 @@
         = render :partial => "form", :locals => {:f => f}
       = f.submit "Save"
       |
-      = link_to 'Cancel', item_path(@item)
+      = link_to 'Cancel', items_path

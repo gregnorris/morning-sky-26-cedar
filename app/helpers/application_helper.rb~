@@ -133,11 +133,34 @@ module ApplicationHelper
   
   def show_field(field, title)
     src = ''
-    src = '<li>'
-    src = "<label>#{title}</label>"
-    src = "#{field}"
-    src = '&nbsp;</li>'
-    
+    src << '<li>'
+    src << "<label>#{title}</label>"
+    src << "#{field}"
+    src << '&nbsp;</li>'
+    src
+  end
+  
+  def table_row(value)
+    "<td>#{value}</td>"
+  end
+  
+  def table_header(items, column_titles, row_partial, row_partial_local_opts = {})
+    src = ''
+    src << "<table class='data'>"
+    src << '<thead>'
+    src << '<tr>'
+    for title in column_titles do
+      src << "<th>#{title}</th>"
+    end
+    src << '</tr>'
+    src << '</thead>'
+    if (!items.blank?) then
+      src << '<tbody>'
+      src << render(:partial => row_partial, :collection => items, :locals => row_partial_local_opts)
+      src << '</tbody>'
+    end
+    src << '</table>'
+    src
   end
 
 end

@@ -44,4 +44,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :recipients
   map.resources :items
+  map.resources :donors
+  map.resources :deliveries
+  map.resources :delivered_items
+  
+  
 end

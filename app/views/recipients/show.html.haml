@@ -1,125 +1,50 @@
-%div.boxtitle
-  - @recipient = @the_thing
-  = "Recipient: #{@recipient.name}"
-%div.boxcontent
-  %ul.show_list
-    = show_field(@recipient.name, 'Name')
-    %li
-      %label
-        Name
-      = @recipient.name
-    %li
-      %label
-        Phone Numbers
-      = "#{@recipient.phone_primary} (primary) " 
-      = " / #{@recipient.phone_secondary} (secondary)"
-    %li
-      %label
-        Email
-      = @recipient.email
-      &nbsp;
-    %li
-      %label
-        = 'Health Care #'
-      = @recipient.health_care_number
-      &nbsp;
-    %li
-      %label
-        Status
-      = @recipient.status
-      &nbsp;
-    %li
-      %label
-        City Section
-      = @recipient.city_section
-      &nbsp;
-    %li
-      %label
-        Street
-      = @recipient.street_1
-      &nbsp;
-    %li
-      %label
-        Buzzer Number
-      = @recipient.buzzer_number
-      &nbsp;
-    %li
-      %label
-        Level
-      = @recipient.level
-      &nbsp;
-    %li
-      %label
-        Elevator
-      = @recipient.elevator
-      &nbsp;
-    %li
-      %label
-        Directions
-      = @recipient.directions
-      &nbsp;
-    %li
-      %label
-        Move In Date
-      = @recipient.move_in_date
-      &nbsp;
+%div.left_half
+  %div.boxtitle
+    - @recipient = @the_thing
+    = "Recipient: #{@recipient.name}"
+  %div.boxcontent
+    %ul.show_list
+      = show_field(@recipient.name, 'Name')
+      = show_field("#{@recipient.phone_primary} (primary) " + " / #{@recipient.phone_secondary} (secondary)", 'Phone Numbers')
+      = show_field(@recipient.health_care_number, 'Health Care #')
+      = show_field(@recipient.status, 'Status')
+      = show_field(@recipient.city_section, 'City Section')
+      = show_field(@recipient.street_1, 'Street')
+      = show_field(@recipient.buzzer_number, 'Buzzer Number')
+      = show_field(@recipient.level, 'Level')
+      = show_field(@recipient.elevator, 'Elevator')
+      = show_field(@recipient.directions, 'Directions')
+      = show_field(@recipient.move_in_date.andand.strftime("%b %d, %y"), 'Move In Date')
+      = show_field(@recipient.previous_address, 'Previous Address')
+      = show_field(@recipient.case_worker_id, 'Case Worker')
+      = show_field(@recipient.bedrooms, 'Bedrooms')
+      = show_field(@recipient.number_of_adults, 'Adults')
+      = show_field(@recipient.number_of_children, 'Children')
+      = show_field(@recipient.additional_information, 'Additional Info')
+      = show_field(@recipient.work_school_schedule, 'Work/School Schedule')
+      = show_field(@recipient.donation, 'Donation ($)')
+      = show_field(@recipient.comments, 'Comments')
+      = show_field(@recipient.intake_date.andand.strftime("%b %d, %y %H:%M"), 'Intake Date')
+      = show_field(@recipient.referred_by, 'Referred By')
+        
+  = link_to 'Edit', edit_recipient_path(@recipient)
+  |
+  = link_to 'Index', recipients_path
 
-    %li
-      %label
-        Previous Address
-      = @recipient.previous_address
-      &nbsp;
-    %li
-      %label
-        Case Worker     
-      &nbsp;
-    %li
-      %label
-        Bedrooms
-      = @recipient.bedrooms
-      &nbsp;
-    %li
-      %label
-        Adults
-      = @recipient.number_of_adults
-      &nbsp;
-    %li
-      %label
-        Children
-      = @recipient.number_of_children
-      &nbsp;
-    %li
-      %label
-        Additional Info
-      = @recipient.additional_information
-      &nbsp;
-    %li
-      %label
-        Work/School Schedule
-      = @recipient.work_school_schedule
-      &nbsp;
-    %li
-      %label
-        Donation ($)
-      = @recipient.donation
-      &nbsp;
-    %li
-      %label
-        Comments
-      = @recipient.comments
-      &nbsp;
-    %li
-      %label
-        Intake Date
-      = @recipient.intake_date
-      &nbsp;
-    %li
-      %label
-        Referred By
-      = @recipient.referred_by
-      &nbsp;
-      
-= link_to 'Edit', edit_recipient_path(@recipient)
-|
-= link_to 'Index', recipients_path
-
+%div.right_half
+  %div.boxtitle
+    Deliveries
+  %div.boxcontent
+    = render :partial => "delivery", :locals => {:recipient => @recipient}
+  %table
+    %tr
+      %td
+        = button_to "Schedule Delivery", new_delivery_path()
+      %td
+        = image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
+    
+  %br
+  %br
+  %div.boxtitle
+    Deliveries
+  %div.boxcontent

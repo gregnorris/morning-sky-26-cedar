@@ -1,16 +1,10 @@
 %tr
-  %td
-    = item.id
-  %td
-    = item.item_code
-  %td
-    = item.name
-  %td
-    = item.description
-  %td
-    = item.icon_path
-  %td
-    = item.image_path
+  = table_row(item.id)
+  = table_row(item.item_code)
+  = table_row(item.name)
+  = table_row(item.description)
+  = table_row(item.icon_path)
+  = table_row(item.image_path)
   %td
     = link_to_icon(:view, item_path(item))
     |

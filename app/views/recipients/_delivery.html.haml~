@@ -1,0 +1,8 @@
+%br
+- delivery = @delivery.nil? ? Delivery.new : @delivery
+- form_for(:delivery, delivery, :url => deliveries_path(:action => "create"), :html => {:method => :post}) do |f|
+  %fieldset
+    %table
+      = render :partial => "deliveries/form", :locals => {:f => f}
+    = f.hidden_field :recipient_id, :value => recipient.id
+    = f.submit "Create"

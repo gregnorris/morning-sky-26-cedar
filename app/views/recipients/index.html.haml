@@ -5,14 +5,8 @@
 = button_to("Create a new Recipient", new_recipient_path, :method => :get)
 <br>
 
-%table.data
-  - column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', '# Adults', '# Children', 'Actions']
-  -for title in column_titles
-    %th
-      = title
-  = render(:partial => 'recipient', :collection => @the_things)
--#= index_display("Recipients","Add recipient", 'recipient_index')
--#= jqgrid("Recipients", "recipients", recipients_path, [{:field => "first_name", :label => "First Name"} ])
+- column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', '# Adults', '# Children', 'Actions']
+= table_header(@the_things, column_titles, 'recipient')
 
 %br
 %br

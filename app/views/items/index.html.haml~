@@ -5,11 +5,5 @@
 = button_to("Create a new Item", new_item_path, :method => :get)
 <br>
 
-%table.data
-  - column_titles = ['ID', 'Item Code', 'Name', 'Description', 'Icon', 'Image', 'Actions']
-  -for title in column_titles
-    %th
-      = title
-  - raise @the_things.last.inspect
-  = render(:partial => 'item', :collection => @the_things)
+= table_header(@the_things, ['ID', 'Item Code', 'Name', 'Description', 'Icon', 'Image', 'Actions'], 'item')
 

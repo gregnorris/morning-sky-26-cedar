@@ -1,0 +1,11 @@
+%h3
+  Create New Donor
+%div.left_half
+  - @donor = @the_thing
+  - form_for(@donor, :url => {:action => "create"}, :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', donors_path

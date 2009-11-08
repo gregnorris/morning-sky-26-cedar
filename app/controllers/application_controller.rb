@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -67,7 +68,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "#{@the_thing.class.to_s} was successfully created."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to :action => the_update_redirect,  }  #redirect_to(@the_thing)
+        format.html { redirect_to :action => the_update_redirect  }  #redirect_to(@the_thing)
         format.xml  { render :xml => @the_thing, :status => :created, :location => @the_thing }
       else
         format.html { render :action => "new" }
@@ -88,7 +89,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "#{@the_thing.class.to_s} was successfully updated."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to :action => the_update_redirect,  }  #redirect_to(@the_thing)
+        format.html { redirect_to :action => the_update_redirect  }  #redirect_to(@the_thing)
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

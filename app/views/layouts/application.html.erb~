@@ -31,7 +31,7 @@
 </tr>
 </table>
 
-<hr size="10" color="#034569">
+<hr size="10" color="blue">
 
 
 <%= yield %>

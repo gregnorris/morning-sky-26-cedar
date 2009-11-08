@@ -1,0 +1,9 @@
+%h2
+  Donors
+= render(:partial => "shared/flashes")
+
+= button_to("Create a new Donor", new_donor_path, :method => :get)
+<br>
+
+- column_titles = ['ID', 'Name', 'Phone', 'Donation Amount', 'City Section', 'Scheduled Pickup Time', 'Possible Future Pickup', 'Actions']
+= table_header(@the_things, column_titles, 'donor')

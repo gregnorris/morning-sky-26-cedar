@@ -1,7 +1,5 @@
 class ItemsController < ApplicationController
   
-  #MODEL_NAME = 'Item'
-  
   def the_model_name;   'Item'; end
   def the_model_symbol; :item;  end
   

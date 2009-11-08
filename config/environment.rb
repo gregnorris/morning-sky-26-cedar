@@ -36,7 +36,7 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
   
   config.gem 'haml'
-  #config.gem 'andand'
+  config.gem 'andand'
   #config.gem 'mime-types', :lib => 'mime/types'
   #config.gem 'daemons'
   #config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 

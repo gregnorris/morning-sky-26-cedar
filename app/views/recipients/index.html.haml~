@@ -5,6 +5,8 @@
 = button_to("Create a new Recipient", new_recipient_path, :method => :get)
 <br>
 
+- column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', '# Adults', '# Children', 'Actions']
+= table_header(@the_things, column_titles, 'recipient')
 %table.data
   - column_titles = ['ID', 'Name', 'Phone Numbers', 'Address', 'Status', '# Adults', '# Children', 'Actions']
   -for title in column_titles

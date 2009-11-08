@@ -25,18 +25,6 @@
     = f.text_field :email
 %tr.form_field
   %td.form_label
-    = f.label 'Health Care #'
-  %td  
-    = f.text_field :health_care_number
-%tr.form_field
-  %td.form_label
-    = f.label 'Status #'
-  %td  
-    = f.check_box :status
-
-
-%tr.form_field
-  %td.form_label
     = f.label :city_section
   %td  
     - sections = ApplicationHelper::CITY_SECTIONS.map{|s| s}
@@ -69,61 +57,17 @@
     = f.text_area :directions, :cols => 40, :rows => 4
 %tr.form_field
   %td.form_label
-    = f.label :move_in_date
+    = f.label :scheduled_pickup_time
   %td  
-    = f.date_select :move_in_date
+    = f.datetime_select :scheduled_pickup_time
 %tr.form_field
   %td.form_label
-    = f.label :previous_address
+    = f.label :possible_future_pickup_time
   %td  
-    = f.text_field :previous_address
-        
-%tr.form-field
-  %td.form_label
-    = f.label 'Case Worker'
-    -# select from case workers, or add new
+    = f.date_select :possible_future_pickup_time
 %tr.form_field
   %td.form_label
-    = f.label :bedrooms
+    = f.label :donation_amount
   %td  
-    = f.text_field :bedrooms, :size => 1
-%tr.form_field
-  %td.form_label
-    = f.label :number_of_adults
-  %td  
-    = f.text_field :number_of_adults, :size => 2
-%tr.form_field
-  %td.form_label
-    = f.label :number_of_children
-  %td  
-    = f.text_field :number_of_children, :size => 2
-%tr.form_field
-  %td.form_label
-    = f.label 'Additional Info'
-  %td  
-    = f.text_area :additional_information, :cols => 40, :rows => 2
-%tr.form_field
-  %td.form_label
-    = f.label 'Work/School Schedule'
-  %td  
-    = f.text_area :work_school_schedule, :cols => 40, :rows => 2
-%tr.form_field
-  %td.form_label
-    = f.label 'Donation ($)'
-  %td  
-    = f.text_field :donation, :size => 5
-%tr.form_field
-  %td.form_label
-    = f.label :comments
-  %td  
-    = f.text_area :comments, :cols => 40, :rows => 4
-%tr.form_field
-  %td.form_label
-    = f.label :intake_date
-  %td  
-    = f.date_select :intake_date
-%tr.form_field
-  %td.form_label
-    = f.label :referred_by
-  %td  
-    = f.text_field :referred_by, :size => 20
+    = f.text_field :donation_amount, :size => 5
+
