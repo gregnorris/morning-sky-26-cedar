@@ -1,0 +1,7 @@
+%tr
+  = table_row(delivery.scheduled_delivery_time.andand.strftime("%b %d, %y - %H:%M"))
+  = table_row(delivery.delivered_on.andand.strftime("%b %d, %y - %H:%M"))
+  = table_row(delivery.initialed_by)
+  = table_row(delivery.state)
+  %td
+    = link_to_icon(:edit, edit_recipient_delivery_path(recipient, delivery))

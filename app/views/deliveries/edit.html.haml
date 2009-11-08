@@ -1,0 +1,10 @@
+%h3
+  = "Edit Delivery for #{@recipient.name}"
+%div
+  - form_for(@the_thing, :url => recipient_delivery_path(@recipient), :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', recipient_path(@recipient)

@@ -32,14 +32,12 @@
   = link_to 'Index', recipients_path
 
 %div.right_half
-  %div.boxtitle
-    Deliveries
-  %div.boxcontent
-    = render :partial => "delivery", :locals => {:recipient => @recipient}
   %table
     %tr
       %td
-        = button_to "Schedule Delivery", new_delivery_path()
+        -#:popup => ["New Delivery", "status=0,location=0,toolbar=0,menubar=0,scrollbars=1,width=1050,resizable=1,directories=0"]
+        -#:target => '_blank
+        = button_to "Schedule New Delivery", new_recipient_delivery_path(@recipient), {:method => :get}
       %td
         = image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
     
@@ -48,3 +46,15 @@
   %div.boxtitle
     Deliveries
   %div.boxcontent
+    %table.data
+      %thead
+        %tr 
+          %td Scheduled Time
+          %td Delivered On
+          %td Initialed By
+          %td State
+          %td Actions
+        
+      %tbody
+        = render :partial => "deliveries/delivery", :collection => @recipient.deliveries, :locals => {:recipient => @recipient}
+        

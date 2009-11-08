@@ -1,0 +1,11 @@
+%h3
+  Create New Delivery
+%div.left_half
+  - form_for(Delivery.new, :url => recipient_deliveries_path(@recipient), :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', recipient_path(@recipient)
+

@@ -1,0 +1,30 @@
+class DeliveriesController < ApplicationController
+
+  def the_model_name;   'Delivery'; end
+  def the_model_symbol; :delivery;  end
+  def parent_model_name; 'Recipient'; end
+  
+  def the_update_redirect
+    {:controller => :recipients, :action => 'show', :id => @recipient}  #recipient_path(@recipient)
+  end
+  
+  def build_the_thing
+    @the_thing = @recipient.deliveries.build(params[:delivery])
+  end
+  
+  def set_the_thing
+    @the_thing = @recipient.deliveries.find(params[:id]) if params[:id] && params[:id] != 'new'
+  end
+
+  
+protected
+
+  def set_objects 
+    @recipient = Recipient.find(params[:recipient_id]) if params[:recipient_id]
+  end
+  
+  def lineage
+    [@recipient, @the_thing]
+  end
+  
+end

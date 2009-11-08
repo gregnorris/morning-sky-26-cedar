@@ -1,7 +1,7 @@
 %tr.form_field.required
   %td.form_label
     = f.label :call_recieved_at
-  %td  
+  %td
     = f.datetime_select :call_recieved_at
 %tr.form_field.required
   %td.form_label
@@ -10,27 +10,39 @@
     = f.datetime_select :scheduled_delivery_time 
 %tr.form_field
   %td.form_label
-    = f.label :visited_on_1
+    = f.label 'Visit Date'
   %td
-    = f.text_field :visited_on_1, :size => 20     
-%tr.form_field
-  %td.form_label
-    = f.label :visited_on_2
-  %td
-    = f.text_field :visited_on_2, :size => 20
-%tr.form_field
-  %td.form_label
-    = f.label :delivered_on
-  %td
-    = f.text_field :delivered_on, :size => 20
-%tr.form_field
+    = f.datetime_select :visited_on_1, {:include_blank => true, :default => nil}   
+    
   %td.form_label
     = f.label :initialed_by
   %td
     = f.text_field :initialed_by, :size => 10
+    
+%tr.form_field
+  %td.form_label
+    = f.label 'Visit 2 (if required)'
+  %td
+    = f.datetime_select :visited_on_2, {:include_blank => true, :default => nil}
+  
+  %td.form_label
+    = f.label :initialed_by
+  %td
+    = f.text_field :initialed_by, :size => 10
+    
+%tr.form_field
+  %td.form_label
+    = f.label :delivered_on
+  %td
+    = f.datetime_select :delivered_on, {:include_blank => true, :default => nil}
+  
 %tr.form_field
   %td.form_label
     = f.label :comments
   %td
     = f.text_area :comments, :cols => 40, :rows => 2
-= f.hidden_field :recipient_id
+%tr.form_field
+  %td.form_label
+    = f.label :state
+  %td
+    = f.text_field :state, :size => 10  

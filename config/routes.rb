@@ -42,12 +42,21 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
   
-  map.resources :recipients
+  map.resources :recipients do |recipient|
+    recipient.resources :deliveries do |delivery|
+      delivery.resources :delivered_items
+    end
+  end
+  
+  map.resources :donors do |donor|
+    map.resources :donor_items
+  end
+  
   map.resources :items
-  map.resources :donors
-  map.resources :deliveries
-  map.resources :delivered_items
-  map.resources :donor_items
+  
+  #map.resources :deliveries
+  #map.resources :delivered_items
+  #map.resources :donor_items
   
   
 end

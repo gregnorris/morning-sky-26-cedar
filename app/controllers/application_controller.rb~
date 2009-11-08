@@ -4,17 +4,30 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  
+  helper_method :lineage
+  
+  # gets called before every action
+  prepend_before_filter :set_objects
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
   # the default redirect for after create and update actions is the 'show' action
-  def the_update_redirect; 'show'; end
+  def the_update_redirect; {:action => 'show'}; end
   
+  def set_objects
+    set_the_thing
+  end
+  
+  # ex.  if the_model_name is a Recipient, the_model_symbol = :recipient
+  def build_the_thing
+    @the_thing = the_model_name.constantize.new(params[the_model_symbol])
+  end
   
   # ex. if MODEL_NAME = Recipient, then @the_thing = Recipient.find(params[:id]
   def set_the_thing
-    @the_thing = the_model_name.constantize.find(params[:id])
+    @the_thing = the_model_name.constantize.find(params[:id]) if params[:id] && params[:id] != 'new'
   end
   
   # GET /recipients
@@ -59,15 +72,14 @@ class ApplicationController < ActionController::Base
   # POST /recipients
   # POST /recipients.xml
   def create
-    # ex.  if @MODEL_NAME is a Recipient, the_model_symbol = :recipient
-    @the_thing = the_model_name.constantize.new(params[the_model_symbol])
+    build_the_thing
     
     respond_to do |format|
       if @the_thing.save
         flash[:notice] = "#{@the_thing.class.to_s} was successfully created."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to :action => the_update_redirect  }  #redirect_to(@the_thing)
+        format.html { redirect_to the_update_redirect  }  #redirect_to(@the_thing)
         format.xml  { render :xml => @the_thing, :status => :created, :location => @the_thing }
       else
         format.html { render :action => "new" }
@@ -88,7 +100,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "#{@the_thing.class.to_s} was successfully updated."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to :action => the_update_redirect  }  #redirect_to(@the_thing)
+        format.html { redirect_to the_update_redirect  }  #redirect_to(@the_thing)
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
