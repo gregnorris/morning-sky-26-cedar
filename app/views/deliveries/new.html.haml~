@@ -1,6 +1,6 @@
 %h3
   Create New Delivery
-%div.left_half
+%div
   - form_for(Delivery.new, :url => recipient_deliveries_path(@recipient), :html => {:method => :post}) do |f|
     %fieldset
       %table

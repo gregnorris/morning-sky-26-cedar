@@ -5,5 +5,6 @@
 = button_to("Create a new Item", new_item_path, :method => :get)
 <br>
 
-= table_header(@the_things, ['ID', 'Item Code', 'Name', 'Description', 'Icon', 'Image', 'Actions'], 'item')
+- column_titles = ['ID', 'Item Code', 'Name', 'Description', 'Icon', 'Image', 'Actions']
+= table_header(@the_things, column_titles, 'item')
 

@@ -1,12 +1,14 @@
-= table_row(item.id)
-= table_row(item.item_code)
-= table_row(item.name)
-= table_row(item.description)
-= table_row(item.icon_path)
-= table_row(item.image_path)
-%td
-  = link_to_icon(:view, item_path(item))
-  |
-  = link_to_icon(:edit, edit_item_path(item))
-  |
-  = link_to_icon(:delete, polymorphic_path([item]))
+%tr
+  = table_row(item.id)
+  = table_row(item.item_code)
+  = table_row(item.name)
+  = table_row(item.description)
+  %td
+    = image_tag(item.icon_path, :width => "50", :height =>"50") unless item.icon_path.blank?
+  -#= table_row(item.image_path)
+  %td
+    = link_to_icon(:view, item_path(item))
+    |
+    = link_to_icon(:edit, edit_item_path(item))
+    |
+    = link_to_icon(:delete, polymorphic_path([item]))

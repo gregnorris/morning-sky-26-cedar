@@ -1,0 +1,5 @@
+%div.boxtitle
+  Deliveries
+%div.boxcontent
+  - column_titles = ['Scheduled Time', 'Delivered On', 'Initialed By', 'State', 'Actions']
+  = table_header(@recipient.deliveries, column_titles, 'deliveries/delivery')     

@@ -36,25 +36,16 @@
     %tr
       %td
         -#:popup => ["New Delivery", "status=0,location=0,toolbar=0,menubar=0,scrollbars=1,width=1050,resizable=1,directories=0"]
-        -%:target => '_blank
+        -#:target => '_blank
         = button_to "Schedule New Delivery", new_recipient_delivery_path(@recipient), {:method => :get}
       %td
         = image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
     
   %br
   %br
+  = render "deliveries/deliveries"
   %div.boxtitle
     Deliveries
   %div.boxcontent
-    %table.data
-      %thead
-        %tr 
-          %td Scheduled Time
-          %td Delivered On
-          %td Initialed By
-          %td State
-          %td Actions
-        
-      %tbody
-        = render :partial => "deliveries/delivery", :collection => @recipient.deliveries, :locals => {:recipient => @recipient}
-        
+    - column_titles = ['Scheduled Time', 'Delivered On', 'Initialed By', 'State', 'Actions']
+    = table_header(@recipient.deliveries, column_titles, 'deliveries/delivery')        

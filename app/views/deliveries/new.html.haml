@@ -1,6 +1,7 @@
 %h3
   Create New Delivery
 %div
+  - @delivery = @the_thing
   - form_for(Delivery.new, :url => recipient_deliveries_path(@recipient), :html => {:method => :post}) do |f|
     %fieldset
       %table

@@ -43,18 +43,4 @@
     
   %br
   %br
-  %div.boxtitle
-    Deliveries
-  %div.boxcontent
-    %table.data
-      %thead
-        %tr 
-          %td Scheduled Time
-          %td Delivered On
-          %td Initialed By
-          %td State
-          %td Actions
-        
-      %tbody
-        = render :partial => "deliveries/delivery", :collection => @recipient.deliveries, :locals => {:recipient => @recipient}
-        
+  = render "deliveries/deliveries"      

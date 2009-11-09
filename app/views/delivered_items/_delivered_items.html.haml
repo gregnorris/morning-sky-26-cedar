@@ -1,0 +1,5 @@
+%div.boxtitle
+  Delivered Items
+%div.boxcontent
+  - column_titles = ['Item Code', 'Item Name', '', '# Requested', '# Delivered', 'Comments', 'Actions']
+  = table_header(@delivery.delivered_items, column_titles, 'delivered_items/delivered_item') 

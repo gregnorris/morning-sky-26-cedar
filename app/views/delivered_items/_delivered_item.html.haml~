@@ -1,0 +1,12 @@
+%tr
+  = table_row(delivered_item.item.item_code)
+  = table_row(delivered_item.item.name)
+  %td
+    = image_tag(item.icon_path, :width => "50", :height =>"50") unless item.icon_path.blank?
+  = table_row(delivered_item.number_requested)
+  = table_row(delivered_item.number_delivered)
+  = table_row(delivered_item.comments)
+  %td
+    = link_to_icon(:edit, edit_polymorphic_path([@recipient, @delivery, delivered_item]))
+    |
+    = link_to_icon(:delete, polymorphic_path([@recipient, @delivery, delivered_item]))

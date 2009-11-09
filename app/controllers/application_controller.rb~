@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
   # the default redirect for after create and update actions is the 'show' action
   def the_update_redirect; {:action => 'show'}; end
   
+  def the_delete_redirect; {:action => 'index'}; end
+  
   def set_objects
     set_the_thing
   end
@@ -24,6 +26,7 @@ class ApplicationController < ActionController::Base
   def build_the_thing
     @the_thing = the_model_name.constantize.new(params[the_model_symbol])
   end
+  
   
   # ex. if MODEL_NAME = Recipient, then @the_thing = Recipient.find(params[:id]
   def set_the_thing
@@ -58,6 +61,7 @@ class ApplicationController < ActionController::Base
   # GET /recipients/new.xml
   def new
     @the_thing = the_model_name.constantize.new
+    #build_children
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @the_thing }
@@ -67,6 +71,7 @@ class ApplicationController < ActionController::Base
   # GET /recipients/1/edit
   def edit
     set_the_thing
+    #build_children
   end
 
   # POST /recipients
@@ -79,7 +84,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "#{@the_thing.class.to_s} was successfully created."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to the_update_redirect  }  #redirect_to(@the_thing)
+        format.html { redirect_to the_update_redirect  }
         format.xml  { render :xml => @the_thing, :status => :created, :location => @the_thing }
       else
         format.html { render :action => "new" }
@@ -100,7 +105,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "#{@the_thing.class.to_s} was successfully updated."
         
         # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
-        format.html { redirect_to the_update_redirect  }  #redirect_to(@the_thing)
+        format.html { redirect_to the_update_redirect  }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

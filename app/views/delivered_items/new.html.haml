@@ -1,0 +1,11 @@
+%h3
+  Add Item to Delivery
+%div.left_half
+  - @delivered_item = @the_thing
+  - form_for(:delivered_item, :url => recipient_delivery_delivered_items_path(@recipient, @delivery), :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', edit_polymorphic_path([@recipient, @delivery])

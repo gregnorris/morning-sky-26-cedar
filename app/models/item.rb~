@@ -1,0 +1,9 @@
+class Item < ActiveRecord::Base
+
+
+  def self.items_for_select
+  
+  
+  end
+
+end

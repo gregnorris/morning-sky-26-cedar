@@ -4,4 +4,6 @@
   = table_row(delivery.initialed_by)
   = table_row(delivery.state)
   %td
-    = link_to_icon(:edit, edit_recipient_delivery_path(recipient, delivery))
+    = link_to_icon(:edit, edit_polymorphic_path([@recipient, delivery]))
+    |
+    = link_to_icon(:delete, polymorphic_path([@recipient, delivery]))
