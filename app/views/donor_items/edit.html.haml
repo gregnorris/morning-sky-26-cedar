@@ -1,0 +1,11 @@
+%h3
+  = "Edit Item given by Donor #{@donor.full_name}"
+%div.left_half
+  - @donor_item = @the_thing
+  - form_for(:donor_item, :url => donor_donor_item_path(@donor), :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', edit_polymorphic_path([@donor])

@@ -1,4 +1,7 @@
 class Donor < ActiveRecord::Base
+  
+  has_many :donor_items, :foreign_key => :delivery_id
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

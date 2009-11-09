@@ -46,5 +46,7 @@
   %td.form_label
     = f.label :state
   %td
-    = f.text_field :state, :size => 10  
+    -# reverse the values in the hash, so the dropdown will show the state strings
+    - states = Delivery::STATES.map{ |s| [s[1], s[0]]}
+    = f.select :state, states
 

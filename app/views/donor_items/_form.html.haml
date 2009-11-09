@@ -1,0 +1,20 @@
+%tr.form_field
+  %td.form_label
+    = f.label :item_id
+  %td
+    = f.select :item_id, Item.items_for_select
+%tr.form_field
+  %td.form_label
+    = f.label :number_donated
+  %td
+    = f.text_field :number_donated, :size => 5
+%tr.form_field
+  %td.form_label
+    = f.label :donated_on
+  %td
+    = f.date_select :donated_on, {:include_blank => true, :default => nil}   
+%tr.form_field
+  %td.form_label
+    = f.label :comments
+  %td
+    = f.text_area :comments, :cols => 40, :rows => 2

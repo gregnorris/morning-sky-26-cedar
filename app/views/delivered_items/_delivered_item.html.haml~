@@ -2,7 +2,10 @@
   = table_row(delivered_item.item.item_code)
   = table_row(delivered_item.item.name)
   %td
-    = image_tag(item.icon_path, :width => "50", :height =>"50") unless item.icon_path.blank?
+    - if !delivered_item.item.image_path.blank?
+      = image_tag(delivered_item.item.image_path, :width => "50", :height =>"50")
+    - elsif !delivered_item.item.icon_path.blank?
+      = image_tag(delivered_item.item.icon_path, :width => "50", :height =>"50")
   = table_row(delivered_item.number_requested)
   = table_row(delivered_item.number_delivered)
   = table_row(delivered_item.comments)

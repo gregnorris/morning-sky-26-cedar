@@ -11,4 +11,8 @@
       = link_to 'Cancel', donors_path
 %div.right_half
   = image_tag "winnipeg_neighborhood_sections.gif", :border => "0", :width => "420", :height => "457", :usemap => "#Map", :alt => "Map of Neighbourhood Clusters"
-
+%div.clear_both
+  %br
+  = button_to "Add Item to this Donor", new_donor_donor_item_path(@donor), {:method => :get}
+  %br
+  = render "donor_items/donor_items"

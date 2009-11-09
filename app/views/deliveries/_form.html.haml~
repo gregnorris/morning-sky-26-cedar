@@ -46,20 +46,7 @@
   %td.form_label
     = f.label :state
   %td
-    = f.text_field :state, :size => 10  
-%tr
-  %td
-    = button_to_function "Add Item", "add_item()"
-%div#items
-  - @delivery.delivered_items.each do |delivered_item|
-    - f.fields_for :delivered_items, delivered_item do |item_fields|
-      %tr.form_field
-        %td.form_label
-          Number Requested:
-        %td
-          = item_fields.text_field :number_requested
-        %td.form_label
-          Delete:
-        %td
-          = item_fields.check_box :_delete
+    -# reverse the values in the hash, so the dropdown will work correctly
+    - states = Delivery::STATES.map{ |s| [s[1], s[0]]}
+    = f.select :state, states
 

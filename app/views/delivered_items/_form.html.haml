@@ -2,7 +2,7 @@
   %td.form_label
     = f.label :item_id
   %td
-    = f.select :item_id, Item.all.map { |it| ["#{it.item_code} - #{it.name}", it.id] }
+    = f.select :item_id, Item.items_for_select
 %tr.form_field
   %td.form_label
     = f.label :number_requested

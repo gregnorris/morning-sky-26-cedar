@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Hands of Hope: inventory/recipient managment %></title>
+  </head>
+  <body>
+  <image src="hoh_banner.jpg" border="0" alt="HandsOfHope" />
+  <p style="color: green"><%= flash[:notice] %></p>
+
+  <table bgcolor="#64AAD0">
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <font size="4"><%= link_to 'Recipients', recipients_path %></font>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    |
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font size="4"><%= link_to 'Donors', donors_path %></font>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      |
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font size="4"><%= link_to 'Items', items_path %></font>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  </table>
+  
+  </body>
+</html>

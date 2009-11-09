@@ -42,6 +42,8 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
   
+  map.root :controller => :recipients
+  
   map.resources :recipients do |recipient|
     recipient.resources :deliveries do |delivery|
       delivery.resources :delivered_items
@@ -49,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :donors do |donor|
-    map.resources :donor_items
+    donor.resources :donor_items
   end
   
   map.resources :items
