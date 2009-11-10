@@ -40,9 +40,9 @@ class ApplicationController < ActionController::Base
     if (params[:search_term] || params[:city_section])
       @the_things = the_model_name.constantize.name_like(params[:search_term]) if params[:search_term]
       # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
-      @the_things = the_model_name.constantize.city_section_is(ApplicationHelper::CITY_SECTIONS[params[:city_section]]) if params[:city_section]
+      @the_things = the_model_name.constantize.city_section_is(params[:city_section]) if params[:city_section]
     else
-      @the_things = the_model_name.constantize.all
+      @the_things = the_model_name.constantize.all  # no search to perform, just return all items in the table
     end
     
     respond_to do |format|

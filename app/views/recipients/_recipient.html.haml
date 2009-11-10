@@ -6,13 +6,11 @@
   %td
     = "#{recipient.phone_primary} <br>  #{recipient.phone_secondary}"
   %td
-    -#= recipient.address.formatted_string
+    = recipient.address
   %td
-    = recipient.status
+    = recipient.city_section_string
   %td
-    = recipient.number_of_adults
-  %td
-    = recipient.number_of_children
+    = recipient.intake_date
   %td
     = link_to_icon(:view, recipient_path(recipient))
     |

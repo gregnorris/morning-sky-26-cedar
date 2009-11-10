@@ -1,31 +1,85 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+#  CITY_SECTIONS = {
+#    'Downtown East' => 1,
+#    'Downtown West' => 2,
+#    'Point Douglas North' => 3,
+#    'Point Douglas South' => 4,
+#    'St. Boniface West' => 5,
+#    'St. Boniface East' => 6,
+#    'River Heights East' => 7,
+#    'River Heights West' => 8,
+#    'River East South' => 9,
+#    'River East West' => 10,
+#    'River East East' => 11,
+#    'Transcona' => 12,
+#    'St. Vital North' => 13,
+#    'St. Vital South' => 14,
+#    'Fort Garry North' => 15,
+#    'Fort Garry South' => 16,
+#    'Assiniboine South' => 17,
+#    'St. James-Assiniboia West' => 18,
+#    'St. James-Assiniboia East' => 19,
+#    'Inkster West' => 20,
+#    'Inkster East' => 21,
+#    'Seven Oaks West' => 22,
+#    'Seven Oaks East' => 23
+#  }
+
+  DOWNTOWN_EAST = 1
+  DOWNTOWN_WEST = 2
+  POINT_DOUGLAS_NORTH = 3
+  POINT_DOUGLAS_SOUTH = 4
+  ST_BONIFACE_WEST = 5
+  ST_BONIFACE_EAST = 6
+  RIVER_HEIGHTS_WEST = 7
+  RIVER_HEIGHTS_EAST = 8
+  RIVER_EAST_SOUTH = 9
+  RIVER_EAST_WEST = 10
+  RIVER_EAST_EAST = 11
+  TRANSCONA = 12
+  ST_VITAL_NORTH = 13
+  ST_VITAL_SOUTH = 14
+  FORT_GARRY_NORTH = 15
+  FORT_GARRY_SOUTH = 16
+  ASSINIBOINE_SOUTH = 17
+  ST_JAMES_ASSINIBOIA_WEST = 18
+  ST_JAMES_ASSINIBOIA_EAST = 19
+  INKSTER_WEST = 20
+  INKSTER_EAST = 21
+  SEVEN_OAKS_WEST = 22
+  SEVEN_OAKS_EAST = 23
+  
   CITY_SECTIONS = {
-    'Downtown East' => 1,
-    'Downtown West' => 2,
-    'Point Douglas North' => 3,
-    'Point Douglas South' => 4,
-    'St. Boniface West' => 5,
-    'St. Boniface East' => 6,
-    'River Heights East' => 7,
-    'River Heights West' => 8,
-    'River East South' => 9,
-    'River East West' => 10,
-    'River East East' => 11,
-    'Transcona' => 12,
-    'St. Vital North' => 13,
-    'St. Vital South' => 14,
-    'Fort Garry North' => 15,
-    'Fort Garry South' => 16,
-    'Assiniboine South' => 17,
-    'St. James-Assiniboia West' => 18,
-    'St. James-Assiniboia East' => 19,
-    'Inkster West' => 20,
-    'Inkster East' => 21,
-    'Seven Oaks West' => 22,
-    'Seven Oaks East' => 23
+    1 => 'Downtown East',
+    2 => 'Downtown West',
+    3 => 'Point Douglas North',
+    4 => 'Point Douglas South',
+    5 => 'St. Boniface West',
+    6 => 'St. Boniface East',
+    7 => 'River Heights East',
+    8 => 'River Heights West',
+    9 => 'River East South',
+    10 => 'River East West',
+    11 => 'River East East',
+    12 => 'Transcona',
+    13 => 'St. Vital North',
+    14 => 'St. Vital South',
+    15 => 'Fort Garry North',
+    16 => 'Fort Garry South',
+    17 => 'Assiniboine South',
+    18 => 'St. James-Assiniboia West',
+    19 => 'St. James-Assiniboia East',
+    20 => 'Inkster West',
+    21 => 'Inkster East',
+    22 => 'Seven Oaks West',
+    23 => 'Seven Oaks East'
   }
+  
+  def date_and_time(the_time)
+    the_time.strftime("%b %d, %y - %I:%M %p")
+  end
   
   # print a row with a label in cell 1, and an underlined value in cell 2 
   # (with extra blank underlined space)
@@ -60,6 +114,18 @@ module ApplicationHelper
                     :alt_text => "Delete"
                     } : {}
     link_to(image_tag("#{icon.to_s}.png", :alt => "#{icon.to_s.upcase}"), the_path, {:title => "#{icon.to_s.upcase}"}.merge(html_options))
+  end
+  
+  def link_to_icon_with_text(icon, text, the_path)
+    html_options = (icon == :delete) ? {
+                    :method   => :delete,
+                    :confirm  => "Are you sure? Clicking 'OK' will remove this record permanently!",
+                    :title    => "Delete",
+                    :alt_text => "Delete"
+                    } : {}
+    img = image_tag("#{icon.to_s}.png", :alt => "#{icon.to_s.upcase}")
+    img << ' <b>' + text +'</b>'
+    link_to(img, the_path, {:title => "#{icon.to_s.upcase}"}.merge(html_options))
   end
   
   
@@ -185,5 +251,37 @@ module ApplicationHelper
     src << '</table>'
     src
   end
+  
+  #
+  # <button type="submit" class="button positive">
+  #    <img src="/stylesheets/blueprint/plugins/buttons/icons/key.png" alt=""/> Sign Up
+  # </button>
+  #
+#  def button_tag(name, icon, options={})
+#    icon_path = '/stylesheets/blueprint/plugins/buttons/icons/'
+#    icon_path += icon
+#    img = tag("img", :src => icon_path,
+#                     :alt =>"", :open => false)
+#    img << ' ' + name
+#    options.merge!("type" => 'submit') unless options[:type]
+#    content_tag(:button, img, options)
+#  end
+
+  #
+  #  <a class="button negative" href="/">
+  #     <img src="/stylesheets/blueprint/plugins/buttons/icons/cross.png" alt=""/> Cancel
+  #  </a>
+  #
+#  def img_link_tag(name, icon, options={})
+#    icon_path = '/stylesheets/blueprint/plugins/buttons/icons/'
+#    icon_path += icon
+#    img = tag("img", :src => icon_path,
+#                     :alt =>"", :open => false)
+#    img << ' ' + name
+#    options.merge!(:href => 'root') unless options[:href]
+#    content_tag(:a, img, options)
+#  end
+
+
 
 end

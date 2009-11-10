@@ -8,7 +8,7 @@
       = show_field("#{@donor.phone_primary} (primary) " + " / #{@donor.phone_secondary} (secondary)", 'Phone Numbers')
       = show_field(@donor.email, 'Email')
       = show_field(@donor.donation_amount, 'Donation Amount')
-      = show_field(@donor.city_section, 'City Section')
+      = show_field(ApplicationHelper::CITY_SECTIONS[@donor.city_section], 'City Section')
       = show_field(@donor.street_1, 'Street')
       = show_field(@donor.buzzer_number, 'Buzzer Number')
       = show_field(@donor.level, 'Level')

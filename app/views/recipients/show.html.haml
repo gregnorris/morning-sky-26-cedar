@@ -8,7 +8,7 @@
       = show_field("#{@recipient.phone_primary} (primary) " + " / #{@recipient.phone_secondary} (secondary)", 'Phone Numbers')
       = show_field(@recipient.health_care_number, 'Health Care #')
       = show_field(@recipient.status, 'Status')
-      = show_field(@recipient.city_section, 'City Section')
+      = show_field(ApplicationHelper::CITY_SECTIONS[@recipient.city_section], 'City Section')
       = show_field(@recipient.street_1, 'Street')
       = show_field(@recipient.buzzer_number, 'Buzzer Number')
       = show_field(@recipient.level, 'Level')

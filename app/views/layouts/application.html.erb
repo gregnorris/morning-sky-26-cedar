@@ -9,35 +9,55 @@
   <%= stylesheet_link_tag 'hoh_style' %>
 </head>
 <body>
-<%= image_tag "hoh_banner.jpg", :border => "0", :alt => "HandsOfHope" %>
-<p style="color: green"><%= flash[:notice] %></p>
 
-<table bgcolor="#64AAD0">
+
+<table>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <font size="4"><%= link_to 'Recipients', recipients_path %></font>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<td>
+<%= image_tag "hoh_banner_small.jpg", :border => "0", :alt => "HandsOfHope", :size => "133x77"%>
+</td>
+<td>&nbsp;</td>
+
+<tr>
+
+<td bgcolor="darkblue">&nbsp;</td>
+
+<td  valign="bottom">
+<table bgcolor="#64AAD0">
+
+<tr>
+<td>&nbsp;&nbsp;
+  <b><font size="4"><%= link_to 'Recipients', recipients_path %></font></b>
+  &nbsp;&nbsp;
   |
 </td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <font size="4"><%= link_to 'Donors', donors_path %></font>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<td>&nbsp;&nbsp;
+  <b><font size="4"><%= link_to 'Donors', donors_path %></font></b>
+  &nbsp;&nbsp;
   |
 </td>
 </td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <font size="4"><%= link_to 'Case Workers', case_workers_path %></font>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<td>&nbsp;&nbsp;
+  <b><font size="4"><%= link_to 'Case Workers', case_workers_path %></font></b>
+  &nbsp;&nbsp;
   |
 </td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <font size="4"><%= link_to 'Items', items_path %></font>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<td>&nbsp;&nbsp;
+  <b><font size="4"><%= link_to 'Items', items_path %></font></b>
+  &nbsp;&nbsp;
 </td>
 </tr>
 </table>
 
+
+
+</tr>
+</table>
+
 <hr size="10" color="#034569">
+
+<p style="color: green"><%= flash[:notice] %></p>
 
 
 <%= yield %>

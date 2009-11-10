@@ -33,7 +33,7 @@
   %td.form_label
     = f.label :city_section
   %td  
-    - sections = ApplicationHelper::CITY_SECTIONS.map{|s| s}
+    - sections = ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
     = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
 %tr.form_field
   %td.form_label

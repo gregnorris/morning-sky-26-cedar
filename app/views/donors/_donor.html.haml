@@ -2,10 +2,10 @@
   = table_row(donor.id)
   = table_row(donor.full_name)
   = table_row("#{donor.phone_primary} <br>  #{donor.phone_secondary}")
-  = table_row(donor.donation_amount)
-  = table_row(ApplicationHelper::CITY_SECTIONS.map{|hash_entry| hash_entry[0] if hash_entry[1] == donor.city_section})
-  = table_row(donor.scheduled_pickup_time.to_s)
-  = table_row(donor.possible_future_pickup_time.to_s)
+  = table_row(donor.address)
+  = table_row(donor.city_section_string)
+  = table_row(date_and_time(donor.scheduled_pickup_time))
+  = table_row(date_and_time(donor.possible_future_pickup_time))
   
   %td
     = link_to_icon(:view, donor_path(donor))

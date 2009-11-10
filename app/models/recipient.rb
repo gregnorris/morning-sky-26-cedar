@@ -10,5 +10,8 @@ class Recipient < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+  
+  def address; street_1; end
+  def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
 
 end
