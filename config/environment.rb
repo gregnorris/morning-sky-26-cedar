@@ -1,5 +1,9 @@
 # Be sure to restart your server when you modify this file
 
+# my heroku.com app:
+#Created http://morning-sky-26.heroku.com/ | git@heroku.com:morning-sky-26.git
+
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
