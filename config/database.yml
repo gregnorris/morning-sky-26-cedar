@@ -21,7 +21,7 @@ development:
   database: handsofhope_inventory_development
   pool: 5
   username: root
-  password: 
+  password: greg7mysql
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -35,7 +35,7 @@ test:
   database: handsofhope_inventory_test
   pool: 5
   username: root
-  password: 
+  password: greg7mysql
   host: localhost
 
 production:
@@ -45,5 +45,5 @@ production:
   database: handsofhope_inventory_production
   pool: 5
   username: root
-  password: 
+  password: greg7mysql
   host: localhost
