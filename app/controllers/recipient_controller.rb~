@@ -1,7 +1,0 @@
-class RecipientsController < ApplicationController
-
-  def index
-    @recipients = Recipients.find(:all)
-  end
-
-end

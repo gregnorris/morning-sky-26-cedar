@@ -1,5 +1,0 @@
-%div.boxtitle
-  Donated Items
-%div.boxcontent
-  - column_titles = ['Item Code', 'Item Name', '', '# Donated', 'Donated On', 'Comments', 'Actions']
-  = table_header(@donor.donor_items, column_titles, 'donor_items/donor_item') 

@@ -1,3 +1,0 @@
-= link_to 'Go to Index', items_path
-
-= render :file => "#{RAILS_ROOT}/app/views/items/index.html.haml"

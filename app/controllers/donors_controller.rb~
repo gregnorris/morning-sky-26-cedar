@@ -1,6 +1,0 @@
-class DonorsController < ApplicationController
-
-  def the_model_name;   'Item'; end
-  def the_model_symbol; :item;  end
-
-end

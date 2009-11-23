@@ -1,9 +1,0 @@
-%h2
-  Case Workers
-= render(:partial => "shared/flashes")
-
-= button_to("Create a new Case Worker", new_case_worker_path, :method => :get)
-%br
-
-- column_titles = ['ID', 'Name', 'Phone', 'Email', 'Organization', 'Actions']
-= table_header(@the_things, column_titles, 'donor')
