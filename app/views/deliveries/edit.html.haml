@@ -1,5 +1,5 @@
 %h3
-  = "Edit Delivery for #{@recipient.name}"
+  = "Edit Delivery for #{@recipient.full_name}"
 %div
   - @delivery = @the_thing
   - form_for(@the_thing, :url => recipient_delivery_path(@recipient), :html => {:method => :put}) do |f|

@@ -28,12 +28,6 @@
     = f.label 'Health Care #'
   %td  
     = f.text_field :health_care_number
-%tr.form_field
-  %td.form_label
-    = f.label 'Status #'
-  %td  
-    = f.check_box :status
-
 
 %tr.form_field
   %td.form_label
@@ -81,7 +75,15 @@
 %tr.form-field
   %td.form_label
     = f.label 'Case Worker'
-    -# select from case workers, or add new
+  %td
+    = f.select :case_worker_id, CaseWorker.items_for_select
+    = link_to("Add New Case Worker", {:controller => 'case_workers', :action => 'new'}, { :popup => ['new_window', 'height=500,width=700'] })
+%tr.form_field
+  %td.form_label
+    = f.label :case_number
+  %td  
+    = f.text_field :case_number, :size => 15
+%tr.form_field
 %tr.form_field
   %td.form_label
     = f.label :bedrooms

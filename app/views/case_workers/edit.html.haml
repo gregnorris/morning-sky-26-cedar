@@ -1,0 +1,11 @@
+%h2
+  - @case_worker = @the_thing
+  = "Edit Case Worker: #{@case_worker.full_name}"
+%div.left_half
+  - form_for(@case_worker, :url => {:action => "update"}, :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', case_workers_path

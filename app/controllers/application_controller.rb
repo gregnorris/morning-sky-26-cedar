@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   # the default redirect for after create and update actions is the 'show' action
-  def the_update_redirect; {:action => 'show'}; end
+  def the_update_redirect; {:action => 'show', :id => @the_thing}; end
   
   def the_delete_redirect; {:action => 'index'}; end
   

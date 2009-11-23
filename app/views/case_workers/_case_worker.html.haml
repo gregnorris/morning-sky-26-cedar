@@ -1,0 +1,13 @@
+%tr
+  = table_row(case_worker.id)
+  = table_row(case_worker.full_name)
+  = table_row(case_worker.phone_number)
+  = table_row(case_worker.email)
+  = table_row(case_worker.organization)
+  
+  %td
+    = link_to_icon(:view, polymorphic_path(case_worker))
+    |
+    = link_to_icon(:edit, edit_polymorphic_path(case_worker))
+    |
+    = link_to_icon(:delete, polymorphic_path([case_worker]))

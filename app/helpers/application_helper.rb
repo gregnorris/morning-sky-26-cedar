@@ -27,6 +27,28 @@ module ApplicationHelper
     'Seven Oaks East' => 23
   }
   
+  # print a row with a label in cell 1, and an underlined value in cell 2 
+  # (with extra blank underlined space)
+  def delivery_sheet_row(label, value)
+    value_size = value.blank? ? 0 : value.size
+    src = ''
+    src << "<tr>"
+    src << "<td align='right' valign='top'> #{label}:&nbsp;</td>"
+    src << "<td><u> #{value}#{'&nbsp;'*(35-value_size)}</u></td>"
+    src << "</tr>"
+  end
+  
+  def delivery_sheet_item_td(value)
+    src = "<td>#{value}</td>"
+  end
+  
+  def underlined_with_spaces(value, number_of_spaces)
+    src = "<u> #{value} #{'&nbsp;'*number_of_spaces}</u>"
+  end
+  
+  def underlined_empty_row(number_of_spaces)
+    src = "<tr><td>&nbsp;</td><td><u>#{'&nbsp;'*number_of_spaces}</u></td>"
+  end
   
   # valid png icons are: edit, view, index, delete, package, deliver
   def link_to_icon(icon, the_path)

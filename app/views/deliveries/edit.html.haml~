@@ -11,4 +11,5 @@
       = link_to 'Cancel', recipient_path(@recipient)
   %br
   = button_to "Add Item to this Delivery", new_recipient_delivery_delivered_item_path(@recipient, @delivery), {:method => :get}
+  %br
   = render "delivered_items/delivered_items"

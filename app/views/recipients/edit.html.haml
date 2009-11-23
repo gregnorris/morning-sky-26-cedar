@@ -1,6 +1,6 @@
 %h2
   - @recipient = @the_thing
-  = "Edit Recipient: #{@recipient.name}"
+  = "Edit Recipient: #{@recipient.full_name}"
 = render(:partial => "shared/flashes")
 %div.left_half
   - form_for @recipient, :url => {:action => "update"}, :html => {:method => :put} do |f|

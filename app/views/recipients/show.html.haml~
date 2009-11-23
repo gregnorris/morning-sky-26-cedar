@@ -1,10 +1,10 @@
 %div.left_half
   %div.boxtitle
     - @recipient = @the_thing
-    = "Recipient: #{@recipient.name}"
+    = "Recipient: #{@recipient.full_name}"
   %div.boxcontent
     %ul.show_list
-      = show_field(@recipient.name, 'Name')
+      = show_field(@recipient.full_name, 'Name')
       = show_field("#{@recipient.phone_primary} (primary) " + " / #{@recipient.phone_secondary} (secondary)", 'Phone Numbers')
       = show_field(@recipient.health_care_number, 'Health Care #')
       = show_field(@recipient.status, 'Status')
@@ -37,15 +37,11 @@
       %td
         -#:popup => ["New Delivery", "status=0,location=0,toolbar=0,menubar=0,scrollbars=1,width=1050,resizable=1,directories=0"]
         -#:target => '_blank
-        = button_to "Schedule New Delivery", new_recipient_delivery_path(@recipient), {:method => :get}
+        -#= button_to "Schedule New Delivery", new_recipient_delivery_path(@recipient), {:method => :get}
+        = link_to("Schedule New Delivery", new_recipient_delivery_path(@recipient), { :popup => ['new_window', 'height=500,width=700'] })
       %td
         = image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
     
   %br
   %br
-  = render "deliveries/deliveries"
-  %div.boxtitle
-    Deliveries
-  %div.boxcontent
-    - column_titles = ['Scheduled Time', 'Delivered On', 'Initialed By', 'State', 'Actions']
-    = table_header(@recipient.deliveries, column_titles, 'deliveries/delivery')        
+  = render "deliveries/deliveries"      

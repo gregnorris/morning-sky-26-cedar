@@ -1,10 +1,10 @@
 %div.left_half
   %div.boxtitle
     - @recipient = @the_thing
-    = "Recipient: #{@recipient.name}"
+    = "Recipient: #{@recipient.full_name}"
   %div.boxcontent
     %ul.show_list
-      = show_field(@recipient.name, 'Name')
+      = show_field(@recipient.full_name, 'Name')
       = show_field("#{@recipient.phone_primary} (primary) " + " / #{@recipient.phone_secondary} (secondary)", 'Phone Numbers')
       = show_field(@recipient.health_care_number, 'Health Care #')
       = show_field(@recipient.status, 'Status')

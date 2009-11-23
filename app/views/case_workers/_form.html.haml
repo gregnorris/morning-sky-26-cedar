@@ -1,0 +1,25 @@
+%tr.form_field.required
+  %td.form_label
+    = f.label :first_name
+  %td
+    = f.text_field :first_name, :size => 20
+%tr.form_field.required
+  %td.form_label
+    = f.label :last_name
+  %td
+    = f.text_field :last_name, :size => 20
+%tr.form_field.required
+  %td.form_label  
+    = f.label :phone_number, "Phone Number"
+  %td
+    = f.text_field :phone_number, :size => 10
+%tr.form_field
+  %td.form_label
+    = f.label :email
+  %td  
+    = f.text_field :email
+%tr.form_field
+  %td.form_label
+    = f.label :organization
+  %td  
+    = f.text_field :organization

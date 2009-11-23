@@ -26,8 +26,15 @@ class DeliveriesController < ApplicationController
     @the_thing = @recipient.deliveries.find(params[:id]) if params[:id] && params[:id] != 'new'
   end
   
-  
-
+  # GET /recipients/1/delivery_sheet
+  def delivery_sheet
+    set_the_thing
+    
+    respond_to do |format|
+      format.html { render :partial => 'delivery_sheet', :locals => {:delivery => @the_thing} }  # deliveries/_delivery_sheet.html.haml
+      format.xml  { render :xml => @the_thing }
+    end
+  end
   
 protected
 

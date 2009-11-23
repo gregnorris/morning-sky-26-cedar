@@ -1,0 +1,61 @@
+%h3{:style => 'text-align:center'}
+  FURNITURE DELIVERY
+  
+  - recipient = delivery.recipient
+<font face='MONACO'>
+%table
+  %tr{:width => '800px'}
+    %td{:width => '600px'}
+      %table
+        = delivery_sheet_row('NAME', recipient.full_name) 
+        = delivery_sheet_row('EMAIL', recipient.email) 
+        = delivery_sheet_row('PHONE #', recipient.phone_primary) 
+        = delivery_sheet_row('ALTERNATE #', recipient.phone_secondary)
+        = delivery_sheet_row('CITY SECTION', ApplicationHelper::CITY_SECTIONS.index(recipient.city_section)) 
+        -#= delivery_sheet_row('ADDRESS', recipient.address) 
+        %tr
+          %td{:align => 'right'}
+            Level:&nbsp;
+          %td
+            = underlined_with_spaces(recipient.level, 2)
+            Buzzer Code:
+            = underlined_with_spaces(recipient.buzzer_number, 2)
+            Elevator?:
+            = underlined_with_spaces((recipient.elevator? ? 'yes' : 'no'), 2)
+        = delivery_sheet_row('DIRECTIONS', recipient.directions) 
+        %tr
+          %td{:align => 'right'}
+            BEDROOMS:&nbsp;
+          %td
+            = underlined_with_spaces(recipient.bedrooms, 2)
+            Adults:
+            = underlined_with_spaces(recipient.number_of_adults, 3) 
+            Children:
+            = underlined_with_spaces(recipient.number_of_children, 4) 
+        = delivery_sheet_row('Work/School Schedule', recipient.work_school_schedule)
+        = underlined_empty_row(35)
+        = delivery_sheet_row('Move-in Date', recipient.move_in_date.andand.strftime("%b %d, %y %H:%M"))
+        = delivery_sheet_row('Comments', recipient.comments)
+        = underlined_empty_row(35)
+        
+        
+        
+    %td{:width => '200px', :valign => 'top'}
+      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
+        %tr
+          = delivery_sheet_item_td('DEL')
+          = delivery_sheet_item_td('REQ')
+          %td{:width => '60px'}
+            ITEM
+          = delivery_sheet_item_td('LD')
+        - delivery.delivered_items.each do |di|
+          %tr
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            = delivery_sheet_item_td(di.item.item_code)
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+
+          
+    
+    
+  </font>
