@@ -36,9 +36,14 @@ class ApplicationController < ActionController::Base
   # GET /recipients
   # GET /recipients.xml
   def index
-  
-    #TODO - probably will want to search, not just display all records
-    @the_things = the_model_name.constantize.all
+    
+    if (params[:search_term] || params[:city_section])
+      @the_things = the_model_name.constantize.name_like(params[:search_term]) if params[:search_term]
+      # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
+      @the_things = the_model_name.constantize.city_section_is(ApplicationHelper::CITY_SECTIONS[params[:city_section]]) if params[:city_section]
+    else
+      @the_things = the_model_name.constantize.all
+    end
     
     respond_to do |format|
       format.html # index.html.erb

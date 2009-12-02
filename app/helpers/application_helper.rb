@@ -31,6 +31,7 @@ module ApplicationHelper
   # (with extra blank underlined space)
   def delivery_sheet_row(label, value)
     value_size = value.blank? ? 0 : value.size
+    value_size = 35 if (35 - value_size) < 0
     src = ''
     src << "<tr>"
     src << "<td align='right' valign='top'> #{label}:&nbsp;</td>"
