@@ -1,0 +1,5 @@
+formtastic
+will-paginate
+squirrel
+semantic_form_builder
+2dc_jqgrid
