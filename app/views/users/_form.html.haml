@@ -1,0 +1,15 @@
+%tr.form_field.required
+  %td.form_label
+    = f.label :login
+  %td
+    = f.text_field :login
+%tr.form_field.required
+  %td.form_label
+    = f.label :password, f.object.new_record? ? nil : "Change password"
+  %td
+    = f.password_field :password
+%tr.form_field.required
+  %td.form_label
+    = f.label :password_confirmation
+  %td
+    = f.password_field :password_confirmation

@@ -1,0 +1,9 @@
+%h2
+  Users
+= render(:partial => "shared/flashes")
+
+= button_to("Create a new User", new_user_path, :method => :get)
+%br
+
+- column_titles = ['ID', 'Login', 'Actions']
+= table_header(@the_things, column_titles, 'user')

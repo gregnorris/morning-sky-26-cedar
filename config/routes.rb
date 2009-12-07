@@ -42,7 +42,11 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
   
-  map.root :controller => :recipients
+  
+  
+  map.resource :user_session
+  map.root :controller => "user_sessions", :action => "new" # first page user sees is the login page
+  #map.root :controller => :recipients
   
   map.resources :recipients, :collection => { :show_map => :get }do |recipient|
     recipient.resources :deliveries, :member => { :delivery_sheet => :get } do |delivery|
@@ -57,6 +61,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :items
   map.resources :case_workers
   map.resources :organizations
+  
+  
+  map.resources :users
+  map.resource :account, :controller => "users"
+  
+  map.login "login", :controller => "user_sessions", :action => "new"
+  map.logout "logout", :controller => "user_sessions", :action => "destroy"
+
   
   
 end

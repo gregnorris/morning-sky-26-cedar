@@ -41,6 +41,7 @@ Rails::Initializer.run do |config|
   
   config.gem 'haml'
   config.gem 'andand'
+  config.gem 'authlogic'
   
   #config.gem 'mime-types', :lib => 'mime/types'
   #config.gem 'daemons'

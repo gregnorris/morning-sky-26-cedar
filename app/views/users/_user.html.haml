@@ -1,0 +1,6 @@
+%tr
+  = table_row(user.id)
+  = table_row(user.login)
+  
+  %td
+    = link_to_icon(:delete, polymorphic_path([user]))

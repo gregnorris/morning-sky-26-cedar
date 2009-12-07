@@ -1,0 +1,12 @@
+%h2
+  = "New User"
+
+%div.left_half
+  - form_for(@user, :url => {:action => "create"}, :html => {:method => :post}) do |f|
+    = f.error_messages
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', users_path
