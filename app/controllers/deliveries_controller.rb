@@ -23,7 +23,8 @@ class DeliveriesController < ApplicationController
 #  end
   
   def set_the_thing
-    @the_thing = @recipient.deliveries.find(params[:id]) if params[:id] && params[:id] != 'new'
+    delivery_id = (params[:id] && params[:id] != 'new' && @delivery.blank?) ? params[:id] : @delivery.id
+    @the_thing = @recipient.deliveries.find(delivery_id) if delivery_id
   end
   
   # GET /recipients/1/delivery_sheet
@@ -36,10 +37,12 @@ class DeliveriesController < ApplicationController
     end
   end
   
+  
 protected
 
   def set_objects 
-    @recipient = Recipient.find(params[:recipient_id]) if params[:recipient_id]
+    recip = (params[:recipient_id] && @reciptient.nil?) ? params[:recipient_id] : @recipient
+    @recipient = Recipient.find(recip)
   end
   
   def lineage

@@ -12,7 +12,8 @@
   %td.form_label
     = f.label :donated_on
   %td
-    = f.date_select :donated_on, {:include_blank => true, :default => nil}   
+    = f.calendar_date_select :donated_on, :time => false, :popup => :force
+    -#= f.date_select :donated_on, {:include_blank => true, :default => nil}   
 %tr.form_field
   %td.form_label
     = f.label :comments

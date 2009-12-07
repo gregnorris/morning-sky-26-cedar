@@ -22,4 +22,6 @@
   %td.form_label
     = f.label :organization
   %td  
-    = f.text_field :organization
+    = f.select :organization_id, Organization.items_for_select
+    = link_to("Add New Organization", {:controller => 'organizations', :action => 'new'}, { :popup => ['new_window', 'height=500,width=700'] })
+

@@ -49,12 +49,14 @@
   %td.form_label
     = f.label :scheduled_pickup_time
   %td  
-    = f.datetime_select :scheduled_pickup_time, {:include_blank => true, :default => nil}
+    = f.calendar_date_select :scheduled_pickup_time, :time => true, :popup => :force
+    -#= f.datetime_select :scheduled_pickup_time, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
     = f.label :possible_future_pickup_time
   %td  
-    = f.date_select :possible_future_pickup_time, {:include_blank => true, :default => nil}
+    = f.calendar_date_select :possible_future_pickup_time, :time => false, :popup => :force
+    -#= f.date_select :possible_future_pickup_time, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
     = f.label 'Donation ($)'

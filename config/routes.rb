@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => :recipients
   
-  map.resources :recipients do |recipient|
+  map.resources :recipients, :collection => { :show_map => :get }do |recipient|
     recipient.resources :deliveries, :member => { :delivery_sheet => :get } do |delivery|
       delivery.resources :delivered_items
     end

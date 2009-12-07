@@ -41,6 +41,7 @@ Rails::Initializer.run do |config|
   
   config.gem 'haml'
   config.gem 'andand'
+  
   #config.gem 'mime-types', :lib => 'mime/types'
   #config.gem 'daemons'
   #config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
@@ -56,6 +57,7 @@ Rails::Initializer.run do |config|
   
   config.time_zone = "Central Time (US & Canada)"
 
+  config.gem "calendar_date_select"
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]

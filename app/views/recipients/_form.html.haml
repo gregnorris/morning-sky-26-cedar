@@ -32,6 +32,7 @@
   %td  
     - sections = ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
     = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
+    = link_to("Show Map", {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
 %tr.form_field
   %td.form_label
     = f.label "Address"
@@ -55,7 +56,8 @@
   %td.form_label
     = f.label :move_in_date
   %td  
-    = f.date_select :move_in_date, {:include_blank => true, :default => nil}
+    = f.calendar_date_select :move_in_date, {:time => false, :popup => :force}
+    -#= f.date_select :move_in_date, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
     = f.label :previous_address
@@ -104,7 +106,8 @@
   %td.form_label
     = f.label :intake_date
   %td  
-    = f.date_select :intake_date, :default => Time.now
+    = f.calendar_date_select :intake_date, {:time => false, :popup => :force}
+    -#= f.date_select :intake_date, :default => Time.now
 %tr.form_field
   %td.form_label
     = f.label :referred_by

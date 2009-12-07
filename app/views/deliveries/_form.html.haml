@@ -1,30 +1,32 @@
-
 %tr.form_field.required
   %td.form_label
     = f.label :call_recieved_at
   %td
-    = f.datetime_select :call_recieved_at
+    = f.calendar_date_select :call_recieved_at, :time => true, :popup => :force
+    -#= f.datetime_select :call_recieved_at
 %tr.form_field.required
   %td.form_label
     = f.label :scheduled_delivery_time
   %td  
-    = f.datetime_select :scheduled_delivery_time 
+    = f.calendar_date_select :scheduled_delivery_time, :time => true, :popup => :force
+    -#= f.datetime_select :scheduled_delivery_time 
 %tr.form_field
   %td.form_label
     = f.label 'Visit Date'
   %td
-    = f.datetime_select :visited_on_1, {:include_blank => true, :default => nil}   
+    = f.calendar_date_select :visited_on_1, :time => true, :popup => :force
+    -#= f.datetime_select :visited_on_1, {:include_blank => true, :default => nil}   
     
   %td.form_label
     = f.label :initialed_by
   %td
     = f.text_field :initialed_by, :size => 10
-    
 %tr.form_field
   %td.form_label
     = f.label 'Visit 2 (if required)'
   %td
-    = f.datetime_select :visited_on_2, {:include_blank => true, :default => nil}
+    = f.calendar_date_select :visited_on_2, :time => true, :popup => :force
+    -#= f.datetime_select :visited_on_2, {:include_blank => true, :default => nil}
   
   %td.form_label
     = f.label :initialed_by
@@ -35,7 +37,8 @@
   %td.form_label
     = f.label :delivered_on
   %td
-    = f.datetime_select :delivered_on, {:include_blank => true, :default => nil}
+    = f.calendar_date_select :delivered_on, :time => true, :popup => :force
+    -#= f.datetime_select :delivered_on, {:include_blank => true, :default => nil}
   
 %tr.form_field
   %td.form_label
