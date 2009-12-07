@@ -10,13 +10,10 @@
     = f.text_field :last_name, :size => 20
 %tr.form_field.required
   %td.form_label  
-    = f.label :phone_primary, "Phone Number (primary)"
+    = f.label :phone_primary, "Phone #(s)"
   %td
     = f.text_field :phone_primary, :size => 10
-%tr.form_field
-  %td.form_label  
-    = f.label :phone_secondary, "Phone Number (secondary)"
-  %td  
+    &nbsp; &nbsp; / &nbsp; &nbsp;
     = f.text_field :phone_secondary, :size => 10
 %tr.form_field
   %td.form_label
@@ -37,25 +34,18 @@
     = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
 %tr.form_field
   %td.form_label
-    = f.label :street
+    = f.label "Address"
   %td  
     = f.text_field :street_1
-%tr.form_field
-  %td.form_label
-    = f.label :buzzer_number
-  %td  
-    = f.text_field :buzzer_number, :size => 7
 %tr.form_field
   %td.form_label
     = f.label :level
   %td  
     = f.text_field :level, :size => 2
-
-%tr.form_field
-  %td.form_label
-    = f.label :elevator
-  %td  
-    = f.check_box :elevator 
+    &nbsp;<b> Buzzer/Code </b>
+    = f.text_field :buzzer_number, :size => 7
+    &nbsp;<b> Elevator? </b>
+    = f.check_box :elevator  
 %tr.form_field
   %td.form_label
     = f.label :directions
@@ -65,7 +55,7 @@
   %td.form_label
     = f.label :move_in_date
   %td  
-    = f.date_select :move_in_date
+    = f.date_select :move_in_date, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
     = f.label :previous_address
@@ -84,20 +74,15 @@
   %td  
     = f.text_field :case_number, :size => 15
 %tr.form_field
-%tr.form_field
   %td.form_label
     = f.label :bedrooms
   %td  
     = f.text_field :bedrooms, :size => 1
-%tr.form_field
-  %td.form_label
-    = f.label :number_of_adults
-  %td  
+    &nbsp; &nbsp;
+    <b> Adults </b>
     = f.text_field :number_of_adults, :size => 2
-%tr.form_field
-  %td.form_label
-    = f.label :number_of_children
-  %td  
+    &nbsp; &nbsp;
+    <b> Children </b>
     = f.text_field :number_of_children, :size => 2
 %tr.form_field
   %td.form_label
@@ -109,11 +94,7 @@
     = f.label 'Work/School Schedule'
   %td  
     = f.text_area :work_school_schedule, :cols => 40, :rows => 2
-%tr.form_field
-  %td.form_label
-    = f.label 'Donation ($)'
-  %td  
-    = f.text_field :donation, :size => 5
+
 %tr.form_field
   %td.form_label
     = f.label :comments
@@ -123,9 +104,14 @@
   %td.form_label
     = f.label :intake_date
   %td  
-    = f.date_select :intake_date
+    = f.date_select :intake_date, :default => Time.now
 %tr.form_field
   %td.form_label
     = f.label :referred_by
   %td  
     = f.text_field :referred_by, :size => 20
+%tr.form_field
+  %td.form_label
+    = f.label 'Donation ($)'
+  %td  
+    = f.text_field :donation, :size => 5

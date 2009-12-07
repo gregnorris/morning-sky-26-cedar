@@ -77,19 +77,25 @@ module ApplicationHelper
     23 => 'Seven Oaks East'
   }
   
-  def date_and_time(the_time)
-    the_time.strftime("%b %d, %y - %I:%M %p")
+  def datetime_formatted(the_time)
+    the_time.andand.strftime("%b %d, %y - %I:%M %p")  # %Z for timezone
   end
+  
+  def date_formatted(the_time)
+    the_time.andand.strftime("%b %d, %y")  # %Z for timezone
+  end
+  
+  DS_LINE_MAX = 39
   
   # print a row with a label in cell 1, and an underlined value in cell 2 
   # (with extra blank underlined space)
   def delivery_sheet_row(label, value)
     value_size = value.blank? ? 0 : value.size
-    value_size = 35 if (35 - value_size) < 0
+    value_size = DS_LINE_MAX if (DS_LINE_MAX - value_size) < 0
     src = ''
     src << "<tr>"
-    src << "<td align='right' valign='top'> #{label}:&nbsp;</td>"
-    src << "<td><u> #{value}#{'&nbsp;'*(35-value_size)}</u></td>"
+    src << "<td width='175px' align='right' valign='top'> #{label}:&nbsp;</td>"
+    src << "<td><u> #{value}#{'&nbsp;'*(DS_LINE_MAX-value_size)}</u></td>"
     src << "</tr>"
   end
   
@@ -250,6 +256,29 @@ module ApplicationHelper
     end
     src << '</table>'
     src
+  end
+  
+  def generate_breadcrumbs(request)
+    s = ""
+    url = request.path.split('?')  #remove extra query string parameters
+    levels = url[0].split('/') #break up url into different levels
+    levels.each_with_index do |level, index|
+      unless level.blank?
+        if index == levels.size-1 || 
+           (level == levels[levels.size-2] && levels[levels.size-1].to_i > 0)
+          s += " / #{level.gsub(/_/, ' ')}" unless level.to_i > 0
+        else
+            link = "/"
+            i = 1
+            while i <= index
+              link += "#{levels[i]}/"
+              i+=1
+            end
+            s += " / <a href=\"#{link}\">#{level.gsub(/_/, ' ')}</a>"
+        end
+      end
+    end
+    s
   end
   
   #

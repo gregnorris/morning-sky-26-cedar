@@ -2,10 +2,10 @@
   = table_row(delivery.scheduled_delivery_time.andand.strftime("%b %d, %y - %H:%M"))
   = table_row(delivery.delivered_on.andand.strftime("%b %d, %y - %H:%M"))
   = table_row(delivery.initialed_by)
-  = table_row(delivery.state)
+  = table_row(Delivery::STATES[delivery.state])
   %td
     = link_to_icon(:edit, edit_polymorphic_path([@recipient, delivery]))
     |
     = link_to_icon(:delete, polymorphic_path([@recipient, delivery]))
     |
-    = link_to(image_tag("deliver.png", :alt => "Delivery"), polymorphic_path([:delivery_sheet, @recipient, delivery]))
+    = link_to(image_tag("deliver.png", :title => "Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, delivery]))

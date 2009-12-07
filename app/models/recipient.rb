@@ -11,6 +11,10 @@ class Recipient < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
   
+  def phones_formatted
+    "#{phone_primary} (primary) " + (phone_secondary.blank? ? "" : " / #{phone_secondary} (secondary)")
+  end
+  
   def address; street_1; end
   def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
 

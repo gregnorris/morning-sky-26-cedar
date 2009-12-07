@@ -4,8 +4,8 @@
   = table_row("#{donor.phone_primary} <br>  #{donor.phone_secondary}")
   = table_row(donor.address)
   = table_row(donor.city_section_string)
-  = table_row(date_and_time(donor.scheduled_pickup_time))
-  = table_row(date_and_time(donor.possible_future_pickup_time))
+  = table_row(datetime_formatted(donor.scheduled_pickup_time))
+  = table_row(datetime_formatted(donor.possible_future_pickup_time))
   
   %td
     = link_to_icon(:view, donor_path(donor))

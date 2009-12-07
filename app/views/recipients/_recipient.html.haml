@@ -10,7 +10,7 @@
   %td
     = recipient.city_section_string
   %td
-    = recipient.intake_date
+    = date_formatted(recipient.intake_date)
   %td
     = link_to_icon(:view, recipient_path(recipient))
     |

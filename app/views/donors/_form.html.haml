@@ -10,13 +10,10 @@
     = f.text_field :last_name, :size => 20
 %tr.form_field.required
   %td.form_label  
-    = f.label :phone_primary, "Phone Number (primary)"
+    = f.label :phone_primary, "Phone #(s)"
   %td
     = f.text_field :phone_primary, :size => 10
-%tr.form_field
-  %td.form_label  
-    = f.label :phone_secondary, "Phone Number (secondary)"
-  %td  
+    &nbsp; &nbsp; / &nbsp; &nbsp;
     = f.text_field :phone_secondary, :size => 10
 %tr.form_field
   %td.form_label
@@ -31,25 +28,18 @@
     = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
 %tr.form_field
   %td.form_label
-    = f.label :street
+    = f.label "Address"
   %td  
     = f.text_field :street_1
-%tr.form_field
-  %td.form_label
-    = f.label :buzzer_number
-  %td  
-    = f.text_field :buzzer_number, :size => 7
 %tr.form_field
   %td.form_label
     = f.label :level
   %td  
     = f.text_field :level, :size => 2
-
-%tr.form_field
-  %td.form_label
-    = f.label :elevator
-  %td  
-    = f.check_box :elevator 
+    &nbsp;<b> Buzzer/Code </b>
+    = f.text_field :buzzer_number, :size => 7
+    &nbsp;<b> Elevator? </b>
+    = f.check_box :elevator  
 %tr.form_field
   %td.form_label
     = f.label :directions
@@ -59,15 +49,15 @@
   %td.form_label
     = f.label :scheduled_pickup_time
   %td  
-    = f.datetime_select :scheduled_pickup_time
+    = f.datetime_select :scheduled_pickup_time, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
     = f.label :possible_future_pickup_time
   %td  
-    = f.date_select :possible_future_pickup_time
+    = f.date_select :possible_future_pickup_time, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
-    = f.label :donation_amount
+    = f.label 'Donation ($)'
   %td  
     = f.text_field :donation_amount, :size => 5
 
