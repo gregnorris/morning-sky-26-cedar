@@ -1,0 +1,12 @@
+%tr
+  = table_row(organization.id)
+  = table_row(organization.org_short_name)
+  = table_row(organization.org_description)
+  = table_row(organization.state)
+  
+  %td
+    = link_to_icon(:view, polymorphic_path(organization))
+    |
+    = link_to_icon(:edit, edit_polymorphic_path(organization))
+    |
+    = link_to_icon(:delete, polymorphic_path([organization]))

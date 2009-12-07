@@ -1,6 +1,7 @@
 class CaseWorker < ActiveRecord::Base
 
   has_many :recipients
+  belongs_to :organization
 
   def full_name
     "#{self.first_name} #{self.last_name}"

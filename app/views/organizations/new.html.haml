@@ -1,0 +1,11 @@
+%h3
+  Create New Organization
+%div.left_half
+  - @organization = @the_thing
+  - form_for(@organization, :url => {:action => "create"}, :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', organizations_path

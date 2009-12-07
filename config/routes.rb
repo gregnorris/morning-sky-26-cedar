@@ -55,10 +55,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :items
-  
   map.resources :case_workers
-  
-  
+  map.resources :organizations
   
   
 end

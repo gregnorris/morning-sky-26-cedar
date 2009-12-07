@@ -1,0 +1,11 @@
+%h2
+  - @organization = @the_thing
+  = "Edit Organization: #{@organization.name}"
+%div.left_half
+  - form_for(@organization, :url => {:action => "update"}, :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save"
+      |
+      = link_to 'Cancel', organizations_path
