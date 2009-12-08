@@ -25,8 +25,8 @@
   -#%div.boxtitle
   -#  Most Recent Delivery
   -#%div.boxcontent
-  -#  -#= render("deliveries/edit") if @recipient.deliveries.any?
-  %br
-  %br
+  -#  = render("deliveries/edit") if @recipient.deliveries.any?
+  -#%br
+  -#%br
   = render "deliveries/deliveries"
 
