@@ -1,7 +1,7 @@
 %h2
   Login
   
-- form_for @user_session, :url => user_session_path do |f|
+- form_for @user_session || UserSession.new, :url => user_session_path do |f|
   = f.error_messages
   %table
     %tr.form_field.required
