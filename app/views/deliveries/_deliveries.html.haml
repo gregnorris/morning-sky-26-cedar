@@ -1,5 +1,5 @@
 %div.boxtitle
-  Deliveries
+  All Deliveries
 %div.boxcontent
-  - column_titles = ['Scheduled Time', 'Delivered On', 'Initialed By', 'State', 'Actions']
-  = table_header(@recipient.deliveries, column_titles, 'deliveries/delivery')     
+  - column_titles = ['ID', 'Scheduled Time', 'Delivered On', 'State', 'Items', 'Actions']
+  = table_header(@recipient.deliveries.all(:order => 'scheduled_delivery_time DESC'), column_titles, 'deliveries/delivery')     

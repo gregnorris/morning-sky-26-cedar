@@ -1,13 +1,10 @@
 %tr.form_field.required
   %td.form_label
-    = f.label :first_name
+    = f.label 'Name (First / Last)'
   %td
-    = f.text_field :first_name, :size => 20
-%tr.form_field.required
-  %td.form_label
-    = f.label :last_name
-  %td
-    = f.text_field :last_name, :size => 20
+    = f.text_field :first_name, :size => 15
+    &nbsp; &nbsp; / &nbsp; &nbsp;
+    = f.text_field :last_name, :size => 15
 %tr.form_field.required
   %td.form_label  
     = f.label :phone_primary, "Phone #(s)"
@@ -20,11 +17,6 @@
     = f.label :email
   %td  
     = f.text_field :email
-%tr.form_field
-  %td.form_label
-    = f.label 'Health Care #'
-  %td  
-    = f.text_field :health_care_number
 
 %tr.form_field
   %td.form_label
@@ -37,7 +29,7 @@
   %td.form_label
     = f.label "Address"
   %td  
-    = f.text_field :street_1
+    = f.text_field :street_1, :size => 40
 %tr.form_field
   %td.form_label
     = f.label :level
@@ -52,12 +44,38 @@
     = f.label :directions
   %td  
     = f.text_area :directions, :cols => 40, :rows => 4
+    
+%tr.form_field
+  %td.form_label
+    = f.label :bedrooms
+  %td  
+    = f.text_field :bedrooms, :size => 1
+    &nbsp; &nbsp;
+    <b> Adults </b>
+    = f.text_field :number_of_adults, :size => 2
+    &nbsp; &nbsp;
+    <b> Children </b>
+    = f.text_field :number_of_children, :size => 2
+    
+%tr.form_field
+  %td.form_label
+    = f.label 'Work/School Schedule'
+  %td  
+    = f.text_area :work_school_schedule, :cols => 40, :rows => 2
+    
 %tr.form_field
   %td.form_label
     = f.label :move_in_date
   %td  
     = f.calendar_date_select :move_in_date, {:time => false, :popup => :force}
     -#= f.date_select :move_in_date, {:include_blank => true, :default => nil}
+
+%tr.form_field
+  %td.form_label
+    = f.label :comments
+  %td  
+    = f.text_area :comments, :cols => 40, :rows => 4
+    
 %tr.form_field
   %td.form_label
     = f.label :previous_address
@@ -77,31 +95,16 @@
     = f.text_field :case_number, :size => 15
 %tr.form_field
   %td.form_label
-    = f.label :bedrooms
+    = f.label 'Health Care #'
   %td  
-    = f.text_field :bedrooms, :size => 1
-    &nbsp; &nbsp;
-    <b> Adults </b>
-    = f.text_field :number_of_adults, :size => 2
-    &nbsp; &nbsp;
-    <b> Children </b>
-    = f.text_field :number_of_children, :size => 2
+    = f.text_field :health_care_number
+    
 %tr.form_field
   %td.form_label
     = f.label 'Additional Info'
   %td  
     = f.text_area :additional_information, :cols => 40, :rows => 2
-%tr.form_field
-  %td.form_label
-    = f.label 'Work/School Schedule'
-  %td  
-    = f.text_area :work_school_schedule, :cols => 40, :rows => 2
 
-%tr.form_field
-  %td.form_label
-    = f.label :comments
-  %td  
-    = f.text_area :comments, :cols => 40, :rows => 4
 %tr.form_field
   %td.form_label
     = f.label :intake_date

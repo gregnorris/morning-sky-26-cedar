@@ -3,6 +3,10 @@ class RecipientsController < ApplicationController
   def the_model_name;   'Recipient'; end
   def the_model_symbol; :recipient;  end
   
+  def the_update_redirect
+    {:controller => :recipients, :action => 'edit', :id => @the_thing}
+  end
+  
   def set_the_thing
     @the_thing = the_model_name.constantize.find(params[:id]) if params[:id] && params[:id] != 'new'
     # set the delivery var to the latest delivery (for imbedded view use)

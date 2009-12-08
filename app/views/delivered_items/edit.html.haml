@@ -2,7 +2,7 @@
   Edit Item on this Delivery
 %div.left_half
   - @delivered_item = @the_thing
-  - form_for(:delivered_item, :url => recipient_delivery_delivered_item_path(@recipient, @delivery), :html => {:method => :put}) do |f|
+  - form_for(:delivered_item, :url => recipient_delivery_delivered_item_path(@recipient, @delivery, @delivered_item), :html => {:method => :put}) do |f|
     %fieldset
       %table
         = render :partial => "form", :locals => {:f => f}

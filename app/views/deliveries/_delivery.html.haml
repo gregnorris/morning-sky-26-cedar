@@ -1,8 +1,9 @@
 %tr
+  = table_row(delivery.id)
   = table_row(delivery.scheduled_delivery_time.andand.strftime("%b %d, %y - %H:%M"))
   = table_row(delivery.delivered_on.andand.strftime("%b %d, %y - %H:%M"))
-  = table_row(delivery.initialed_by)
   = table_row(Delivery::STATES[delivery.state])
+  = table_row(delivery.delivered_items.andand.size)
   %td
     = link_to_icon(:edit, edit_polymorphic_path([@recipient, delivery]))
     |

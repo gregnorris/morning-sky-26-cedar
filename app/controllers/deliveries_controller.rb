@@ -6,12 +6,12 @@ class DeliveriesController < ApplicationController
   
   # where to redirect to after a successful create or update action
   def the_update_redirect
-    {:controller => :recipients, :action => 'show', :id => @recipient}
+    {:controller => :recipients, :action => 'edit', :id => @recipient}
   end
   
   # where to redirect to after a successful delete action
   def the_delete_redirect
-    {:controller => :recipients, :action => 'show', :id => @recipient}
+    {:controller => :recipients, :action => 'edit', :id => @recipient}
   end
   
   def build_the_thing

@@ -6,22 +6,27 @@
     %ul.show_list
       = show_field(@recipient.full_name, 'Name')
       = show_field(@recipient.phones_formatted, 'Phone Numbers')
-      = show_field(@recipient.health_care_number, 'Health Care #')
+      = show_field(@recipient.email, 'Email')
+      
       = show_field(@recipient.city_section_string, 'City Section')
       = show_field(@recipient.street_1, 'Address')
       = show_field(@recipient.buzzer_number, 'Buzzer/Code')
       = show_field(@recipient.level, 'Level')
       = show_field(@recipient.elevator, 'Elevator')
       = show_field(@recipient.directions, 'Directions')
-      = show_field(date_formatted(@recipient.move_in_date), 'Move In Date')
-      = show_field(@recipient.previous_address, 'Previous Address')
-      = show_field(@recipient.case_worker_id, 'Case Worker')
       = show_field(@recipient.bedrooms, 'Bedrooms')
       = show_field(@recipient.number_of_adults, 'Adults')
       = show_field(@recipient.number_of_children, 'Children')
-      = show_field(@recipient.additional_information, 'Additional Info')
       = show_field(@recipient.work_school_schedule, 'Work/School Schedule')
+      = show_field(date_formatted(@recipient.move_in_date), 'Move In Date')
       = show_field(@recipient.comments, 'Comments')
+      
+      = show_field(@recipient.previous_address, 'Previous Address')
+      = show_field(@recipient.case_worker_id, 'Case Worker')
+      = show_field(@recipient.case_number, 'Case Number')
+      = show_field(@recipient.health_care_number, 'Health Care #')
+      = show_field(@recipient.additional_information, 'Additional Info')
+      
       = show_field(datetime_formatted(@recipient.intake_date), 'Intake Date')
       = show_field(@recipient.referred_by, 'Referred By')
       = show_field("$#{@recipient.donation}", 'Donation')
@@ -29,9 +34,10 @@
       = show_field(datetime_formatted(@recipient.created_at), 'Created At')
       = show_field(datetime_formatted(@recipient.updated_at), 'Updated At')
         
-  = link_to 'Edit', edit_recipient_path(@recipient)
-  |
+  
   = link_to 'Index', recipients_path
+  |
+  = link_to 'Edit', edit_recipient_path(@recipient)
 
 %div.right_half
   %table

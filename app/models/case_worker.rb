@@ -8,7 +8,7 @@ class CaseWorker < ActiveRecord::Base
   end
 
   def self.items_for_select
-    CaseWorker.all.map { |it| ["#{it.full_name} - #{it.organization}", it.id]}
+    CaseWorker.all.map { |it| ["#{it.full_name} - #{it.organization.andand.org_short_name}", it.id]}.unshift(['none', nil])
   end
 
 end

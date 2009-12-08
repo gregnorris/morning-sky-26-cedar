@@ -1,6 +1,6 @@
 %h2
   - @organization = @the_thing
-  = "Edit Organization: #{@organization.name}"
+  = "Edit Organization: #{@organization.org_short_name}"
 %div.left_half
   - form_for(@organization, :url => {:action => "update"}, :html => {:method => :put}) do |f|
     %fieldset

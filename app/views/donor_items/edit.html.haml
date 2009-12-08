@@ -2,7 +2,7 @@
   = "Edit Item given by Donor #{@donor.full_name}"
 %div.left_half
   - @donor_item = @the_thing
-  - form_for(:donor_item, :url => donor_donor_item_path(@donor), :html => {:method => :put}) do |f|
+  - form_for(:donor_item, :url => donor_donor_item_path(@donor, @donor_item), :html => {:method => :put}) do |f|
     %fieldset
       %table
         = render :partial => "form", :locals => {:f => f}

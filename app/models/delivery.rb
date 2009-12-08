@@ -4,7 +4,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :recipient
   
   accepts_nested_attributes_for :delivered_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-
+  #named_scope :ordered_by_newest_delivery_date,  lambda{ {:order => 'scheduled_delivery_time DESC'}}
   
   ENTERED = 0
   PARTIAL = 1
@@ -12,5 +12,7 @@ class Delivery < ActiveRecord::Base
   
   STATES = { ENTERED => "Entered", PARTIAL => "Partially Done", COMPLETED => "Done"}
 
-  
+  def total_requested_items
+    self.delivered_items.map { |sum, element| sum + element.requested_items}
+  end
 end

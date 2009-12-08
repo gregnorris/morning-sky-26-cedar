@@ -10,7 +10,11 @@
         
       = f.submit "Save"
       |
-      = link_to 'Cancel', recipient_path(@recipient)
+      = link_to 'Back to Index', recipients_path
+      = link_to_icon(:list, recipients_path) 
+  
+  %br
+
 %div.right_half
   -#= image_tag "winnipeg_neighborhood_sections.gif", :border => "0", :width => "420", :height => "457", :usemap => "#Map", :alt => "Map of Neighbourhood Clusters"
   %table
@@ -18,15 +22,16 @@
       %td
         = button_to "Schedule New Delivery", new_recipient_delivery_path(@recipient), {:method => :get}
       %td
-        = image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
+        -#= image_tag "deliver.png", :border => "0", :alt => "DeliverySheet", :size => "20x20"
     
   %br
-  %br
-  -#%div.boxtitle
-  -#  Most Recent Delivery
-  -#%div.boxcontent
-  -#  = render("deliveries/edit") if @recipient.deliveries.any?
-  -#%br
-  -#%br
+  - if @delivery
+    %div.boxtitle
+      = "Edit Most Recent Delivery (ID: #{@delivery.id} )"
+      &nbsp; &nbsp;
+      = link_to(image_tag("deliver.png", :title => "Print Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, @delivery]))
+    %div.boxcontent
+      = render("deliveries/edit")
+    %br
   = render "deliveries/deliveries"
 
