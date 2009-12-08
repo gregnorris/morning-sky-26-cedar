@@ -1,6 +1,8 @@
 class Donor < ActiveRecord::Base
   
   has_many :donor_items
+  accepts_nested_attributes_for :donor_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  
   
   named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}

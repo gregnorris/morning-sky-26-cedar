@@ -1,0 +1,16 @@
+%tr
+  %td
+    = items_form.select :item_id, Item.items_for_select('add')
+  %td
+    = items_form.text_field :number_donated, :size => 1
+  %td
+    = items_form.calendar_date_select :donated_on, :time => true, :popup => :force
+  %td
+    = items_form.text_field :comments, :size => 20, :title => "#{items_form.object.comments}"
+  - unless items_form.object.new_record?
+    %td
+      = items_form.check_box '_delete'
+      = items_form.label '_delete', "Remove"
+  - else
+    %td
+      = ''

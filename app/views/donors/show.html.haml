@@ -19,7 +19,9 @@
       %br
       = show_field(datetime_formatted(@donor.created_at), 'Created At')
       = show_field(datetime_formatted(@donor.updated_at), 'Updated At')
-        
+
+%div.clear_both
+  = render "donor_items/donor_items"
   = link_to 'Edit', edit_donor_path(@donor)
   |
   = link_to 'Index', donors_path

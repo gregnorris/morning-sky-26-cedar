@@ -26,6 +26,7 @@
   %td  
     - sections = ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
     = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
+    = link_to("Show Map", {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
 %tr.form_field
   %td.form_label
     = f.label "Address"
