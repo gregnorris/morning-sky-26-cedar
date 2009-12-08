@@ -24,8 +24,13 @@ class UsersController < ApplicationController
     end
   end
   
+  # only admin can create new users
   def new
-    @user = User.new
+    if current_user.andand.login == 'gnorris'
+      @user = User.new
+    else
+      redirect_to account_url
+    end
   end
   
   # new user accounts can only be created by the admin from the users index
