@@ -6,7 +6,9 @@
     %fieldset
       %table
         = render :partial => "form", :locals => {:f => f}
+      = render :partial => "deliveries/edit_delivered_items", :locals => {:f => f}
+      
       = f.submit "Create"
       |
-      = link_to 'Cancel', recipient_path(@recipient)
+      = link_to 'Cancel', edit_recipient_path(@recipient)
 

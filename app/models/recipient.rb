@@ -17,5 +17,6 @@ class Recipient < ActiveRecord::Base
   
   def address; street_1; end
   def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
+  
 
 end

@@ -10,6 +10,12 @@
   %td
     = recipient.city_section_string
   %td
+    -# show the scheduled_delivery_time of the delivery with soonest scheduled delivery time
+    - most_recent_delivery_time =  recipient.deliveries.all(:order => 'scheduled_delivery_time DESC').first.andand.scheduled_delivery_time
+    = datetime_formatted(most_recent_delivery_time)
+  %td
+    = recipient.deliveries.size
+  %td
     = date_formatted(recipient.intake_date)
   %td
     = link_to_icon(:view, recipient_path(recipient))
