@@ -52,7 +52,6 @@
       %br
       %br
       %br
-      %br
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
       Partial
       = check_box_tag('Partial:', 1, false, :disabled => true)
@@ -74,14 +73,10 @@
             = delivery_sheet_item_td("&nbsp; #{di.number_requested}")
             = delivery_sheet_item_td("#{di.item.item_code} - #{di.item.name}")
             = delivery_sheet_item_td('&nbsp; &nbsp;')
-        - 3.times do
+        - 2.times do
           %tr
             - 4.times do
               = delivery_sheet_item_td('&nbsp; &nbsp;')
-      %br
-      %br
-      %br
-      %br
       %br
       %br
       %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
