@@ -1,8 +1,12 @@
 %tr
   %td
+    -# ,{}, {:on_change => "alert('hello')"}
     = items_form.select :item_id, Item.items_for_select('add')
   %td
-    = items_form.text_field :number_requested, :size => 1
+    -#  :value => (items_form.object.andand.number_requested.blank? ? '1' : items_form.object.number_requested)
+    - initial_number_requested = ((items_form.object.andand.number_requested.blank? && items_form.object.item_id.nil?) ? '1' : items_form.object.number_requested)
+    -# :value => initial_number_requested,
+    = items_form.text_field(:number_requested, :size => 1 )
   %td
     = items_form.text_field :number_delivered, :size => 1
   %td

@@ -5,7 +5,7 @@
     = f.text_field :first_name, :size => 15
     &nbsp; &nbsp; / &nbsp; &nbsp;
     = f.text_field :last_name, :size => 15
-%tr.form_field.required
+%tr.form_field
   %td.form_label  
     = f.label :phone_primary, "Phone #(s)"
   %td
@@ -72,7 +72,7 @@
 
 %tr.form_field
   %td.form_label
-    = f.label :comments
+    = f.label 'Recipient Comments'
   %td  
     = f.text_area :comments, :cols => 40, :rows => 4
     

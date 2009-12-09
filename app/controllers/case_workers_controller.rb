@@ -5,7 +5,7 @@ class CaseWorkersController < ApplicationController
   
   # where to redirect to after a successful create or update action
   def the_update_redirect
-    return {:controller => :recipients, :action => 'show', :id => @recipient} if @recipient
+    #return {:controller => :recipients, :action => 'show', :id => @recipient} if @recipient
     return {:action => 'index'}
   end
   

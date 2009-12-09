@@ -1,5 +1,10 @@
+%br
+%br
+%br
+%br
 %h3{:style => 'text-align:center'}
-  FURNITURE DELIVERY
+  - strftime_format = "%a %b %d, %y - %H:%M"
+  = "FURNITURE DELIVERY - #{delivery.scheduled_delivery_time.andand.strftime(strftime_format)}"
   
   - recipient = delivery.recipient
 <font face='MONACO'>
@@ -7,21 +12,22 @@
   %tr{:width => '800px'}
     %td{:width => '500px'}
       %table
+        -#= delivery_sheet_row('Scheduled Delivery Time', datetime_formatted(delivery.scheduled_delivery_time))
         = delivery_sheet_row('NAME', recipient.full_name) 
         = delivery_sheet_row('EMAIL', recipient.email) 
         = delivery_sheet_row('PHONE #', recipient.phone_primary) 
         = delivery_sheet_row('ALTERNATE #', recipient.phone_secondary)
-        = delivery_sheet_row('CITY SECTION', ApplicationHelper::CITY_SECTIONS.index(recipient.city_section)) 
+        = delivery_sheet_row('CITY SECTION', recipient.city_section_string) 
         = delivery_sheet_row('Address', recipient.street_1)
         %tr
           %td{:align => 'right'}
             Level:&nbsp;
           %td
-            = underlined_with_spaces(recipient.level, 2)
+            = underlined_with_spaces(recipient.level, 1)
             Buzzer Code:
-            = underlined_with_spaces(recipient.buzzer_number, 2)
+            = underlined_with_spaces(recipient.buzzer_number, 0)
             Elevator?:
-            = underlined_with_spaces((recipient.elevator? ? 'yes' : 'no'), 2)
+            = underlined_with_spaces((recipient.elevator? ? 'yes' : 'no'), 0)
         = delivery_sheet_row('DIRECTIONS', recipient.directions) 
         %tr
           %td{:align => 'right'}
@@ -32,12 +38,26 @@
             = underlined_with_spaces(recipient.number_of_adults, 3) 
             Children:
             = underlined_with_spaces(recipient.number_of_children, 4) 
-        = delivery_sheet_row('Work/School Schedule', recipient.work_school_schedule)
+        = delivery_sheet_row('Work/School Sched', recipient.work_school_schedule)
         = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
-        = delivery_sheet_row('Move-in Date', date_formatted(recipient.move_in_date))
-        = delivery_sheet_row('Comments', recipient.comments)
+        -#= delivery_sheet_row('Move-in Date', date_formatted(recipient.move_in_date))
+        = delivery_sheet_row('Recipient Comments', recipient.comments)
         = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
-        = delivery_sheet_row('Scheduled Delivery Time', datetime_formatted(delivery.scheduled_delivery_time))
+        = delivery_sheet_row('Delivery Notes', delivery.comments)
+        = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
+        = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
+        = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
+        = underlined_empty_row(ApplicationHelper::DS_LINE_MAX)
+        
+      %br
+      %br
+      %br
+      %br
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+      Partial
+      = check_box_tag('Partial:', 1, false, :disabled => true)
+      Complete
+      = check_box_tag('Complete:', 1, false, :disabled => true)
         
         
     %td{:width => '300px', :valign => 'top'}
@@ -54,8 +74,25 @@
             = delivery_sheet_item_td("&nbsp; #{di.number_requested}")
             = delivery_sheet_item_td("#{di.item.item_code} - #{di.item.name}")
             = delivery_sheet_item_td('&nbsp; &nbsp;')
-
-          
+        - 3.times do
+          %tr
+            - 4.times do
+              = delivery_sheet_item_td('&nbsp; &nbsp;')
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
+        %tr
+          = delivery_sheet_item_td('# REQ')
+          %td{:width => '175px'}
+            NEEDED ITEM
+        - 3.times do
+          %tr
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
     
     
   </font>

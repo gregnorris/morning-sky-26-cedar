@@ -1,7 +1,9 @@
 %tr
   = table_row(delivery.id)
-  = table_row(delivery.scheduled_delivery_time.andand.strftime("%b %d, %y - %H:%M"))
-  = table_row(delivery.delivered_on.andand.strftime("%b %d, %y - %H:%M"))
+  = table_row(datetime_formatted(delivery.scheduled_delivery_time))
+  -#.andand.strftime("%b %d, %y - %H:%M"))
+  = table_row(datetime_formatted(delivery.delivered_on))
+  -#.andand.strftime("%b %d, %y - %H:%M"))
   = table_row(Delivery::STATES[delivery.state])
   = table_row(delivery.delivered_items.andand.size)
   %td
@@ -9,4 +11,4 @@
     |
     = link_to_icon(:delete, polymorphic_path([@recipient, delivery]))
     |
-    = link_to(image_tag("deliver.png", :title => "Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, delivery]))
+    = link_to(image_tag("deliver.png", :title => "Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, delivery]), { :popup => ['new_window', 'height=2000,width=825,menubar=yes,scrollbars=1'] })

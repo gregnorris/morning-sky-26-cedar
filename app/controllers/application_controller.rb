@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   def the_update_redirect; {:action => 'show', :id => @the_thing}; end
   
   def the_delete_redirect; {:action => 'index'}; end
+  #def the_update_error_redirect; {:action => 'edit'}; end
   
   def set_objects
     set_the_thing
@@ -99,6 +100,7 @@ class ApplicationController < ActionController::Base
         format.html { redirect_to the_update_redirect  }
         format.xml  { render :xml => @the_thing, :status => :created, :location => @the_thing }
       else
+        flash[:error] = @the_thing.errors.full_messages.to_sentence
         format.html { render :action => "new" }
         format.xml  { render :xml => @the_thing.errors, :status => :unprocessable_entity }
       end
@@ -120,6 +122,7 @@ class ApplicationController < ActionController::Base
         format.html { redirect_to the_update_redirect  }
         format.xml  { head :ok }
       else
+        flash[:error] = @the_thing.errors.full_messages.to_sentence
         format.html { render :action => "edit" }
         format.xml  { render :xml => @the_thing.errors, :status => :unprocessable_entity }
       end
