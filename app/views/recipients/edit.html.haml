@@ -30,8 +30,8 @@
       = "Edit Most Recent Delivery (ID: #{@delivery.id} )"
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       -#= link_to('Print Delivery Sheet', {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
-      = link_to('Print Delivery Sheet', polymorphic_path([:delivery_sheet, @recipient, @delivery]), { :popup => ['new_window', 'height=2000,width=825,menubar=yes'] })
-      = link_to(image_tag("deliver.png", :title => "Print Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, @delivery]), { :popup => ['new_window', 'height=2000,width=825,menubar=yes'] })
+      = link_to('Print Delivery Sheet', polymorphic_path([:delivery_sheet, @recipient, @delivery]), { :popup => ['new_window', 'height=2000,width=850,menubar=yes'] })
+      = link_to(image_tag("deliver.png", :title => "Print Delivery Sheet"), polymorphic_path([:delivery_sheet, @recipient, @delivery]), { :popup => ['new_window', 'height=2000,width=850,menubar=yes'] })
     %div.boxcontent
       = render("deliveries/edit")
     %br
