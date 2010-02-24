@@ -59,6 +59,12 @@ Rails::Initializer.run do |config|
   config.time_zone = "Central Time (US & Canada)"
 
   config.gem "calendar_date_select"
+  
+  # in .gems if you need to reinstall theses on heroku
+  #andand --version 1.3.1
+  #calendar_date_select --version 1.15
+  #authlogic --version 2.1.3
+  
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
