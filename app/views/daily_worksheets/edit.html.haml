@@ -1,12 +1,15 @@
 %h3
   "Edit Worksheet for #{@the_thing.worksheet_date}"
+= link_to('Print Daily Worksheet', polymorphic_path([:print_worksheet, @the_thing]), { :popup => ['new_window', 'height=2000,width=850,menubar=yes'] })
+= link_to(image_tag("deliver.png", :title => "Print Daily Worksheet"), polymorphic_path([:print_worksheet, @the_thing]), { :popup => ['new_window', 'height=700,width=1050,menubar=yes'] })
+
 
 %div
-  - @delivery = @the_thing unless @delivery
-  - form_for(@delivery, :url => recipient_delivery_path(@recipient, @delivery), :html => {:method => :put}) do |f|
+  - @daily_worksheet = @the_thing unless @daily_worksheet
+  - form_for(@daily_worksheet, :url => daily_worksheet_path(@daily_worksheet), :html => {:method => :put}) do |f|
     %fieldset
       %table
-        = render :partial => "deliveries/form", :locals => {:f => f}
+        = render :partial => "form", :locals => {:f => f}
       = render :partial => "edit_daily_deliveries", :locals => {:f => f}
     
       

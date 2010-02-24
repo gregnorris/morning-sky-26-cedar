@@ -10,49 +10,93 @@ class DailyWorksheetsController < ApplicationController
 #  end
 
 #end
+  
 
   def the_model_name;   'DailyWorksheet'; end
   def the_model_symbol; :daily_worksheet;  end
   
   def the_update_redirect
-    {:controller => :daily_worksheet, :action => 'edit', :id => @the_thing}
+    {:controller => :daily_worksheets, :action => 'edit', :id => @the_thing}
   end
   
   def set_the_thing
     @the_thing = the_model_name.constantize.find(params[:id]) if params[:id] && params[:id] != 'new'
-    # set the delivery var to the oldest delivery with a state != Done (for imbedded view use)
-    # (it will be shown exploded on the recipient edit page, so it's easy to edit it)
-    if @the_thing then
-      @delivery = @the_thing.deliveries.any? ? @the_thing.oldest_uncompleted_delivery : nil
-    end
   end
   
   # special action
   def reorder
+  
+    
     render(:partial => "daily_delivery", :collection => @the_thing.daily_deliveries)
   end
   
   # override new, so we can set all the daily deliveries to the ones targeted for today, by default
   def new
-    @the_thing = the_model_name.constantize.new
-#    Delivery.all.for_date(Time.now).each do |delivery|
-#      @the_thing.daily_deliveries.build(delivery)
-#    end
+    @the_thing = the_model_name.constantize.new  # DailyWorksheet.new
+    
+    @the_thing.worksheet_date = Time.now.to_date
+    
+    d_count = 0
+    
+    Donor.for_date(Time.now).each do |donor|
+      d_count = d_count + 1
+      @the_thing.daily_deliveries.build(:pickup_or_delivery => 1, :donor_id => donor.id, 
+                                          :position => d_count, :target_date => Time.now)
+    end 
+    
+    Delivery.for_date(Time.now).each do |delivery|
+      d_count = d_count + 1
+      @the_thing.daily_deliveries.build(:pickup_or_delivery => 2, :position => d_count, 
+                                          :delivery_id => delivery.id, :target_date => Time.now)
+    end
     
     
-    
-    
-    
-    
-    @the_thing.deliveries = Time.now unless @the_thing.intake_date  # set to now by default
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @the_thing }
     end
   end
   
-  # just show the map (this will be called to display in a new window; poor man's popup)
-  def show_map
-    render :partial => 'shared/city_section_map.html.haml'
+  # override 'update' so we check for any other donors or deliveries that have been updated to 
+  # be scheduled for TODAY
+  def update
+    set_the_thing
+    
+    #raise params[:daily_worksheet].changes.inspect  #[:daily_deliveries_attributes]
+    
+    respond_to do |format|
+      # get the params symbol to get the attributes
+      # ex.  if @the_thing is a Recipient, then @the_thing.class.name.downcase.to_sym = :recipient
+      if @the_thing.update_attributes(params[the_model_symbol])
+        flash[:notice] = "#{@the_thing.class.to_s} was successfully updated."
+        
+#        @the_thing.special_comments = "booooo"
+#        @the_thing.daily_deliveries.each do |dd|
+#          unless dd.changes.blank?
+#            dd.changes.has_key?(:donor_id)
+#          end
+#        end
+        
+        
+        # redirect to the action specified by the sub-controller (ex. 'index', 'show', ect)
+        format.html { redirect_to the_update_redirect  }
+        format.xml  { head :ok }
+      else
+        flash[:error] = @the_thing.errors.full_messages.to_sentence
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @the_thing.errors, :status => :unprocessable_entity }
+      end
+    end
   end
+  
+  def print_worksheet
+    set_the_thing
+    
+    respond_to do |format|
+      format.html { render :partial => 'worksheet', :locals => {:worksheet => @the_thing} }
+      format.xml  { render :xml => @the_thing }
+    end
+  end
+  
+  
 end

@@ -1,0 +1,11 @@
+%tr.form_field.required
+  %td.form_label
+    = f.label :worksheet_date
+  %td
+    = f.calendar_date_select :worksheet_date, :size => 23, :popup => :force
+%tr.form_field.required
+  %td.form_label
+    = f.label :special_comments
+  %td
+    = f.text_area :special_comments, :size => "100x3"
+

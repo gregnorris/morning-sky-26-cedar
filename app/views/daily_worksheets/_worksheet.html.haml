@@ -1,0 +1,21 @@
+%table
+  %tr
+    %td
+      = date_formatted(worksheet.worksheet_date)
+%table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse; font-family: monaco"}
+
+  - worksheet.daily_deliveries.each do |dd|
+    %tr
+      %td
+        &nbsp; &nbsp; &nbsp;
+      %td
+        = dd.target.address
+      %td
+        = dd.target.full_name
+        %br
+        = dd.target.andand.phone_primary
+        = "/ #{dd.target.andand.phone_secondary}" unless dd.target.andand.phone_secondary.blank?
+      %td
+        = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
+      %td{:style => "font-size:10"}
+        = dd.items_list

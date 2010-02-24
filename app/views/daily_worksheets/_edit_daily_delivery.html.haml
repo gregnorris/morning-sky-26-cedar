@@ -1,21 +1,44 @@
-%tr{:style => "cursor: move",  :id => "daily_delivery_#{daily_delivery.id}"}
+%tr{:style => "cursor: move",  :id => "daily_delivery_#{dd_form.object.id}"}
   
   %td
-    dd_form.text_field :order
+    = dd_form.text_field :position, :size => 3
   %td
     -#dd_form.select  # code
     &nbsp;&nbsp;
   %td
-    = dd_form.recipient.address
+    = dd_form.object.target.andand.address
   %td
-    = dd_form.recipient.full_name
+    = dd_form.object.target.andand.full_name
     %br
-    = dd_form.recipient.andand.phone_primary
-    = "/ #{dd_form.recipient.phone_secondary}" unless dd_form.recipient.phone_secondary.blank?
+    = dd_form.object.target.andand.phone_primary
+    = "/ #{dd_form.object.target.andand.phone_secondary}" unless dd_form.object.target.andand.phone_secondary.blank?
   %td
-    = DailyDelivery:TARGET_TYPES[dd_form.pickup_or_delivery]
+    - if dd_form.object.new_record?
+      - states = DailyDelivery::TARGET_TYPES.map{ |s| [s[1], s[0]]}
+      = dd_form.select :pickup_or_delivery, states, {:include_blank => ''}
+      %br
+      = "donor ID:"
+      = dd_form.text_field :donor_id, :size => 3
+      = " OR "
+      %br
+      = "delivery ID:"
+      = dd_form.text_field :delivery_id, :size => 3
+      = hidden_field_tag :is_new_object, "yes"
+    - else
+      = DailyDelivery::TARGET_TYPES[dd_form.object.pickup_or_delivery]
+      - if (dd_form.object.pickup_or_delivery == DailyDelivery::PICKUP) && dd_form.object.target
+        = "- Donor:"
+        = link_to_icon('edit', edit_donor_path(dd_form.object.target.id))
+      - if (dd_form.object.pickup_or_delivery == DailyDelivery::DELIVERY) && dd_form.object.delivery
+        = " (ID: #{dd_form.object.delivery.id}) " 
+        %br
+        = "Recipient:"
+        = link_to_icon('edit', edit_recipient_path(dd_form.object.target.id))
+      
   %td
-    = dd_form.items_list
+    - the_items = dd_form.object.items_list
+    = the_items if the_items
+    
   - unless dd_form.object.new_record?
     %td
       = dd_form.check_box '_delete'
@@ -24,7 +47,7 @@
     %td
       = ''
         
-= draggable_element( "daily_delivery_#{daily_delivery.id}", :ghosting => true, :revert => true)
+= draggable_element( "daily_delivery_#{dd_form.object.id}", :ghosting => true, :revert => true)
 
 -#= drop_receiving_element "daily_delivery_#{daily_delivery.id}", :update => 'delivery_list', |
 -#  :with => "'delivery_id=' + element.id", |
@@ -34,24 +57,3 @@
 -#:url => { :action => 'restructure', :category_id => category.id },
 -#:url => reorder_daily_worksheet_path(daily_delivery.id), |
 
-
-%tr
-  %td
-    -# ,{}, {:on_change => "alert('hello')"}
-    = items_form.select :item_id, Item.items_for_select('add')
-  %td
-    -#  :value => (items_form.object.andand.number_requested.blank? ? '1' : items_form.object.number_requested)
-    - initial_number_requested = ((items_form.object.andand.number_requested.blank? && items_form.object.item_id.nil?) ? '1' : items_form.object.number_requested)
-    -# :value => initial_number_requested,
-    = items_form.text_field(:number_requested, :size => 1 )
-  %td
-    = items_form.text_field :number_delivered, :size => 1
-  %td
-    = items_form.text_field :comments, :size => 20, :title => "#{items_form.object.comments}"
-  - unless items_form.object.new_record?
-    %td
-      = items_form.check_box '_delete'
-      = items_form.label '_delete', "Remove"
-  - else
-    %td
-      = ''

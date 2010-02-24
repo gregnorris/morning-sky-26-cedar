@@ -2,18 +2,15 @@
   %td
     = daily_worksheet.id
   %td
-    = daily_worksheet.code
+    = daily_worksheet.worksheet_date
   %td
-    = daily_worksheet.target.address
+    = daily_worksheet.special_comments
   %td
-    = daily_worksheet.target.full_name
-    = "#{daily_worksheet.target.phone_primary} <br>  #{daily_worksheet.target.phone_secondary}"
+    -#= daily_worksheet.total_trips
   %td
-    = daily_worksheet.pickup_or_delivery
+    = daily_worksheet.created_at
   %td
-    = daily_worksheet.items_list
-  %td
-    = date_formatted(daily_worksheet.target_date)
+    = daily_worksheet.updated_at
   %td
     = link_to_icon(:view, daily_worksheet_path(daily_worksheet))
     |

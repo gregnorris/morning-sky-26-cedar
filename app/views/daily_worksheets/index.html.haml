@@ -1,6 +1,6 @@
 
 %h2
-  Recipients &nbsp; &nbsp; &nbsp; &nbsp;
+  Daily Worksheets
 
 %table
   %tr
@@ -19,18 +19,6 @@
 
 = render(:partial => "shared/flashes")
 
-- column_titles = ['ID', 'Code', 'Address', 'Name and Number', 'PU/DEL', 'Items', 'Target Day', 'Actions']
+- column_titles = ['ID', 'Worksheet Date', 'Special Comments', '# PU/DEL', 'Created At', 'Updated At', 'Actions']
 = table_header('Daily Worksheets', @the_things, column_titles, 'daily_worksheet')
 
-%br
-%br
-%br
-
-%h2
-  = "Daily Worksheet for #{Date.today.to_s}"
-  
--# raise @scheduled_deliveries.inspect
-
-%table{{ :border => 1, :style => "border-style:inset"}}
-  %tbody{:id => "delivery_list"}
-    = render(:partial => "daily_delivery", :collection => @scheduled_deliveries)
