@@ -1,7 +1,3 @@
-%br
-%br
-%br
-%br
 %h3{:style => 'text-align:center'}
   - strftime_format = "%a %b %d, %y - %H:%M"
   = "FURNITURE DELIVERY - #{delivery.scheduled_delivery_time.andand.strftime(strftime_format)}"
@@ -9,8 +5,40 @@
   - recipient = delivery.recipient
 <font face='MONACO'>
 %table
-  %tr{:width => '800px'}
-    %td{:width => '500px'}
+  %tr{:width => '1000px'}
+    %td{:width => '100px', :valign => 'top'}
+      &nbsp; &nbsp;
+    %td{:width => '350px', :valign => 'top'}
+      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
+        %tr
+          = delivery_sheet_item_td('DEL')
+          = delivery_sheet_item_td('REQ')
+          %td{:width => '220px'}
+            ITEM
+          = delivery_sheet_item_td('LD')
+        - delivery.delivered_items.each do |di|
+          %tr
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            = delivery_sheet_item_td("&nbsp; #{di.number_requested}")
+            = delivery_sheet_item_td("#{di.item.item_code} - #{di.item.name}")
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+        - 2.times do
+          %tr
+            - 4.times do
+              = delivery_sheet_item_td('&nbsp; &nbsp;')
+      %br
+      %br
+      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
+        %tr
+          = delivery_sheet_item_td('# REQ')
+          %td{:width => '175px'}
+            NEEDED ITEM
+        - 3.times do
+          %tr
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            = delivery_sheet_item_td('&nbsp; &nbsp;')
+            
+    %td{:width => '550px'}
       %table
         -#= delivery_sheet_row('Scheduled Delivery Time', datetime_formatted(delivery.scheduled_delivery_time))
         = delivery_sheet_row('NAME', recipient.full_name) 
@@ -51,46 +79,12 @@
         
       %br
       %br
-      %br
-      %br
-      %br
-      %br
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
       Partial
       = check_box_tag('Partial:', 1, false, :disabled => true)
       Complete
       = check_box_tag('Complete:', 1, false, :disabled => true)
-        
-        
-    %td{:width => '300px', :valign => 'top'}
-      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
-        %tr
-          = delivery_sheet_item_td('DEL')
-          = delivery_sheet_item_td('REQ')
-          %td{:width => '175px'}
-            ITEM
-          = delivery_sheet_item_td('LD')
-        - delivery.delivered_items.each do |di|
-          %tr
-            = delivery_sheet_item_td('&nbsp; &nbsp;')
-            = delivery_sheet_item_td("&nbsp; #{di.number_requested}")
-            = delivery_sheet_item_td("#{di.item.item_code} - #{di.item.name}")
-            = delivery_sheet_item_td('&nbsp; &nbsp;')
-        - 2.times do
-          %tr
-            - 4.times do
-              = delivery_sheet_item_td('&nbsp; &nbsp;')
-      %br
-      %br
-      %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse"}
-        %tr
-          = delivery_sheet_item_td('# REQ')
-          %td{:width => '175px'}
-            NEEDED ITEM
-        - 3.times do
-          %tr
-            = delivery_sheet_item_td('&nbsp; &nbsp;')
-            = delivery_sheet_item_td('&nbsp; &nbsp;')
+      
     
     
   </font>

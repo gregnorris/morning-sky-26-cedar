@@ -85,7 +85,7 @@ module ApplicationHelper
     the_time.andand.strftime("%b %d, %y")  # %Z for timezone
   end
   
-  DS_LINE_MAX = 39
+  DS_LINE_MAX = 40 # was 39
   
   # print a row with a label in cell 1, and an underlined value in cell 2 
   # (with extra blank underlined space)
@@ -180,6 +180,9 @@ module ApplicationHelper
     src << render(:partial => "shared/flashes")
     
     src << '<table>'
+    #src << '<thead>'
+    #src << pagination_display(items, item_name, column_titles.size, pagination_opts) unless items.nil?
+    #src << '</thead>'
     src << '<tr><td>'
     src << render(:partial => index_partial)
     src << "</td></tr>"
@@ -239,7 +242,7 @@ module ApplicationHelper
     "<td>#{value}</td>"
   end
   
-  def table_header(items, column_titles, row_partial, row_partial_local_opts = {})
+  def index_table(items, column_titles, row_partial, row_partial_local_opts = {})
     src = ''
     src << "<table class='data'>"
     src << '<thead>'
@@ -253,6 +256,32 @@ module ApplicationHelper
       src << '<tbody>'
       src << render(:partial => row_partial, :collection => items, :locals => row_partial_local_opts)
       src << '</tbody>'
+      
+    end
+    src << '</table>'
+    src
+  end
+  
+  def table_header(item_name, items, column_titles, row_partial, row_partial_local_opts = {})
+    src = ''
+    src << "<table class='data'>"
+    src << '<thead>'
+    src << pagination_display(items, item_name, column_titles.size, {}) unless items.nil?
+    src << '</thead>'
+    src << '<tr>'
+    for title in column_titles do
+      src << "<th>#{title}</th>"
+    end
+    src << '</tr>'
+    src << '</thead>'
+    if (!items.blank?) then
+      src << '<tbody>'
+      src << render(:partial => row_partial, :collection => items, :locals => row_partial_local_opts)
+      src << '</tbody>'
+      
+      src << '<tfoot>'
+      src << pagination_display(items, item_name, column_titles.size, {})
+      src << '</tfoot>'
     end
     src << '</table>'
     src

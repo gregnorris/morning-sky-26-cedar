@@ -9,9 +9,10 @@ class RecipientsController < ApplicationController
   
   def set_the_thing
     @the_thing = the_model_name.constantize.find(params[:id]) if params[:id] && params[:id] != 'new'
-    # set the delivery var to the latest delivery (for imbedded view use)
+    # set the delivery var to the oldest delivery with a state != Done (for imbedded view use)
+    # (it will be shown exploded on the recipient edit page, so it's easy to edit it)
     if @the_thing then
-      @delivery = @the_thing.deliveries.any? ? @the_thing.deliveries.last : nil
+      @delivery = @the_thing.deliveries.any? ? @the_thing.oldest_uncompleted_delivery : nil
     end
   end
   

@@ -3,4 +3,4 @@
   - # NOT USED ANYMORE
 %div.boxcontent
   - column_titles = ['Item Code', 'Item Name', '', '# Requested', '# Delivered', 'Comments', 'Actions']
-  = table_header(@delivery.delivered_items, column_titles, 'delivered_items/delivered_item') 
+  = index_table(@delivery.delivered_items, column_titles, 'delivered_items/delivered_item') 

@@ -45,8 +45,8 @@ Rails::Initializer.run do |config|
   
   #config.gem 'mime-types', :lib => 'mime/types'
   #config.gem 'daemons'
-  #config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
-  #           :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
+             :source => 'http://gems.github.com'
 
   
   config.active_record.default_timezone = :utc

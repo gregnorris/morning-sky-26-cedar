@@ -41,17 +41,22 @@ class ApplicationController < ActionController::Base
     @the_thing = the_model_name.constantize.find(params[:id]) if params[:id] && params[:id] != 'new'
   end
   
+  def default_pagination_params(opts = {})
+    {:page => (params[:page] || 1),  :per_page => 5}.merge(opts) # should be 50 maybe
+  end
+  
   # GET /recipients
   # GET /recipients.xml
   def index
     
     if (params[:search_term] || params[:city_section])
-      @the_things = the_model_name.constantize.name_like(params[:search_term]) if params[:search_term]
+      @the_things = the_model_name.constantize.name_like(params[:search_term]).paginate(default_pagination_params) if params[:search_term]
       # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
-      @the_things = the_model_name.constantize.city_section_is(params[:city_section]) if params[:city_section]
+      @the_things = the_model_name.constantize.city_section_is(params[:city_section]).paginate(default_pagination_params) if params[:city_section]
     else
-      @the_things = the_model_name.constantize.all  # no search to perform, just return all items in the table
+      @the_things = the_model_name.constantize.all.paginate(default_pagination_params)  # no search to perform, just return all items in the table
     end
+    
     
     respond_to do |format|
       format.html # index.html.erb

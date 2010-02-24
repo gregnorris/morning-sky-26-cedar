@@ -1,8 +1,10 @@
 %tr
   %td
     = recipient.id
+  -#{:style => "background-color:red"}
   %td
-    = recipient.full_name
+    %b
+      = link_to(recipient.full_name, edit_recipient_path(recipient))
   %td
     = "#{recipient.phone_primary} <br>  #{recipient.phone_secondary}"
   %td
@@ -10,8 +12,8 @@
   %td
     = recipient.city_section_string
   %td
-    -# show the scheduled_delivery_time of the delivery with soonest scheduled delivery time
-    - most_recent_delivery_time =  recipient.deliveries.all(:order => 'scheduled_delivery_time DESC').first.andand.scheduled_delivery_time
+    -# show the scheduled_delivery_time of the delivery with oldest noncomplete scheduled delivery time
+    - most_recent_delivery_time = recipient.deliveries.by_oldest_uncompleted.first.andand.scheduled_delivery_time
     = datetime_formatted(most_recent_delivery_time)
   %td
     = recipient.deliveries.size

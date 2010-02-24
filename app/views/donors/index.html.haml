@@ -18,7 +18,7 @@
 = render(:partial => "shared/flashes")
 
 - column_titles = ['ID', 'Name', 'Phone', 'Address', 'City Section', 'Scheduled Pickup Time', 'Possible Future Pickup', 'Actions']
-= table_header(@the_things, column_titles, 'donor')
+= table_header('Donor', @the_things, column_titles, 'donor')
 
 %br
 %br

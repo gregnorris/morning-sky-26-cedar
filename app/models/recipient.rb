@@ -20,5 +20,8 @@ class Recipient < ActiveRecord::Base
   def address; street_1; end
   def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
   
-
+  def oldest_uncompleted_delivery
+    deliveries.by_oldest_uncompleted.first
+  end
+  
 end
