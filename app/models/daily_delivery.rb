@@ -5,7 +5,7 @@ class DailyDelivery < ActiveRecord::Base
   has_one :delivery
   
   named_scope :for_date,  lambda{ |a_date| {:conditions => ["target_date = :term", {:term => "%#{a_date}%"}]}}
-  named_scope :in_order, {:order => 'order ASC']}
+  #named_scope :in_order, {:order => 'order ASC']}
 
   PICKUP = 1
   DELIVERY = 2
