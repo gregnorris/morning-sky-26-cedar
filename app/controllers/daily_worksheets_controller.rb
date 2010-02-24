@@ -35,10 +35,9 @@ class DailyWorksheetsController < ApplicationController
   # override new, so we can set all the daily deliveries to the ones targeted for today, by default
   def new
     @the_thing = the_model_name.constantize.new
-    for Delivery.all.for_date(Time.now) do |delivery|
-      @the_thing.daily_deliveries.build(delivery)
-    end
-    
+#    Delivery.all.for_date(Time.now).each do |delivery|
+#      @the_thing.daily_deliveries.build(delivery)
+#    end
     
     
     
