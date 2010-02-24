@@ -1,0 +1,36 @@
+
+%h2
+  Recipients &nbsp; &nbsp; &nbsp; &nbsp;
+
+%table
+  %tr
+    %td
+      -#= link_to_icon_with_text(:add, "Create NEW Recipient", new_recipient_path)
+      = button_to("Create a NEW Daily Worksheet", new_daily_worksheet_path, :method => :get)
+      &nbsp; &nbsp;
+    %td
+      &nbsp; &nbsp; &nbsp; &nbsp;
+    %td
+      - form_for(DailyWorksheet.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+        %fieldset
+          Search By Date: 
+          = text_field_tag :search_term
+          = f.submit "Search"
+
+= render(:partial => "shared/flashes")
+
+- column_titles = ['ID', 'Code', 'Address', 'Name and Number', 'PU/DEL', 'Items', 'Target Day', 'Actions']
+= table_header('Daily Worksheets', @the_things, column_titles, 'daily_worksheet')
+
+%br
+%br
+%br
+
+%h2
+  = "Daily Worksheet for #{Date.today.to_s}"
+  
+-# raise @scheduled_deliveries.inspect
+
+%table{{ :border => 1, :style => "border-style:inset"}}
+  %tbody{:id => "delivery_list"}
+    = render(:partial => "daily_delivery", :collection => @scheduled_deliveries)

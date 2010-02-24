@@ -1,0 +1,22 @@
+%tr
+  %td
+    = daily_worksheet.id
+  %td
+    = daily_worksheet.code
+  %td
+    = daily_worksheet.target.address
+  %td
+    = daily_worksheet.target.full_name
+    = "#{daily_worksheet.target.phone_primary} <br>  #{daily_worksheet.target.phone_secondary}"
+  %td
+    = daily_worksheet.pickup_or_delivery
+  %td
+    = daily_worksheet.items_list
+  %td
+    = date_formatted(daily_worksheet.target_date)
+  %td
+    = link_to_icon(:view, daily_worksheet_path(daily_worksheet))
+    |
+    = link_to_icon(:edit, edit_daily_worksheet_path(daily_worksheet))
+    |
+    = link_to_icon(:delete, polymorphic_path([daily_worksheet]))

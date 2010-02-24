@@ -6,7 +6,8 @@ class Donor < ActiveRecord::Base
   
   named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}
-
+  named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
+  
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

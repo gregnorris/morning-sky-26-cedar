@@ -2,7 +2,19 @@
   Organizations
 = render(:partial => "shared/flashes")
 
-= button_to("Create a new Organization", new_organization_path, :method => :get)
+%table
+  %tr
+    %td
+      = button_to("Create a new Organization", new_organization_path, :method => :get)
+      &nbsp; &nbsp;
+    %td
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    %td
+      - form_for(Organization.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+        %fieldset
+          Search By Name: 
+          = text_field_tag :search_term
+          = f.submit "Search"
 %br
 
 - column_titles = ['ID', 'Name', 'Description', 'Actions']

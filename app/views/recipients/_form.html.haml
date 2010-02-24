@@ -93,12 +93,28 @@
     = f.label :case_number
   %td  
     = f.text_field :case_number, :size => 15
+    
 %tr.form_field
   %td.form_label
     = f.label 'Health Care #'
   %td  
     = f.text_field :health_care_number
+
+%tr.form_field
+  %td.form_label
+    = f.label :gender
+  %td  
+    - genders = Recipient::GENDERS.map{ |s| [s[1], s[0]]}
+    = f.select :gender, genders, {:include_blank => ' '}
+    -#= f.text_field :gender, :size => 2
+    &nbsp;<b> Age </b>
+    = f.text_field :age, :size => 3
+    &nbsp;<b> Aboriginal? </b>
+    = f.check_box :aboriginal
+    &nbsp;<b> Disabled? </b>
+    = f.check_box :disabled  
     
+       
 %tr.form_field
   %td.form_label
     = f.label 'Additional Info'

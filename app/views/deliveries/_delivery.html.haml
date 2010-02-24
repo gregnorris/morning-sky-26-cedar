@@ -1,5 +1,6 @@
 %tr
   = table_row(delivery.id)
+  = table_row(Delivery::PRIORITIES[delivery.priority])
   = table_row(datetime_formatted(delivery.scheduled_delivery_time))
   -#.andand.strftime("%b %d, %y - %H:%M"))
   = table_row(datetime_formatted(delivery.delivered_on))

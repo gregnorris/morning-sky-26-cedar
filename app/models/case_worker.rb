@@ -2,6 +2,8 @@ class CaseWorker < ActiveRecord::Base
 
   has_many :recipients
   belongs_to :organization
+  
+  named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
 
   def full_name
     "#{self.first_name} #{self.last_name}"

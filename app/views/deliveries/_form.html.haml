@@ -2,48 +2,48 @@
   %td.form_label
     = f.label :call_recieved_at
   %td
-    = f.calendar_date_select :call_recieved_at, :time => true, :popup => :force
+    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force
     -#= f.datetime_select :call_recieved_at
 %tr.form_field.required
   %td.form_label
     = f.label :scheduled_delivery_time
   %td  
-    = f.calendar_date_select :scheduled_delivery_time, :time => true, :popup => :force
+    = f.calendar_date_select :scheduled_delivery_time, :size => 23, :time => true, :popup => :force
     -#= f.datetime_select :scheduled_delivery_time 
 %tr.form_field
   %td.form_label
     = f.label 'Visit Date'
   %td
-    = f.calendar_date_select :visited_on_1, :time => true, :popup => :force
+    = f.calendar_date_select :visited_on_1, :size => 23, :time => true, :popup => :force
     -#= f.datetime_select :visited_on_1, {:include_blank => true, :default => nil}   
     
   %td.form_label
     = f.label :initialed_by
   %td
-    = f.text_field :initialed_by, :size => 10
+    = f.text_field :initialed_by, :size => 5
 %tr.form_field
   %td.form_label
     = f.label 'Visit 2 (if required)'
   %td
-    = f.calendar_date_select :visited_on_2, :time => true, :popup => :force
+    = f.calendar_date_select :visited_on_2, :size => 23, :time => true, :popup => :force
     -#= f.datetime_select :visited_on_2, {:include_blank => true, :default => nil}
   
   %td.form_label
     = f.label :initialed_by
   %td
-    = f.text_field :initialed_by_2, :size => 10
+    = f.text_field :initialed_by_2, :size => 5
     
 %tr.form_field
   %td.form_label
     = f.label :delivered_on
   %td
-    = f.calendar_date_select :delivered_on, :time => true, :popup => :force
+    = f.calendar_date_select :delivered_on, :size => 23, :time => true, :popup => :force
     -#= f.datetime_select :delivered_on, {:include_blank => true, :default => nil}
   
 %tr.form_field
   %td.form_label
     = f.label 'Delivery Notes'
-  %td
+  %td{:colspan => 2}
     = f.text_area :comments, :cols => 40, :rows => 2
 %tr.form_field
   %td.form_label
@@ -52,4 +52,11 @@
     -# reverse the values in the hash, so the dropdown will show the state strings
     - states = Delivery::STATES.map{ |s| [s[1], s[0]]}
     = f.select :state, states
+%tr.form_field
+  %td.form_label
+    = f.label :priority
+  %td
+    -# reverse the values in the hash, so the dropdown will show the strings
+    - priorities = Delivery::PRIORITIES.map{ |s| [s[1], s[0]]}
+    = f.select :priority, priorities, {:include_blank => ' '}
 

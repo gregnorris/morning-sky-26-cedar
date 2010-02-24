@@ -1,0 +1,13 @@
+%h3
+  "Edit Worksheet for #{@the_thing.worksheet_date}"
+
+%div
+  - @delivery = @the_thing unless @delivery
+  - form_for(@delivery, :url => recipient_delivery_path(@recipient, @delivery), :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "deliveries/form", :locals => {:f => f}
+      = render :partial => "edit_daily_deliveries", :locals => {:f => f}
+    
+      
+      = f.submit "Save"

@@ -1,0 +1,33 @@
+%div.boxtitle
+  Deliveries and Pickups
+-# use {:style => "overflow: scroll"} to cause the div to contain the items (no auto overflow), but put scrollbars
+%div.boxcontent
+  %table{{ :border => 1, :style => "border-style:inset"}}
+    %tr
+      %th 
+        = 'Order'
+      %th 
+        = 'Code'
+      %th 
+        = 'Address'
+      %th 
+        = 'Name and Number'
+      %th 
+        = 'PU/DEL'
+      %th 
+        = 'Items'
+      %th
+        = 'Action'
+    %tbody{:id => "delivery_list"}
+      - f.fields_for :daily_deliveries do |dd_form|
+        = render :partial => 'edit_daily_delivery', :locals => {:dd_form => dd_form}
+      -# have 3 extra blank delivered item rows shown, so they can be easily added (to avoid js)
+      -# (7 blank item rows if this is a totally new delivery being entered)
+      -# blank_rows = @delivery.delivered_items.any? ? 3 : 7
+      - 7.times do  
+        - f.fields_for :daily_deliveries, DailyDelivery.new do |dd_form|
+          = render :partial => 'edit_daily_delivery', :locals => {:dd_form => dd_form}
+        
+        %table{{ :border => 1, :style => "border-style:inset"}}
+  %tbody{:id => "delivery_list"}
+    = render(:partial => "daily_delivery", :collection => @scheduled_deliveries)

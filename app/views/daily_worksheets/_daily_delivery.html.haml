@@ -1,0 +1,21 @@
+%tr{:style => "cursor: move",  :id => "daily_delivery_#{daily_delivery.id}"}
+  
+  %td
+    &nbsp;&nbsp;
+  %td
+    = daily_delivery.recipient.address
+  %td
+    = daily_delivery.recipient.full_name
+    %br
+    = daily_delivery.recipient.andand.phone_primary
+    = "/ #{daily_delivery.recipient.phone_secondary}" unless daily_delivery.recipient.phone_secondary.blank?
+  
+= draggable_element( "daily_delivery_#{daily_delivery.id}", :ghosting => true, :revert => true)
+
+-#= drop_receiving_element "daily_delivery_#{daily_delivery.id}", :update => 'delivery_list', |
+-#  :with => "'delivery_id=' + element.id", |
+-#  :url => reorder_daily_worksheet_path(daily_delivery.id), |
+-#  :hoverclass => "row_highlight" |
+
+-#:url => { :action => 'restructure', :category_id => category.id },
+-#:url => reorder_daily_worksheet_path(daily_delivery.id), |

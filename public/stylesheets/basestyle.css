@@ -340,7 +340,7 @@ caption {
   display: none; }
 
 #left_half {
-  width: 520px;
+  width: 500px;   // was 520
   float: left;
   padding-top: 8px; }
   #left_half h3 {
@@ -349,7 +349,7 @@ caption {
     font-weight: lighter; }
 
 #right_half {
-  width: 368px;
+  width: 400px;  // was 368
   float: right;
   margin-bottom: 10px;
   margin-right: 20px;

@@ -1,0 +1,57 @@
+%tr{:style => "cursor: move",  :id => "daily_delivery_#{daily_delivery.id}"}
+  
+  %td
+    dd_form.text_field :order
+  %td
+    -#dd_form.select  # code
+    &nbsp;&nbsp;
+  %td
+    = dd_form.recipient.address
+  %td
+    = dd_form.recipient.full_name
+    %br
+    = dd_form.recipient.andand.phone_primary
+    = "/ #{dd_form.recipient.phone_secondary}" unless dd_form.recipient.phone_secondary.blank?
+  %td
+    = DailyDelivery:TARGET_TYPES[dd_form.pickup_or_delivery]
+  %td
+    = dd_form.items_list
+  - unless dd_form.object.new_record?
+    %td
+      = dd_form.check_box '_delete'
+      = dd_form.label '_delete', "Remove"
+  - else
+    %td
+      = ''
+        
+= draggable_element( "daily_delivery_#{daily_delivery.id}", :ghosting => true, :revert => true)
+
+-#= drop_receiving_element "daily_delivery_#{daily_delivery.id}", :update => 'delivery_list', |
+-#  :with => "'delivery_id=' + element.id", |
+-#  :url => reorder_daily_worksheet_path(daily_delivery.id), |
+-#  :hoverclass => "row_highlight" |
+
+-#:url => { :action => 'restructure', :category_id => category.id },
+-#:url => reorder_daily_worksheet_path(daily_delivery.id), |
+
+
+%tr
+  %td
+    -# ,{}, {:on_change => "alert('hello')"}
+    = items_form.select :item_id, Item.items_for_select('add')
+  %td
+    -#  :value => (items_form.object.andand.number_requested.blank? ? '1' : items_form.object.number_requested)
+    - initial_number_requested = ((items_form.object.andand.number_requested.blank? && items_form.object.item_id.nil?) ? '1' : items_form.object.number_requested)
+    -# :value => initial_number_requested,
+    = items_form.text_field(:number_requested, :size => 1 )
+  %td
+    = items_form.text_field :number_delivered, :size => 1
+  %td
+    = items_form.text_field :comments, :size => 20, :title => "#{items_form.object.comments}"
+  - unless items_form.object.new_record?
+    %td
+      = items_form.check_box '_delete'
+      = items_form.label '_delete', "Remove"
+  - else
+    %td
+      = ''

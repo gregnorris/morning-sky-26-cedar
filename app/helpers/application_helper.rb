@@ -238,6 +238,7 @@ module ApplicationHelper
     src
   end
   
+  
   def table_row(value)
     "<td>#{value}</td>"
   end

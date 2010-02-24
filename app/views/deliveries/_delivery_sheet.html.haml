@@ -3,8 +3,8 @@
   = "FURNITURE DELIVERY - #{delivery.scheduled_delivery_time.andand.strftime(strftime_format)}"
   
   - recipient = delivery.recipient
-<font face='MONACO'>
-%table
+  
+%table{:style => "font-family:monaco"}
   %tr{:width => '1000px'}
     %td{:width => '100px', :valign => 'top'}
       &nbsp; &nbsp;
@@ -13,7 +13,8 @@
         %tr
           = delivery_sheet_item_td('DEL')
           = delivery_sheet_item_td('REQ')
-          %td{:width => '220px'}
+          %td
+            -#{:width => '200px'}
             ITEM
           = delivery_sheet_item_td('LD')
         - delivery.delivered_items.each do |di|
@@ -85,6 +86,3 @@
       Complete
       = check_box_tag('Complete:', 1, false, :disabled => true)
       
-    
-    
-  </font>

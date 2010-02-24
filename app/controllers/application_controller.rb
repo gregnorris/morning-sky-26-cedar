@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
   
   def default_pagination_params(opts = {})
-    {:page => (params[:page] || 1),  :per_page => 5}.merge(opts) # should be 50 maybe
+    {:page => (params[:page] || 1),  :per_page => 25}.merge(opts) # should be 50 maybe
   end
   
   # GET /recipients

@@ -1,0 +1,11 @@
+%h3
+  Create New Daily Worksheet
+%div
+  - @daily_worksheet = @the_thing
+  - form_for(Delivery.new, :url => daily_worksheets_path(), :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = render :partial => "edit_daily_deliveries", :locals => {:f => f}
+      
+      = f.submit "Create"
