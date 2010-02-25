@@ -37,7 +37,7 @@
       
   %td
     - the_items = dd_form.object.items_list
-    = the_items if the_items
+    = the_items unless dd_form.object.new_record?
     
   - unless dd_form.object.new_record?
     %td
