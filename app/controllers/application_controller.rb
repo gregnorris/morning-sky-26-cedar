@@ -45,18 +45,23 @@ class ApplicationController < ActionController::Base
     {:page => (params[:page] || 1),  :per_page => 25}.merge(opts) # should be 50 maybe
   end
   
+  # items filtered by search parms (if any) -- shown in the index
+  def searched_items
+    @the_things = the_model_name.constantize.name_like(params[:search_term]).paginate(default_pagination_params) if params[:search_term]
+    # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
+    @the_things = the_model_name.constantize.city_section_is(params[:city_section]).paginate(default_pagination_params) if params[:city_section]
+  end
+  
   # GET /recipients
   # GET /recipients.xml
   def index
     
-    if (params[:search_term] || params[:city_section])
-      @the_things = the_model_name.constantize.name_like(params[:search_term]).paginate(default_pagination_params) if params[:search_term]
-      # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
-      @the_things = the_model_name.constantize.city_section_is(params[:city_section]).paginate(default_pagination_params) if params[:city_section]
-    else
-      @the_things = the_model_name.constantize.all.paginate(default_pagination_params)  # no search to perform, just return all items in the table
-    end
+    searched_items
     
+    if @the_things.blank?
+      # no search to perform, just return all items in the table
+      @the_things = the_model_name.constantize.all.paginate(default_pagination_params)  
+    end
     
     respond_to do |format|
       format.html # index.html.erb

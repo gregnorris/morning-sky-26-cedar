@@ -3,6 +3,9 @@
   = table_row("#{donor.full_name} <br> #{donor.phone_primary} <br>  #{donor.phone_secondary}")
   = table_row(donor.address)
   = table_row(donor.city_section_string)
+  = table_row(Donor::STATES[donor.state])
+  = table_row(Donor::PRIORITIES[donor.priority])
+  = table_row(donor.pending.nil? ? 'nil' : donor.pending?)
   = table_row(datetime_formatted(donor.scheduled_pickup_time))
   %td
     - donor.daily_deliveries.each do |dd|

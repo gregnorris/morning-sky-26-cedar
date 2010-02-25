@@ -58,8 +58,8 @@ module ApplicationHelper
     4 => 'Point Douglas South',
     5 => 'St. Boniface West',
     6 => 'St. Boniface East',
-    7 => 'River Heights East',
-    8 => 'River Heights West',
+    7 => 'River Heights West',
+    8 => 'River Heights East',
     9 => 'River East South',
     10 => 'River East West',
     11 => 'River East East',
@@ -77,8 +77,20 @@ module ApplicationHelper
     23 => 'Seven Oaks East'
   }
   
+  def city_sections_list
+    ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
+  end
+  
   def datetime_formatted(the_time)
     the_time.andand.strftime("%a %b %d, %Y - %I:%M %p")  # %Z for timezone
+  end
+  
+  def datetime_formatted_2_line(the_time)
+    return "" unless the_time
+    time_str = the_time.andand.strftime("%a %b %d, %Y")
+    time_str << "<br>"
+    time_str << the_time.andand.strftime("%I:%M %p")
+    time_str
   end
   
   def date_formatted(the_time)

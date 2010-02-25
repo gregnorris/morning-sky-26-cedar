@@ -1,0 +1,31 @@
+%b
+#search_form
+  - form_for(Donor.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+    %fieldset
+      %b
+        Search: &nbsp; 
+      First Name: 
+      = text_field_tag :search_first_name, params[:search_first_name], {:size => 7}
+      Last Name: 
+      = text_field_tag :search_last_name, params[:search_last_name], {:size => 7}
+      Address: 
+      = text_field_tag :search_address, params[:search_address], {:size => 10}
+      City Section:
+      -#= f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'} 
+      = select_tag :search_city_section, "<option value=''></option>" + options_for_select(city_sections_list)
+      %br
+      %br
+      Delivery Time Between
+      = calendar_date_select_tag( :search_delivery_time_lowest, nil, :size => 15, :time => false, :popup => :force) 
+      And
+      = calendar_date_select_tag( :search_delivery_time_highest, nil, :size => 15, :time => false, :popup => :force) 
+      State:
+      = select_tag :search_state, "<option value=''></option>" + options_for_select(Delivery::STATES.map{ |s| [s[1], s[0]]})
+      Class:
+      = select_tag :search_priority, "<option value=''></option>" + options_for_select(Delivery::PRIORITIES.map{ |s| [s[1], s[0]]})
+      Pending:
+      = select_tag :search_pending, "<option value=''></option>" + options_for_select([['TRUE', 1], ['FALSE', 0]])
+      = f.submit "Search"
+      -#= button_to_function "Reset", "$('#search_form form').clearForm()"
+      -#<input type='reset', value='Clear Search fields'>
+

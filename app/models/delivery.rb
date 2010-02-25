@@ -5,9 +5,22 @@ class Delivery < ActiveRecord::Base
   has_many :daily_deliveries, :dependent => :destroy
   
   accepts_nested_attributes_for :delivered_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  
+  
+  named_scope :first_name_like,  lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.first_name LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
+  named_scope :last_name_like,  lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.last_name LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
+  named_scope :address_like,  lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
+  named_scope :for_delivery_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_delivery_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  named_scope :with_state,  lambda{ |search_term| {:conditions => ["state = ?", search_term]} unless search_term == ''}
+  named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
+  named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
+  
+  named_scope :city_section_is,  lambda{ |section| {:include => :recipient, :conditions => ["recipients.city_section = ?", section]} unless section.blank?}
+  
+  
   #named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
   named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
-  named_scope :by_oldest_uncompleted,  {:conditions => ["state <> 3"], :order => 'scheduled_delivery_time ASC'}
+  named_scope :by_oldest_uncompleted,  {:conditions => ["state <> 3 AND state <> 4"], :order => 'scheduled_delivery_time ASC'}
   named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_delivery_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_delivery_time DESC'}}
   
   ENTERED = 0
@@ -15,9 +28,10 @@ class Delivery < ActiveRecord::Base
   PARTIAL = 2
   COMPLETED = 3
   CANCELLED = 4
+  NOT_DONE = 5
   
   STATES = { ENTERED => "Entered", SCHEDULED => "Scheduled", 
-             PARTIAL => "Partially Done", COMPLETED => "Done", CANCELLED => "Cancelled"}
+             PARTIAL => "Partially Done", NOT_DONE => "Not Done", COMPLETED => "Done", CANCELLED => "Cancelled"}
              
   # priority classifications
   CLASS_A = 1

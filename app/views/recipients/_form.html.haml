@@ -22,8 +22,7 @@
   %td.form_label
     = f.label :city_section
   %td  
-    - sections = ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
-    = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
+    = f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'}
     = link_to("Show Map", {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
 %tr.form_field
   %td.form_label
@@ -56,9 +55,12 @@
     &nbsp; &nbsp;
     <b> Children </b>
     = f.text_field :number_of_children, :size => 2
+    
+- # render partial to allow editing of all residents
 %tr
   %td{:colspan => 2}
-    = render :partial => "edit_residents", :locals => {:f => f}    
+    = render :partial => "edit_residents", :locals => {:f => f}  
+      
 %tr.form_field
   %td.form_label
     = f.label 'Work/School Schedule'
@@ -101,20 +103,6 @@
     = f.label 'Health Care #'
   %td  
     = f.text_field :health_care_number
-
-%tr.form_field
-  %td.form_label
-    = f.label :gender
-  %td  
-    - genders = Recipient::GENDERS.map{ |s| [s[1], s[0]]}
-    = f.select :gender, genders, {:include_blank => ' '}
-    -#= f.text_field :gender, :size => 2
-    &nbsp;<b> Age </b>
-    = f.text_field :age, :size => 3
-    &nbsp;<b> Aboriginal? </b>
-    = f.check_box :aboriginal
-    &nbsp;<b> Disabled? </b>
-    = f.check_box :disabled  
     
        
 %tr.form_field

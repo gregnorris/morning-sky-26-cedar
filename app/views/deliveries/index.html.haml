@@ -1,9 +1,11 @@
 %h2
   Deliveries &nbsp; &nbsp; &nbsp; &nbsp;
+  
+= render(:partial => "delivery_search")
 
 = render(:partial => "shared/flashes")
 
-- column_titles = ['ID', 'Recipient Name', 'Address', 'City Section', 'State', 'Scheduled Delivery Date', 'Pending?', 'Class', 'Worksheet', 'Items', 'Call recived at', 'Actions']
+- column_titles = ['ID', 'Recipient Name', 'Address', 'City Section', 'State', 'Class', 'Pending?', 'Scheduled Delivery<br>Date', 'Class', 'Worksheet', 'Items', 'Call recived at', 'Actions']
 = table_header('Delivery', @the_things, column_titles, 'delivery_index_row')
 
 %br

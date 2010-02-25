@@ -12,8 +12,10 @@ class Resident < ActiveRecord::Base
   RELATIVE = 3
   ROOMMATE = 4
   OTHER = 5
+  ADULT = 6
   
-  CATEGORIES = {PARENT => 'Parent', CHILD => 'Child', RELATIVE => 'Relative',  
+  
+  CATEGORIES = {PARENT => 'Parent', CHILD => 'Child', ADULT => 'Adult', RELATIVE => 'Relative',  
                 ROOMMATE => 'Roommate', OTHER => 'Other'}
   
 end

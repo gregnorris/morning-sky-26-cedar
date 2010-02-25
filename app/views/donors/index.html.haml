@@ -1,23 +1,19 @@
-%h2
-  Donors
-
 %table
   %tr
     %td
-      = button_to("Create a NEW Donor", new_donor_path, :method => :get)
-      &nbsp; &nbsp;
+      %h2
+        Donors
     %td
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     %td
-      - form_for(Donor.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
-        %fieldset
-          Search By Last Name: 
-          = text_field_tag :search_term
-          = f.submit "Search"
+      = button_to("Create a NEW Donor", new_donor_path, :method => :get)
+      &nbsp; &nbsp;
+
+= render(:partial => "donor_search")
 
 = render(:partial => "shared/flashes")
 
-- column_titles = ['ID', 'Name', 'Address', 'City Section', 'Scheduled Pickup Time', 'Daily Worksheet', 'Possible Future Pickup', 'Items', 'Actions']
+- column_titles = ['ID', 'Name', 'Address', 'City Section', 'State', 'Class', 'Pending?', 'Scheduled Pickup Time', 'Daily Worksheet', 'Possible Future Pickup', 'Items', 'Actions']
 = table_header('Donor', @the_things, column_titles, 'donor')
 
 %br

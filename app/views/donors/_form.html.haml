@@ -21,8 +21,7 @@
   %td.form_label
     = f.label :city_section
   %td  
-    - sections = ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
-    = f.select :city_section, sections, {:include_blank => 'Please Select a City Section'}
+    = f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'}
     = link_to("Show Map", {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
 %tr.form_field
   %td.form_label
@@ -38,6 +37,11 @@
     = f.text_field :buzzer_number, :size => 7
     &nbsp;<b> Elevator? </b>
     = f.check_box :elevator  
+    &nbsp;<b> Bed Bugs? </b>
+    = f.check_box :bed_bugs
+    &nbsp;<b> Donation ($) </b>
+    = f.text_field :donation_amount, :size => 2
+    
 %tr.form_field
   %td.form_label
     = f.label :directions
@@ -57,7 +61,21 @@
     -#= f.date_select :possible_future_pickup_time, {:include_blank => true, :default => nil}
 %tr.form_field
   %td.form_label
-    = f.label 'Donation ($)'
+    = f.label :status
   %td  
-    = f.text_field :donation_amount, :size => 5
+    -# reverse the values in the hash, so the dropdown will show the state strings
+    - states = Donor::STATES.map{ |s| [s[1], s[0]]}
+    = f.select :state, states
+%tr.form_field
+  %td.form_label
+    = f.label 'Class'
+  %td  
+    -# reverse the values in the hash, so the dropdown will show the strings
+    - priorities = Donor::PRIORITIES.map{ |s| [s[1], s[0]]}
+    = f.select :priority, priorities, {:include_blank => ' '}
+%tr.form_field
+  %td.form_label
+    = f.label 'Pending?'
+  %td  
+    = f.check_box :pending
 

@@ -7,6 +7,26 @@ class DonorsController < ApplicationController
     {:controller => :donors, :action => 'edit', :id => @the_thing}
   end
   
+  # items filtered by search parms (if any) -- shown in the index
+  def searched_items
+    # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
+    if params[:city_section]
+      @the_things = Donor.city_section_is(params[:city_section]).paginate(default_pagination_params)
+      return
+    end
+    
+    @the_things = Donor.first_name_like(params[:search_first_name]).
+                          last_name_like(params[:search_last_name]).
+                          address_like(params[:search_address]).
+                          with_state(params[:search_state]).
+                          with_priority(params[:search_priority]).
+                          is_pending(params[:search_pending]).
+                          city_section_is(params[:search_city_section]).
+                          for_pickup_date_range(params[:search_pickup_time_lowest], params[:search_pickup_time_highest]).
+                          paginate(default_pagination_params)
+    
+  end
+  
   def add_to_worksheet
     the_donor_id = params[:id]
     the_worksheet_date = Date.parse(params[:the_worksheet_date])

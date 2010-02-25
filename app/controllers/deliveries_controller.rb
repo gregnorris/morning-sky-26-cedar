@@ -24,7 +24,11 @@ class DeliveriesController < ApplicationController
   
   def set_the_thing
     delivery_id = (params[:id] && params[:id] != 'new' && @delivery.blank?) ? params[:id] : @delivery.id
-    @the_thing = @recipient.deliveries.find(delivery_id) if delivery_id
+    if @recipient
+      @the_thing = @recipient.deliveries.find(delivery_id) if delivery_id
+    else  # shouldn't usually happen, but may, if delivery is orphaned
+      @the_thing = Delivery.find(delivery_id) if delivery_id
+    end
   end
   
   # GET /recipients/1/delivery_sheet
@@ -57,6 +61,26 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       format.html {redirect_to deliveries_path}
     end
+  end
+  
+  # items filtered by search parms (if any) -- shown in the index
+  def searched_items
+    # search by city_section if that param is passed in (convert city_section string name to key for db lookup first)
+    if params[:city_section]
+      @the_things = Delivery.city_section_is(params[:city_section]).paginate(default_pagination_params)
+      return
+    end
+    
+    @the_things = Delivery.first_name_like(params[:search_first_name]).
+                          last_name_like(params[:search_last_name]).
+                          address_like(params[:search_address]).
+                          with_state(params[:search_state]).
+                          with_priority(params[:search_priority]).
+                          is_pending(params[:search_pending]).
+                          city_section_is(params[:search_city_section]).
+                          for_delivery_date_range(params[:search_delivery_time_lowest], params[:search_delivery_time_highest]).
+                          paginate(default_pagination_params)
+    
   end
   
   

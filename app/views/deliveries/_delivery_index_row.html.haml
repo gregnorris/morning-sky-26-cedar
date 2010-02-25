@@ -14,10 +14,13 @@
   %td
     = Delivery::STATES[delivery.state]
   %td
-    = datetime_formatted(delivery.scheduled_delivery_time)
+    = Delivery::PRIORITIES[delivery.priority]
   %td
     -# only show TRUE if pending is true
     = delivery.pending? if delivery.pending?
+  %td
+    = datetime_formatted(delivery.scheduled_delivery_time)
+
   %td
     = Delivery::PRIORITIES[delivery.priority]
   %td
@@ -31,6 +34,8 @@
     = datetime_formatted(delivery.call_recieved_at)
   %td
     = link_to_icon(:edit, edit_recipient_delivery_path(delivery.recipient, delivery))  if delivery.recipient
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    = link_to_icon(:delete, polymorphic_path([@recipient, delivery]))
     
     - if delivery.recipient
       -form_tag add_to_worksheet_delivery_path(delivery), :method => :put do
