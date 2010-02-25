@@ -78,11 +78,11 @@ module ApplicationHelper
   }
   
   def datetime_formatted(the_time)
-    the_time.andand.strftime("%b %d, %y - %I:%M %p")  # %Z for timezone
+    the_time.andand.strftime("%a %b %d, %Y - %I:%M %p")  # %Z for timezone
   end
   
   def date_formatted(the_time)
-    the_time.andand.strftime("%b %d, %y")  # %Z for timezone
+    the_time.andand.strftime("%a %b %d, %Y")  # %Z for timezone
   end
   
   DS_LINE_MAX = 40 # was 39

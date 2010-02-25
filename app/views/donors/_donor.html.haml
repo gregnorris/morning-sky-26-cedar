@@ -1,11 +1,17 @@
 %tr
   = table_row(donor.id)
-  = table_row(donor.full_name)
-  = table_row("#{donor.phone_primary} <br>  #{donor.phone_secondary}")
+  = table_row("#{donor.full_name} <br> #{donor.phone_primary} <br>  #{donor.phone_secondary}")
   = table_row(donor.address)
   = table_row(donor.city_section_string)
   = table_row(datetime_formatted(donor.scheduled_pickup_time))
+  %td
+    - donor.daily_deliveries.each do |dd|
+      - if dd.daily_worksheet
+        = link_to(date_formatted(dd.daily_worksheet.worksheet_date), edit_daily_worksheet_path(dd.daily_worksheet))
+        %br
+  -#= table_row("#{donor.daily_deliveries.first ? date_formatted(donor.daily_deliveries.first.daily_worksheet.worksheet_date) : ''}")
   = table_row(datetime_formatted(donor.possible_future_pickup_time))
+  = table_row(donor.items_list)
   
   %td
     = link_to_icon(:view, donor_path(donor))
@@ -13,3 +19,7 @@
     = link_to_icon(:edit, edit_donor_path(donor))
     |
     = link_to_icon(:delete, polymorphic_path([donor]))
+    |
+    -form_tag add_to_worksheet_donor_path(donor), :method => :put do
+      = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+      = submit_tag "Add to Daily Worksheet", :name => 'add_to_daily_worksheet'

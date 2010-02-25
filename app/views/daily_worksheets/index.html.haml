@@ -5,8 +5,12 @@
 %table
   %tr
     %td
-      -#= link_to_icon_with_text(:add, "Create NEW Recipient", new_recipient_path)
-      = button_to("Create a NEW Daily Worksheet", new_daily_worksheet_path, :method => :get)
+      -form_tag new_daily_worksheet_path(), :method => :get do
+        = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+        %br
+        = submit_tag "Create NEW Daily Worksheet", :name => 'new_daily_worksheet'
+
+      -#= button_to("Create a NEW Daily Worksheet", new_daily_worksheet_path, :method => :get)
       &nbsp; &nbsp;
     %td
       &nbsp; &nbsp; &nbsp; &nbsp;

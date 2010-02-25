@@ -54,7 +54,10 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   
-  map.resources :donors do |donor|
+  # to allow for top level index view
+  map.resources :deliveries, :member => { :add_to_worksheet => :put }
+  
+  map.resources :donors, :member => { :add_to_worksheet => :put } do |donor|
     donor.resources :donor_items
   end
   

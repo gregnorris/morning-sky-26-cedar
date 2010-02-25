@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100224194434) do
+ActiveRecord::Schema.define(:version => 20100225020308) do
 
   create_table "case_workers", :force => true do |t|
     t.string   "first_name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20100224194434) do
     t.integer  "state"
     t.string   "initialed_by_2"
     t.integer  "priority"
+    t.boolean  "pending"
   end
 
   create_table "donor_items", :force => true do |t|
@@ -155,6 +156,18 @@ ActiveRecord::Schema.define(:version => 20100224194434) do
     t.boolean  "bed_bugs"
     t.date     "date_of_birth"
     t.integer  "age"
+  end
+
+  create_table "residents", :force => true do |t|
+    t.integer  "recipient_id"
+    t.string   "gender",           :limit => 1
+    t.integer  "age"
+    t.boolean  "aboriginal"
+    t.boolean  "recent_immigrant"
+    t.boolean  "disabled"
+    t.integer  "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

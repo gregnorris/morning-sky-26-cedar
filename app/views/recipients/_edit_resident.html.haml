@@ -1,0 +1,24 @@
+%tr
+  %td
+    -# ,{}, {:on_change => "alert('hello')"}
+    - categories = Resident::CATEGORIES.map{ |s| [s[1], s[0]]}
+    = residents_form.select :category, categories, {:include_blank => ' '}
+  %td
+    - genders = Resident::GENDERS.map{ |s| [s[1], s[0]]}
+    = residents_form.select :gender, genders, {:include_blank => ' '}
+  %td
+    = residents_form.text_field :age, :size => 2
+  %td
+    = residents_form.check_box :aboriginal
+  %td
+    = residents_form.check_box :disabled
+  %td
+    = residents_form.check_box :recent_immigrant
+        
+  - unless residents_form.object.new_record?
+    %td
+      = residents_form.check_box '_delete'
+      = residents_form.label '_delete', "Remove"
+  - else
+    %td
+      = ''

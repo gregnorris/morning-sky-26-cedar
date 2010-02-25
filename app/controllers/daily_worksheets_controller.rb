@@ -34,20 +34,20 @@ class DailyWorksheetsController < ApplicationController
   def new
     @the_thing = the_model_name.constantize.new  # DailyWorksheet.new
     
-    @the_thing.worksheet_date = Time.now.to_date
+    @the_thing.worksheet_date = Date.parse(params[:the_worksheet_date]) # was Time.now.to_date
     
     d_count = 0
     
-    Donor.for_date(Time.now).each do |donor|
+    Donor.for_date(@the_thing.worksheet_date).each do |donor|
       d_count = d_count + 1
       @the_thing.daily_deliveries.build(:pickup_or_delivery => 1, :donor_id => donor.id, 
-                                          :position => d_count, :target_date => Time.now)
+                                          :position => d_count, :target_date =>  @the_thing.worksheet_date)
     end 
     
-    Delivery.for_date(Time.now).each do |delivery|
+    Delivery.for_date(@the_thing.worksheet_date).each do |delivery|
       d_count = d_count + 1
       @the_thing.daily_deliveries.build(:pickup_or_delivery => 2, :position => d_count, 
-                                          :delivery_id => delivery.id, :target_date => Time.now)
+                                          :delivery_id => delivery.id, :target_date =>  @the_thing.worksheet_date)
     end
     
     

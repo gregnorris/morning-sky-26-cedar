@@ -54,9 +54,13 @@
     = f.select :state, states
 %tr.form_field
   %td.form_label
-    = f.label :priority
+    = f.label 'Class'
   %td
     -# reverse the values in the hash, so the dropdown will show the strings
     - priorities = Delivery::PRIORITIES.map{ |s| [s[1], s[0]]}
     = f.select :priority, priorities, {:include_blank => ' '}
-
+%tr.form_field
+  %td.form_label
+    = f.label :pending
+  %td
+    = f.check_box :pending

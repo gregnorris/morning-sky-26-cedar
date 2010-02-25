@@ -1,0 +1,52 @@
+%div.boxtitle
+  Residents
+-# use {:style => "overflow: scroll"} to cause the div to contain the items (no auto overflow), but put scrollbars
+%div.boxcontent
+  %table.residents
+    %tr
+      %th
+        = 'Category'
+      %th 
+        = 'Gender'
+      %th 
+        = 'Age'
+      %th 
+        = 'Aboriginal?'
+      %th 
+        = 'Disabled?'
+      %th 
+        = 'Recent Immigrant?'
+      %th
+        = 'Action'
+    
+    - f.fields_for :residents do |residents_form|
+      = render :partial => 'edit_resident', :locals => {:residents_form => residents_form}
+  <a href="#recipient_area" onclick="Element.toggle('new_residents')">CLICK HERE to add more residents ---></a>
+  %div#new_residents{:style => "display:none"}
+    
+    %table.new_residents
+      %tr
+        %th
+          = 'Category'
+        %th 
+          = 'Gender'
+        %th 
+          = 'Age'
+        %th 
+          = 'Aboriginal?'
+        %th 
+          = 'Disabled?'
+        %th 
+          = 'Recent Immigrant?'
+        %th
+          = 'Action'
+      -# put blank new residents fields in a div that can be toggle hidden
+      -# have 3 extra blank delivered item rows shown, so they can be easily added (to avoid js)
+      -# (7 blank item rows if this is a totally new delivery being entered)
+    
+    
+      -blank_rows = @recipient.residents.any? ? 2 : 5
+      -blank_rows.times do  
+        -f.fields_for :residents, Resident.new do |residents_form|
+          = render :partial => 'edit_resident', :locals => {:residents_form => residents_form}
+    

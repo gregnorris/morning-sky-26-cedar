@@ -1,0 +1,40 @@
+%tr
+  - delivery = delivery_index_row
+  %td
+    = delivery.id
+  -#{:style => "background-color:red"}
+  %td
+    %b
+      = link_to(delivery.recipient.full_name, edit_recipient_path(delivery.recipient)) if delivery.recipient
+    = "#{delivery.recipient.phone_primary} <br>  #{delivery.recipient.phone_secondary}"  if delivery.recipient
+  %td
+    = delivery.recipient.address if delivery.recipient
+  %td
+    = delivery.recipient.city_section_string if delivery.recipient
+  %td
+    = Delivery::STATES[delivery.state]
+  %td
+    = datetime_formatted(delivery.scheduled_delivery_time)
+  %td
+    -# only show TRUE if pending is true
+    = delivery.pending? if delivery.pending?
+  %td
+    = Delivery::PRIORITIES[delivery.priority]
+  %td
+    - delivery.daily_deliveries.each do |dd|
+      - if dd.daily_worksheet
+        = link_to(date_formatted(dd.daily_worksheet.worksheet_date), edit_daily_worksheet_path(dd.daily_worksheet))
+        %br
+  %td
+    = delivery.items_list
+  %td
+    = datetime_formatted(delivery.call_recieved_at)
+  %td
+    = link_to_icon(:edit, edit_recipient_delivery_path(delivery.recipient, delivery))  if delivery.recipient
+    
+    - if delivery.recipient
+      -form_tag add_to_worksheet_delivery_path(delivery), :method => :put do
+        = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+        = hidden_field_tag 'recipient_id', delivery.recipient.id
+        = submit_tag "Add to Daily Worksheet", :name => 'add_to_daily_worksheet'
+          

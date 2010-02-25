@@ -1,7 +1,12 @@
 class Recipient < ActiveRecord::Base
   
-  has_many :deliveries
+  has_many :deliveries, :dependent => :destroy
+  has_many :residents, :dependent => :destroy
   belongs_to :case_worker
+  
+  # needs special code in the "reject_if" so the boolean checkbox values of '0' (false) are considered "blank".
+  accepts_nested_attributes_for :residents, :allow_destroy => true, 
+                                :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank? || v == '0'} }
   
   validates_presence_of :first_name, :last_name
   

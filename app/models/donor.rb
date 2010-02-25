@@ -1,8 +1,8 @@
 class Donor < ActiveRecord::Base
   
-  has_many :donor_items
+  has_many :donor_items, :dependent => :destroy
   accepts_nested_attributes_for :donor_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
-  
+  has_many :daily_deliveries, :dependent => :destroy
   
   named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}
@@ -18,5 +18,10 @@ class Donor < ActiveRecord::Base
   
   def address; street_1; end
   def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
+  
+  # string formatted list of items and number
+  def items_list
+    return self.donor_items.map{|it| " #{it.item.item_code} (#{it.number_donated}) "}.join("/")
+  end
   
 end

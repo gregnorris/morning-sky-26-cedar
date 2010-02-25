@@ -1,7 +1,8 @@
 class Delivery < ActiveRecord::Base
   
-  has_many :delivered_items, :foreign_key => :delivery_id
+  has_many :delivered_items, :foreign_key => :delivery_id, :dependent => :destroy
   belongs_to :recipient
+  has_many :daily_deliveries, :dependent => :destroy
   
   accepts_nested_attributes_for :delivered_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
   #named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
@@ -30,5 +31,9 @@ class Delivery < ActiveRecord::Base
 #    self.delivered_items.map { |sum, element| sum + element.number_requested}
 #  end
   
+  # string formatted list of items and number
+  def items_list
+    return self.delivered_items.map{|it| " #{it.item.item_code} (#{it.number_requested}) "}.join("/")
+  end
   
 end
