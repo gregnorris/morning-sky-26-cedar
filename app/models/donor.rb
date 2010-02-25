@@ -21,7 +21,7 @@ class Donor < ActiveRecord::Base
   
   # string formatted list of items and number
   def items_list
-    return self.donor_items.map{|it| " #{it.item.item_code} (#{it.number_donated}) "}.join("/")
+    return self.donor_items.map{|it| " #{it.item.andand.item_code} (#{it.number_donated}) "}.join("/")
   end
   
 end
