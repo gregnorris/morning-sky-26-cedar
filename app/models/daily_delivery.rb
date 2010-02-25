@@ -24,8 +24,8 @@ class DailyDelivery < ActiveRecord::Base
 
   # string formatted list of items and number
   def items_list
-    return self.donor.donor_items.map{|it| " #{it.andand.item.item_code} (#{it.number_donated}) "}.join("/") if (self.pickup_or_delivery == PICKUP) && self.donor
-    return self.delivery.delivered_items.map{|it| " #{it.andand.item.item_code} (#{it.number_requested}) "}.join("/") if (self.pickup_or_delivery == DELIVERY) and self.delivery
+    return self.donor.donor_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_donated}) "}.join("/") if (self.pickup_or_delivery == PICKUP) && self.donor
+    return self.delivery.delivered_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_requested}) "}.join("/") if (self.pickup_or_delivery == DELIVERY) and self.delivery
   end
 
 end
