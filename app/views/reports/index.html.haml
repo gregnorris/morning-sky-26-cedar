@@ -1,0 +1,11 @@
+%h2
+  Reports
+  
+%h3
+  Delivery Stats by Date Range:
+
+  -form_tag deliveries_stats_report_path(1), :method => :get do
+    = calendar_date_select_tag( 'report_start_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+    = calendar_date_select_tag( 'report_end_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    = submit_tag "Show Deliveries Stats Report", :name => 'deliveries_stats'

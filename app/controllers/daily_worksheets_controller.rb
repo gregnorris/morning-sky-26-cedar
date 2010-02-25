@@ -38,12 +38,14 @@ class DailyWorksheetsController < ApplicationController
     
     d_count = 0
     
+    # get all donor pickups that are schedules for this date
     Donor.for_date(@the_thing.worksheet_date).each do |donor|
       d_count = d_count + 1
       @the_thing.daily_deliveries.build(:pickup_or_delivery => 1, :donor_id => donor.id, 
                                           :position => d_count, :target_date =>  @the_thing.worksheet_date)
     end 
     
+    # get all deliveries that are schedules for this date
     Delivery.for_date(@the_thing.worksheet_date).each do |delivery|
       d_count = d_count + 1
       @the_thing.daily_deliveries.build(:pickup_or_delivery => 2, :position => d_count, 

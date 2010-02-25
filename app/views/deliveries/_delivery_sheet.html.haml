@@ -50,6 +50,15 @@
         = delivery_sheet_row('Address', recipient.street_1)
         %tr
           %td{:align => 'right'}
+            Class:&nbsp;
+          %td
+            = underlined_with_spaces(Delivery::PRIORITIES[delivery.priority], 1)
+            Pending?:
+            = underlined_with_spaces((delivery.pending? ? 'yes' : 'no'), 0)
+            Bed Bugs?:
+            = underlined_with_spaces((recipient.bed_bugs? ? 'yes' : 'no'), 0)
+        %tr
+          %td{:align => 'right'}
             Level:&nbsp;
           %td
             = underlined_with_spaces(recipient.level, 1)

@@ -1,0 +1,72 @@
+%h2
+  Deliveries Stats Report
+  - from_date = params[:report_start_date]
+  - to_date = params[:report_end_date]
+  = "(From: #{from_date} To: #{to_date})"
+  
+
+- recipients = Delivery::total_people_served(from_date, to_date)
+
+- total_recipients = recipients.inject(nil) {|res_sum, res| res_sum ? res_sum + res.residents.size : res.residents.size}
+%b
+  Total Unique People served (including family members): 
+= total_recipients
+
+%br
+%br
+Breakdown of Age Ranges:
+%br
+- recipients_zero_to_fourteen = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.zero_to_fourteen.size) : res.residents.zero_to_fourteen.size}
+%b
+  0-14 &nbsp;: 
+= recipients_zero_to_fourteen
+%br
+- recipients_fifteen_to_thirty = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.fifteen_to_thirty.size) : res.residents.fifteen_to_thirty.size}
+%b
+  15-30: 
+= recipients_fifteen_to_thirty
+%br
+- recipients_thirtyone_to_sixtyfour = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.thirtyone_to_sixtyfour.size) : res.residents.thirtyone_to_sixtyfour.size}
+%b
+  31-64: 
+= recipients_thirtyone_to_sixtyfour
+%br
+- recipients_sixtyfive_plus = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.sixtyfive_plus.size) : res.residents.sixtyfive_plus.size}
+%b
+  65+ &nbsp; : 
+= recipients_sixtyfive_plus
+
+%br
+%br
+Breakdown of Gender:
+%br
+%b
+  Male: 
+- recipients_male = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.males.size) : res.residents.males.size}
+= recipients_male
+%br
+%b
+  Female: 
+- recipients_female = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.females.size) : res.residents.females.size}
+= recipients_female
+
+%br
+%br
+Breakdown of Other Categories:
+%br
+%b
+  Aboriginal: 
+- recipients_aboriginals = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.aboriginals.size) : res.residents.aboriginals.size}
+= recipients_aboriginals
+%br
+- recipients_recent_immigrants = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.recent_immigrants.size) : res.residents.recent_immigrants.size}
+%b
+  Recent Immigrant: 
+=recipients_recent_immigrants
+%br
+- recipients_disabled_people = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.disabled_people.size) : res.residents.disabled_people.size}
+%b
+  Disabled: 
+= recipients_recent_immigrants
+
+

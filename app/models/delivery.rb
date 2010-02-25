@@ -17,6 +17,7 @@ class Delivery < ActiveRecord::Base
   
   named_scope :city_section_is,  lambda{ |section| {:include => :recipient, :conditions => ["recipients.city_section = ?", section]} unless section.blank?}
   
+  named_scope :was_delivered_to,  {:conditions => ["state = 2 OR state = 3"]}
   
   #named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
   named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
@@ -49,5 +50,17 @@ class Delivery < ActiveRecord::Base
   def items_list
     return self.delivered_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_requested}) "}.join("/")
   end
+  
+  def self.total_people_served(from_date, to_date)
+    return Delivery.for_delivery_date_range(from_date, to_date).was_delivered_to.map{|dels| dels.recipient}.compact.uniq
+  end
+#  
+#  def self.total_people_served(from_date, to_date)
+#    
+#  end
+#  
+#  def self.total_people_served(from_date, to_date)
+#    
+#  end
   
 end

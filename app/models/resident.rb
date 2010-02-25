@@ -2,8 +2,22 @@ class Resident < ActiveRecord::Base
   
   belongs_to :recipient
   
-  named_scope :children,  {:conditions => "age < 18"}
+  named_scope :young_people,  {:conditions => "age < 18"}
   named_scope :adults,  {:conditions => "age > 17"}
+  
+  named_scope :zero_to_fourteen,  {:conditions => "age < 15"}
+  named_scope :fifteen_to_thirty,  {:conditions => "age > 14 AND age < 31"}
+  named_scope :thirtyone_to_sixtyfour,  {:conditions => "age > 30 AND age < 65"}
+  named_scope :sixtyfive_plus,  {:conditions => "age > 64"}
+  
+  named_scope :males,  {:conditions => "gender = 'M'"}
+  named_scope :females,  {:conditions => "gender = 'F'"}
+  named_scope :aboriginals,  {:conditions => "aboriginal = TRUE"}
+  named_scope :recent_immigrants,  {:conditions => "recent_immigrant = TRUE"}
+  named_scope :disabled_people,  {:conditions => "disabled = TRUE"}
+  named_scope :not_parents,  {:conditions => "category <> 1"}
+  named_scope :parents,  {:conditions => "category = 1"}
+  named_scope :children,  {:conditions => "category = 2"}
   
   GENDERS = { 'M' => 'Male', 'F' => 'Female'}
   

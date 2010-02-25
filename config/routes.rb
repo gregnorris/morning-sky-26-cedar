@@ -64,7 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :items
   map.resources :case_workers
   map.resources :organizations
-  
+  map.resources :reports, :member => { :deliveries_stats => :get }
   
   map.resources :users
   map.resource :account, :controller => "users"
