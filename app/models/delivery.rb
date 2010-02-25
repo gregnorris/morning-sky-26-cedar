@@ -47,7 +47,7 @@ class Delivery < ActiveRecord::Base
   
   # string formatted list of items and number
   def items_list
-    return self.delivered_items.map{|it| " #{it.item.item_code} (#{it.number_requested}) "}.join("/")
+    return self.delivered_items.map{|it| " #{it.andand.item.item_code} (#{it.number_requested}) "}.join("/")
   end
   
 end
