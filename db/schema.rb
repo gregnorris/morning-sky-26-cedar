@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(:version => 20100224194434) do
   end
 
   create_table "daily_worksheets", :force => true do |t|
-    t.date     "worksheet_date"
+    t.integer  "bad_ws_date"
     t.text     "special_comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "worksheet_date"
   end
 
   create_table "delivered_items", :force => true do |t|
