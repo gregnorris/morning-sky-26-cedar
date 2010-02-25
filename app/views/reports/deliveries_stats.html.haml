@@ -67,6 +67,6 @@ Breakdown of Other Categories:
 - recipients_disabled_people = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.disabled_people.size) : res.residents.disabled_people.size}
 %b
   Disabled: 
-= recipients_recent_immigrants
+= recipients_disabled_people
 
 
