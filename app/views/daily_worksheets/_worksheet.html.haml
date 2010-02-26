@@ -20,12 +20,12 @@
     - is_delivery = dd.pickup_or_delivery == DailyDelivery::DELIVERY
     - is_pickup = dd.pickup_or_delivery == DailyDelivery::PICKUP
     %tr
-      %td{:valign => 'top', :style => "font-size:10;width:200"}
+      %td{:valign => 'top', :style => "font-size:10;width:150"}
         = dd.visit_notes ? dd.visit_notes : '&nbsp;&nbsp;&nbsp;&nbsp;'
-      %td{:valign => 'top', :style => "font-size:10;width:200"}
+      %td{:valign => 'top', :style => "font-size:10;width:150"}
         -# directions on how to get to the address
         = dd.target.directions
-      %td{:valign => 'top', :style => "font-size:10;width:240"}
+      %td{:valign => 'top', :style => "font-size:10"}
         = dd.target.address
         %br
         %table{:style => "font-size:10"}
@@ -43,7 +43,7 @@
               = "<b>Bdrm:</b> #{dd.target.bedrooms} &nbsp; " if is_delivery
             %td
               = "<b>BBugs?:</b> #{dd.target.bed_bugs? ? 'Yes' : 'N'}"
-      %td{:valign => 'top'} 
+      %td{:valign => 'top', :style => "font-size:12"} 
         = dd.target.full_name
         %br
         = dd.target.andand.phone_primary
@@ -62,7 +62,7 @@
                 &nbsp;
               %td
                 = " Boys: &nbsp;#{dd.target.number_of_boys} (#{dd.target.boys_ages})" if dd.target.number_of_boys > 0
-      %td{:valign => 'top'}
+      %td{:valign => 'top', :style => "font-size:12"}
         -# make pickup "PU" symbol bold
         - if is_pickup
           %b

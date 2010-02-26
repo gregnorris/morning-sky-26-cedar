@@ -14,6 +14,7 @@ class Donor < ActiveRecord::Base
   
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]} unless section.blank?}
   
+  named_scope :was_pickedup,  {:conditions => ["state = 2 OR state = 3"]}
   
   named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
   
@@ -47,6 +48,10 @@ class Donor < ActiveRecord::Base
   # string formatted list of items and number
   def items_list
     return self.donor_items.map{|it| " #{it.item.andand.item_code} (#{it.number_donated}) "}.join("/")
+  end
+  
+  def self.total_households_that_donated_items(from_date, to_date)
+    return Donor.for_pickup_date_range(from_date, to_date).was_pickedup.compact.uniq
   end
   
 end

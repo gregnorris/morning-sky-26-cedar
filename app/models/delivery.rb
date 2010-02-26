@@ -51,8 +51,12 @@ class Delivery < ActiveRecord::Base
     return self.delivered_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_requested}) "}.join("/")
   end
   
-  def self.total_people_served(from_date, to_date)
-    return Delivery.for_delivery_date_range(from_date, to_date).was_delivered_to.map{|dels| dels.recipient}.compact.uniq
+#  def self.total_people_served(from_date, to_date)
+#    return total_households_served(from_date, to_date).
+#  end
+  
+  def self.total_households_served(from_date, to_date)
+    return Delivery.for_delivery_date_range(from_date, to_date).was_delivered_to.map{|del| del.recipient}.compact.uniq
   end
 #  
 #  def self.total_people_served(from_date, to_date)

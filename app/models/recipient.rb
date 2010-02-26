@@ -13,6 +13,8 @@ class Recipient < ActiveRecord::Base
   named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}
   
+  
+  
   GENDERS = { 'M' => 'Male', 'F' => 'Female'}
   
   #------------ dwelling_type constants --------------------------------
@@ -61,6 +63,18 @@ class Recipient < ActiveRecord::Base
     the_girls = residents.girls
     return "" unless the_girls
     return the_girls.map {|girl| girl.age.to_s}.join(',')
+  end
+  
+  def has_an_aboriginal_in_household?
+    self.residents.aboriginals.any?
+  end
+  
+  def has_a_recent_immigrant_in_household?
+    self.residents.recent_immigrants.any?
+  end
+  
+  def has_a_disabled_person_in_household?
+    self.residents.disabled_people.any?
   end
   
   def number_of_girls; residents.girls ? residents.girls.size : 0; end

@@ -5,12 +5,24 @@
   = "(From: #{from_date} To: #{to_date})"
   
 
-- recipients = Delivery::total_people_served(from_date, to_date)
+- recipients = Delivery::total_households_served(from_date, to_date)
 
-- total_recipients = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.size}
+%b
+  Total number of households delivered to: 
+= recipients.size
+%br
+- num_total_recipients = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.size}
 %b
   Total Unique People served (including family members): 
-= total_recipients
+= num_total_recipients
+%br
+%br
+
+
+%b
+  Total number of households furniture was picked up from: 
+- num_total_pickups = Donor::total_households_that_donated_items(from_date, to_date).size
+= num_total_pickups
 
 %br
 %br
