@@ -1,15 +1,30 @@
 %tr{:style => "cursor: move",  :id => "daily_delivery_#{dd_form.object.id}"}
-  
+  - is_delivery = (dd_form.object.pickup_or_delivery == DailyDelivery::DELIVERY)
+  - is_pickup = (dd_form.object.pickup_or_delivery == DailyDelivery::PICKUP)
   %td
     = dd_form.text_field :position, :size => 3
   %td
     = dd_form.object.visit_notes ? dd_form.object.visit_notes : '&nbsp;&nbsp;&nbsp;&nbsp;'
   %td
+    = dd_form.object.target.andand.directions
+  %td
     = dd_form.object.target.andand.address
     %br
-      = "B: #{dd_form.object.target.buzzer_number} / " if dd_form.object.andand.target
-      = "L: #{dd_form.object.target.level} / " if dd_form.object.andand.target
-      = "E?: #{dd_form.object.target.elevator? ? 'Y' : 'N'}"  if dd_form.object.andand.target
+    %table{:style => "font-size:10"}
+      %tr
+        %td
+          = "Buzz: #{dd_form.object.target.buzzer_number} &nbsp; " if dd_form.object.andand.target
+        %td
+          = "Lvl: #{dd_form.object.target.level} &nbsp; " if dd_form.object.andand.target
+        %td
+          = "Elev?: #{dd_form.object.target.elevator? ? 'Yes' : 'N'}"  if dd_form.object.andand.target
+      %tr
+        %td
+          = "Dwell: #{Recipient::DWELLINGS[dd_form.object.target.dwelling_type]} &nbsp; " if dd_form.object.andand.target.andand.dwelling_type
+        %td
+          = "Bedrms: #{dd_form.object.target.bedrooms} &nbsp; " if is_delivery && dd_form.object.target
+        %td
+          = "BBugs?: #{dd_form.object.target.bed_bugs? ? 'Yes' : 'N'}" if dd_form.object.target
   %td
     = dd_form.object.target.andand.full_name
     %br
@@ -29,10 +44,10 @@
       = hidden_field_tag :is_new_object, "yes"
     - else
       = DailyDelivery::TARGET_TYPES[dd_form.object.pickup_or_delivery]
-      - if (dd_form.object.pickup_or_delivery == DailyDelivery::PICKUP) && dd_form.object.target
+      - if is_pickup && dd_form.object.target
         = "- Donor:"
         = link_to_icon('edit', edit_donor_path(dd_form.object.target.id))
-      - if (dd_form.object.pickup_or_delivery == DailyDelivery::DELIVERY) && dd_form.object.delivery
+      - if is_delivery && dd_form.object.delivery
         = " (ID: #{dd_form.object.delivery.id}) " 
         %br
         = "Recipient:"
@@ -41,8 +56,6 @@
   %td
     - the_items = dd_form.object.items_list
     = the_items
-  %td
-    = dd_form.object.target.andand.directions
   - unless dd_form.object.new_record?
     %td
       = dd_form.check_box '_delete'

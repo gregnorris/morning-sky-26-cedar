@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100226024808) do
+ActiveRecord::Schema.define(:version => 20100226090444) do
 
   create_table "case_workers", :force => true do |t|
     t.string   "first_name"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20100226024808) do
     t.boolean  "bed_bugs"
     t.integer  "state"
     t.string   "pickup_comments"
+    t.integer  "dwelling_type"
   end
 
   create_table "items", :force => true do |t|
@@ -164,6 +165,9 @@ ActiveRecord::Schema.define(:version => 20100226024808) do
     t.boolean  "bed_bugs"
     t.date     "date_of_birth"
     t.integer  "age"
+    t.integer  "dwelling_type"
+    t.boolean  "medical_relocation"
+    t.boolean  "relocation_from_reserve"
   end
 
   create_table "residents", :force => true do |t|
@@ -176,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20100226024808) do
     t.integer  "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_recipient",                  :default => false
   end
 
   create_table "users", :force => true do |t|

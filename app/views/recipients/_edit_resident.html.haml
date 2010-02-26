@@ -1,5 +1,7 @@
 %tr
   %td
+    = residents_form.check_box :is_recipient
+  %td
     -# ,{}, {:on_change => "alert('hello')"}
     - categories = Resident::CATEGORIES.map{ |s| [s[1], s[0]]}
     = residents_form.select :category, categories, {:include_blank => ' '}

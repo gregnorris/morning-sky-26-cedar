@@ -3,40 +3,79 @@
     %td
       = date_formatted(worksheet.worksheet_date)
 %table{:border => '1', :cellpadding => '5', :border_collapse => 'collapse', :style => "border-style: solid; border-collapse: collapse; font-family: monaco"}
-
+  %tr{:style => "font-size:10"}
+    %th
+      Delivery Notes
+    %th
+      Directions
+    %th
+      Address
+    %th
+      Name/Number
+    %th
+      PU/DEL
+    %th
+      Items
   - worksheet.daily_deliveries.each do |dd|
+    - is_delivery = dd.pickup_or_delivery == DailyDelivery::DELIVERY
+    - is_pickup = dd.pickup_or_delivery == DailyDelivery::PICKUP
     %tr
-      %td{:style => "font-size:10"}
+      %td{:valign => 'top', :style => "font-size:10"}
         = dd.visit_notes ? dd.visit_notes : '&nbsp;&nbsp;&nbsp;&nbsp;'
-      %td
+      %td{:valign => 'top', :style => "font-size:10"}
+        -# directions on how to get to the address
+        = dd.target.directions
+      %td{:valign => 'top', :style => "font-size:10;width:240"}
         = dd.target.address
         %br
-        %b{:style => "font-size:10"}
-          = "B: #{dd.target.buzzer_number} / " if dd.target.buzzer_number
-          = "L: #{dd.target.level} / " if dd.target.level
-          = "E?: #{dd.target.elevator? ? 'Y' : 'N'}"
-      %td
+        %table{:style => "font-size:10"}
+          %tr
+            %td
+              = "<b>Buzz:</b> #{dd.target.buzzer_number} &nbsp; " if dd.target.buzzer_number
+            %td
+              = "<b>Lvl:</b> #{dd.target.level} &nbsp; " if dd.target.level
+            %td
+              = "<b>Elev?:</b> #{dd.target.elevator? ? 'Yes' : 'N'}"
+          %tr
+            %td
+              = "<b>Dwell:</b> #{Recipient::DWELLINGS[dd.target.dwelling_type]} &nbsp; "
+            %td
+              = "<b>Bdrm:</b> #{dd.target.bedrooms} &nbsp; " if is_delivery
+            %td
+              = "<b>BBugs?:</b> #{dd.target.bed_bugs? ? 'Yes' : 'N'}"
+      %td{:valign => 'top'} 
         = dd.target.full_name
         %br
         = dd.target.andand.phone_primary
         = "/ #{dd.target.andand.phone_secondary}" unless dd.target.andand.phone_secondary.blank?
-      %td
+        %br
+        - if is_delivery
+          %table{:style => "font-size:10;width:200"}
+            %tr
+              %td
+                = dd.target.spouse_string
+                &nbsp;
+              %td
+                = " Girls: #{dd.target.number_of_girls} (#{dd.target.girls_ages})" if dd.target.number_of_girls > 0
+            %tr
+              %td
+                &nbsp;
+              %td
+                = " Boys: &nbsp;#{dd.target.number_of_boys} (#{dd.target.boys_ages})" if dd.target.number_of_boys > 0
+      %td{:valign => 'top'}
         -# make pickup "PU" symbol bold
-        - if dd.pickup_or_delivery == 1
+        - if is_pickup
           %b
             = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
         - else
           = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
         %br
         = "(#{Delivery::PRIORITIES[dd.priority]})"
-      - if dd.pickup_or_delivery == 1
+      - if is_pickup
         -# is a pickup, so use double-line cell border so it will stand out
-        %td{:style => "font-size:10; border-style: double"}
+        %td{:valign => 'top', :style => "font-size:10; border-style: solid"}
           = dd.items_list
       -else
         -# is delivery -- just single line cell border
-        %td{:style => "font-size:10"}
+        %td{:valign => 'top', :style => "font-size:10"}
           = dd.items_list
-      %td{:style => "font-size:10"}
-        -# directions on how to get to the address
-        = dd.target.directions

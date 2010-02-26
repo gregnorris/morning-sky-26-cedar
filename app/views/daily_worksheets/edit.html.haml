@@ -1,5 +1,5 @@
 %h3
-  "Edit Worksheet for #{@the_thing.worksheet_date}"
+  = "Edit Worksheet for #{@the_thing.worksheet_date}"
 = link_to('Print Daily Worksheet', polymorphic_path([:print_worksheet, @the_thing]), { :popup => ['new_window', 'height=2000,width=850,menubar=yes'] })
 = link_to(image_tag("deliver.png", :title => "Print Daily Worksheet"), polymorphic_path([:print_worksheet, @the_thing]), { :popup => ['new_window', 'height=700,width=1050,menubar=yes'] })
 

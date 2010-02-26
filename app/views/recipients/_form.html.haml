@@ -45,7 +45,18 @@
     = f.label :directions
   %td  
     = f.text_area :directions, :cols => 40, :rows => 4
-    
+
+%tr.form_field
+  %td.form_label
+    = f.label 'Dwelling'
+  %td  
+    - dwellings = Recipient::DWELLINGS_LONG.map{ |s| [s[1], s[0]]}
+    = f.select :dwelling_type, dwellings, {:include_blank => ' '}
+    &nbsp;<b> Medical Relocation? </b>
+    = f.check_box :medical_relocation  
+    &nbsp;<b> (from reserve? </b>
+    = f.check_box :relocation_from_reserve  
+    <b>)</b>
 %tr.form_field
   %td.form_label
     = f.label :bedrooms

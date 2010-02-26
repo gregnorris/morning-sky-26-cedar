@@ -18,6 +18,11 @@ class Resident < ActiveRecord::Base
   named_scope :not_parents,  {:conditions => "category <> 1"}
   named_scope :parents,  {:conditions => "category = 1"}
   named_scope :children,  {:conditions => "category = 2"}
+  named_scope :girls,  {:conditions => "category = 2 AND gender = 'F'"}
+  named_scope :boys,  {:conditions => "category = 2 AND gender = 'M'"}
+  named_scope :the_recipient,  {:conditions => "is_recipient = true"}
+  named_scope :the_spouse, {:conditions => "is_recipient = false AND category = 1"}  # is not the recipient, but is a parent
+  
   
   GENDERS = { 'M' => 'Male', 'F' => 'Female'}
   
@@ -31,5 +36,7 @@ class Resident < ActiveRecord::Base
   
   CATEGORIES = {PARENT => 'Parent', CHILD => 'Child', ADULT => 'Adult', RELATIVE => 'Relative',  
                 ROOMMATE => 'Roommate', OTHER => 'Other'}
+                
+
   
 end
