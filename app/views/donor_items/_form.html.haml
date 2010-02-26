@@ -10,6 +10,11 @@
     = f.text_field :number_donated, :size => 5
 %tr.form_field
   %td.form_label
+    = f.label 'Done?'
+  %td
+    = f.check_box :done
+%tr.form_field
+  %td.form_label
     = f.label :donated_on
   %td
     = f.calendar_date_select :donated_on, :time => false, :popup => :force

@@ -4,7 +4,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :recipient
   has_many :daily_deliveries, :dependent => :destroy
   
-  accepts_nested_attributes_for :delivered_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :delivered_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank? || v == '0'} }
   
   
   named_scope :first_name_like,  lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.first_name LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}

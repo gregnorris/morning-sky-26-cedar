@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
 
+  def the_model_name; 'Reports'; end
+  
   def set_objects
      
   end

@@ -1,7 +1,7 @@
 class Donor < ActiveRecord::Base
   
-  has_many :donor_items, :dependent => :destroy
-  accepts_nested_attributes_for :donor_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank?} }
+  has_many :donor_items, :foreign_key => :donor_id, :dependent => :destroy
+  accepts_nested_attributes_for :donor_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank? || v == '0'} }
   has_many :daily_deliveries, :dependent => :destroy
   
   named_scope :first_name_like,  lambda{ |search_term| {:conditions => ["first_name LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}

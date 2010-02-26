@@ -6,16 +6,37 @@
 
   - worksheet.daily_deliveries.each do |dd|
     %tr
-      %td
-        &nbsp; &nbsp; &nbsp;
+      %td{:style => "font-size:10"}
+        = dd.visit_notes ? dd.visit_notes : '&nbsp;&nbsp;&nbsp;&nbsp;'
       %td
         = dd.target.address
+        %br
+        %b{:style => "font-size:10"}
+          = "B: #{dd.target.buzzer_number} / " if dd.target.buzzer_number
+          = "L: #{dd.target.level} / " if dd.target.level
+          = "E?: #{dd.target.elevator? ? 'Y' : 'N'}"
       %td
         = dd.target.full_name
         %br
         = dd.target.andand.phone_primary
         = "/ #{dd.target.andand.phone_secondary}" unless dd.target.andand.phone_secondary.blank?
       %td
-        = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
+        -# make pickup "PU" symbol bold
+        - if dd.pickup_or_delivery == 1
+          %b
+            = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
+        - else
+          = DailyDelivery::TARGET_TYPES[dd.pickup_or_delivery]
+        %br
+        = "(#{Delivery::PRIORITIES[dd.priority]})"
+      - if dd.pickup_or_delivery == 1
+        -# is a pickup, so use double-line cell border so it will stand out
+        %td{:style => "font-size:10; border-style: double"}
+          = dd.items_list
+      -else
+        -# is delivery -- just single line cell border
+        %td{:style => "font-size:10"}
+          = dd.items_list
       %td{:style => "font-size:10"}
-        = dd.items_list
+        -# directions on how to get to the address
+        = dd.target.directions

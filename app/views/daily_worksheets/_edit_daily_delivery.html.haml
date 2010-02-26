@@ -3,10 +3,13 @@
   %td
     = dd_form.text_field :position, :size => 3
   %td
-    -#dd_form.select  # code
-    &nbsp;&nbsp;
+    = dd_form.object.visit_notes ? dd_form.object.visit_notes : '&nbsp;&nbsp;&nbsp;&nbsp;'
   %td
     = dd_form.object.target.andand.address
+    %br
+      = "B: #{dd_form.object.target.buzzer_number} / " if dd_form.object.andand.target
+      = "L: #{dd_form.object.target.level} / " if dd_form.object.andand.target
+      = "E?: #{dd_form.object.target.elevator? ? 'Y' : 'N'}"  if dd_form.object.andand.target
   %td
     = dd_form.object.target.andand.full_name
     %br
@@ -38,7 +41,8 @@
   %td
     - the_items = dd_form.object.items_list
     = the_items
-    
+  %td
+    = dd_form.object.target.andand.directions
   - unless dd_form.object.new_record?
     %td
       = dd_form.check_box '_delete'

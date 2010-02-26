@@ -46,7 +46,7 @@
   %td.form_label
     = f.label :directions
   %td  
-    = f.text_area :directions, :cols => 40, :rows => 4
+    = f.text_area :directions, :cols => 40, :rows => 2
 %tr.form_field
   %td.form_label
     = f.label :scheduled_pickup_time
@@ -59,6 +59,11 @@
   %td  
     = f.calendar_date_select :possible_future_pickup_time, :time => false, :popup => :force
     -#= f.date_select :possible_future_pickup_time, {:include_blank => true, :default => nil}
+%tr.form_field
+  %td.form_label
+    = f.label :pickup_comments
+  %td  
+    = f.text_area :pickup_comments, :cols => 40, :rows => 1
 %tr.form_field
   %td.form_label
     = f.label :status

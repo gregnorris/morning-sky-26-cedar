@@ -1,8 +1,8 @@
 %h2
-  - @donor = @the_thing
+  - @donor = @the_thing unless @donor
   = "Edit Donor: #{@donor.full_name}"
 %div
-  - form_for(@donor, :url => {:action => "update"}, :html => {:method => :put}) do |f|
+  - form_for(@donor, :url => donor_path(@donor), :html => {:method => :put}) do |f|
     %fieldset
       %table
         = render :partial => "form", :locals => {:f => f}

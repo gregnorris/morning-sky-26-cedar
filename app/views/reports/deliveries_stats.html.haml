@@ -7,7 +7,7 @@
 
 - recipients = Delivery::total_people_served(from_date, to_date)
 
-- total_recipients = recipients.inject(nil) {|res_sum, res| res_sum ? res_sum + res.residents.size : res.residents.size}
+- total_recipients = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.size}
 %b
   Total Unique People served (including family members): 
 = total_recipients
@@ -16,22 +16,22 @@
 %br
 Breakdown of Age Ranges:
 %br
-- recipients_zero_to_fourteen = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.zero_to_fourteen.size) : res.residents.zero_to_fourteen.size}
+- recipients_zero_to_fourteen = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.zero_to_fourteen.size}
 %b
   0-14 &nbsp;: 
 = recipients_zero_to_fourteen
 %br
-- recipients_fifteen_to_thirty = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.fifteen_to_thirty.size) : res.residents.fifteen_to_thirty.size}
+- recipients_fifteen_to_thirty = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.fifteen_to_thirty.size}
 %b
   15-30: 
 = recipients_fifteen_to_thirty
 %br
-- recipients_thirtyone_to_sixtyfour = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.thirtyone_to_sixtyfour.size) : res.residents.thirtyone_to_sixtyfour.size}
+- recipients_thirtyone_to_sixtyfour = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.thirtyone_to_sixtyfour.size}
 %b
   31-64: 
 = recipients_thirtyone_to_sixtyfour
 %br
-- recipients_sixtyfive_plus = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.sixtyfive_plus.size) : res.residents.sixtyfive_plus.size}
+- recipients_sixtyfive_plus = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.sixtyfive_plus.size}
 %b
   65+ &nbsp; : 
 = recipients_sixtyfive_plus
@@ -42,12 +42,12 @@ Breakdown of Gender:
 %br
 %b
   Male: 
-- recipients_male = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.males.size) : res.residents.males.size}
+- recipients_male = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.males.size}
 = recipients_male
 %br
 %b
   Female: 
-- recipients_female = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.females.size) : res.residents.females.size}
+- recipients_female = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.females.size}
 = recipients_female
 
 %br
@@ -56,17 +56,43 @@ Breakdown of Other Categories:
 %br
 %b
   Aboriginal: 
-- recipients_aboriginals = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.aboriginals.size) : res.residents.aboriginals.size}
+- recipients_aboriginals = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.aboriginals.size}
 = recipients_aboriginals
 %br
-- recipients_recent_immigrants = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.recent_immigrants.size) : res.residents.recent_immigrants.size}
+- recipients_recent_immigrants = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.recent_immigrants.size}
 %b
   Recent Immigrant: 
 =recipients_recent_immigrants
 %br
-- recipients_disabled_people = recipients.inject(nil) {|res_sum, res| res_sum ? (res_sum + res.residents.disabled_people.size) : res.residents.disabled_people.size}
+- recipients_disabled_people = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.disabled_people.size}
 %b
   Disabled: 
 = recipients_disabled_people
+
+%br
+%br
+Family Characteristics:
+%br
+%b
+  Number of adults without dependent children: 
+- recipients_not_parents = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.not_parents.size}
+= recipients_not_parents
+%br
+%br
+%b
+  Families with children: 
+%br
+  One adult with child(ren): 
+-# if there is only 1 of this recipient's residents that is a parent, then it's a single parent family
+- recipients_single_parents = recipients.inject(0) {|res_sum, recip| res_sum + (recip.residents.parents.size == 1 ? 1 : 0)}
+=recipients_single_parents
+%br
+  Two parent family: 
+-# if 2 of this recipient's residents are parents, then it's a 2 parent family
+- recipients_two_parents = recipients.inject(0) {|res_sum, recip| res_sum + (recip.residents.parents.size > 1 ? recip.residents.parents.size : 0)}
+=recipients_two_parents
+
+%b
+
 
 
