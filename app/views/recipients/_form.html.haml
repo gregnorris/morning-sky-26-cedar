@@ -22,7 +22,7 @@
   %td.form_label
     = f.label :city_section
   %td  
-    = f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'}
+    = f.select :city_section, city_sections_list(f.object.city_section), {:include_blank => 'Please Select a City Section'}
     = link_to("Show Map", {:controller => 'recipients', :action => 'show_map'}, { :popup => ['new_window', 'height=500,width=700'] })
 %tr.form_field
   %td.form_label
