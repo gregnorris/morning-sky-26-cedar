@@ -50,7 +50,7 @@
   %td.form_label
     = f.label 'Dwelling'
   %td  
-    - dwellings = Recipient::DWELLINGS_LONG.map{ |s| [s[1], s[0]]}
+    - dwellings = Recipient::DWELLINGS_LONG.sort.map{ |s| [s[1], s[0]]}
     = f.select :dwelling_type, dwellings, {:include_blank => ' '}
     &nbsp;<b> Medical Relocation? </b>
     = f.check_box :medical_relocation  

@@ -74,6 +74,7 @@ class DeliveriesController < ApplicationController
     @the_things = Delivery.first_name_like(params[:search_first_name]).
                           last_name_like(params[:search_last_name]).
                           address_like(params[:search_address]).
+                          health_number_like(params[:search_health_number]).
                           with_state(params[:search_state]).
                           with_priority(params[:search_priority]).
                           is_pending(params[:search_pending]).

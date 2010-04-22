@@ -1,0 +1,20 @@
+%b
+#search_form
+  - form_for(Recipient.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+    %fieldset
+      %b
+        Search: &nbsp; 
+      Health Care #:
+      = text_field_tag :search_health_number, params[:search_health_number], {:size => 5}
+      First Name: 
+      = text_field_tag :search_first_name, params[:search_first_name], {:size => 7}
+      Last Name: 
+      = text_field_tag :search_last_name, params[:search_last_name], {:size => 7}
+      Address: 
+      = text_field_tag :search_address, params[:search_address], {:size => 10}
+      City Section:
+      -#= f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'} 
+      = select_tag :search_city_section, "<option value=''></option>" + options_for_select(all_city_sections_list)
+      = f.submit "Search"
+      -#= button_to_function "Reset", "$('#search_form form').clearForm()"
+      -#<input type='reset', value='Clear Search fields'>

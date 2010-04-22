@@ -4,6 +4,8 @@
     %fieldset
       %b
         Search: &nbsp; 
+      Health Care #:
+      = text_field_tag :search_health_number, params[:search_health_number], {:size => 5}
       First Name: 
       = text_field_tag :search_first_name, params[:search_first_name], {:size => 7}
       Last Name: 
@@ -12,7 +14,7 @@
       = text_field_tag :search_address, params[:search_address], {:size => 10}
       City Section:
       -#= f.select :city_section, city_sections_list, {:include_blank => 'Please Select a City Section'} 
-      = select_tag :search_city_section, "<option value=''></option>" + options_for_select(city_sections_list)
+      = select_tag :search_city_section, "<option value=''></option>" + options_for_select(all_city_sections_list)
       %br
       %br
       Delivery Time Between

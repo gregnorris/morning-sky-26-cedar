@@ -10,9 +10,23 @@ class Recipient < ActiveRecord::Base
   
   validates_presence_of :first_name, :last_name
   
-  named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
-  named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}
+  #named_scope :name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "%#{search_term}%"}]}}
+  #named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]}}
   
+  named_scope :first_name_like,  lambda{ |search_term| {:conditions => ["first_name LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
+  named_scope :last_name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
+  named_scope :address_like,  lambda{ |search_term| {:conditions => ["street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
+  #named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  named_scope :with_status,  lambda{ |search_term| {:conditions => ["status = ?", search_term]} unless search_term == ''}
+  #named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
+  #named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
+  named_scope :health_number_like, lambda{ |search_term| {:conditions => ["health_care_number LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
+  
+  named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]} unless section.blank?}
+  
+  
+  #named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
+
   
   
   GENDERS = { 'M' => 'Male', 'F' => 'Female'}
@@ -24,11 +38,13 @@ class Recipient < ActiveRecord::Base
   ROOM = 4
   DUPLEX = 5
   TRIPLEX = 6
+  BUSINESS = 7
+  CHURCH = 8
   
   DWELLINGS_LONG = {HOUSE => 'H - House', TOWNHOUSE => 'TH - Townhouse', APARTMENT => 'APT - Apartment',  
-                    ROOM => 'RM - Room', DUPLEX => 'DUP - Duplex', TRIPLEX => 'TRI - Triplex'}
+                    ROOM => 'RM - Room', DUPLEX => 'DUP - Duplex', TRIPLEX => 'TRI - Triplex', BUSINESS => 'BUS - Business', CHURCH => 'CHURCH - Church'}
   DWELLINGS = {HOUSE => 'H', TOWNHOUSE => 'TH', APARTMENT => 'APT',  
-               ROOM => 'RM', DUPLEX => 'DUP', TRIPLEX => 'TRI'}
+               ROOM => 'RM', DUPLEX => 'DUP', TRIPLEX => 'TRI', BUSINESS => 'BUS', CHURCH => 'CHURCH'}
   #------------ dwelling_type constants --------------------------------
   
   def full_name
@@ -77,7 +93,12 @@ class Recipient < ActiveRecord::Base
     self.residents.disabled_people.any?
   end
   
-  def number_of_girls; residents.girls ? residents.girls.size : 0; end
-  def number_of_boys; residents.boys ? residents.boys.size : 0; end
+  def number_of_girls
+    residents.girls ? residents.girls.size : 0
+  end
+  
+  def number_of_boys 
+    residents.boys ? residents.boys.size : 0
+  end
   
 end

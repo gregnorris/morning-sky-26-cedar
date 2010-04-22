@@ -52,33 +52,126 @@ module ApplicationHelper
   SEVEN_OAKS_EAST = 23
   
   CITY_SECTIONS = {
-    1 => 'Downtown East',
-    2 => 'Downtown West',
-    3 => 'Point Douglas North',
-    4 => 'Point Douglas South',
-    5 => 'St. Boniface West',
-    6 => 'St. Boniface East',
-    7 => 'River Heights West',
-    8 => 'River Heights East',
-    9 => 'River East South',
-    10 => 'River East West',
-    11 => 'River East East',
-    12 => 'Transcona',
-    13 => 'St. Vital North',
-    14 => 'St. Vital South',
-    15 => 'Fort Garry North',
-    16 => 'Fort Garry South',
-    17 => 'Assiniboine South',
-    18 => 'St. James-Assiniboia West',
-    19 => 'St. James-Assiniboia East',
-    20 => 'Inkster West',
-    21 => 'Inkster East',
-    22 => 'Seven Oaks West',
-    23 => 'Seven Oaks East'
+    1 => '*OLD* Downtown East (new: A, A-1, D-E, D-C)',
+    2 => '*OLD* Downtown West (new: D-W, S-W)',
+    3 => '*OLD* Point Douglas North (new: A, A-1, A-2)',
+    4 => '*OLD* Point Douglas South (new: A, A-1, A-2, D-C, D-W)',
+    5 => '*OLD* St. Boniface West (new: B)',
+    6 => '*OLD* St. Boniface East (new: B, S)',
+    7 => '*OLD* River Heights West (new: R)',
+    8 => '*OLD* River Heights East (new: O)',
+    9 => '*OLD* River East South (new: E)',
+    10 => '*OLD* River East West (new: K)',
+    11 => '*OLD* River East East (new: K)',
+    12 => '*OLD* Transcona (new: T)',
+    13 => '*OLD* St. Vital North (new: B)',
+    14 => '*OLD* St. Vital South (new: V)',
+    15 => '*OLD* Fort Garry North (new: R, O, G)',
+    16 => '*OLD* Fort Garry South (new: G)',
+    17 => '*OLD* Assiniboine South (new: C, W-C)',
+    18 => '*OLD* St. James-Assiniboia West (new: W-J)',
+    19 => '*OLD* St. James-Assiniboia East (new: J)',
+    20 => '*OLD* Inkster West (new: M, S)',
+    21 => '*OLD* Inkster East (new: M, S)',
+    22 => '*OLD* Seven Oaks West (new: M)',
+    23 => '*OLD* Seven Oaks East (new: N)',
+    24 => 'Point Douglas (A-1)',
+    25 => 'Dufferin to Selkirk (A-2)',
+    26 => 'Pritchard to Redwood (A)',
+    27 => 'Main to Balmoral (D-E)',
+    28 => 'Balmoral to Furby (D-C)',
+    29 => 'Sherbrook to Arlington (W)',
+    30 => 'Sargent, Wolseley (S-W)',
+    31 => 'Weston, Brooklands (S)',
+    32 => 'Silver Heights (J)',
+    33 => 'Sturgeon Creek (J)',
+    34 => 'West Charleswood (W-C)',
+    35 => 'Tuxedo, Charleswood (C)',
+    36 => 'River Heights (R)',
+    37 => 'Fort Garry (G)',
+    38 => 'Osborne, Fort Rouge (O)',
+    39 => 'St. Vital (V)',
+    40 => 'St. Boniface (B)',
+    41 => 'Transcona (T)',
+    42 => 'Elmwook (E)',
+    43 => 'North Kildonan (K)',
+    44 => 'West Kildonan (N)',
+    45 => 'Maples (M)'
   }
   
-  def city_sections_list
-    ApplicationHelper::CITY_SECTIONS.map{|s| [s[1], s[0]]}
+  OLD_CITY_SECTIONS = {
+    1 => '*OLD* Downtown East (new: A, A-1, D-E, D-C)',
+    2 => '*OLD* Downtown West (new: D-W, S-W)',
+    3 => '*OLD* Point Douglas North (new: A, A-1, A-2)',
+    4 => '*OLD* Point Douglas South (new: A, A-1, A-2, D-C, D-W)',
+    5 => '*OLD* St. Boniface West (new: B)',
+    6 => '*OLD* St. Boniface East (new: B, S)',
+    7 => '*OLD* River Heights West (new: R)',
+    8 => '*OLD* River Heights East (new: O)',
+    9 => '*OLD* River East South (new: E)',
+    10 => '*OLD* River East West (new: K)',
+    11 => '*OLD* River East East (new: K)',
+    12 => '*OLD* Transcona (new: T)',
+    13 => '*OLD* St. Vital North (new: B)',
+    14 => '*OLD* St. Vital South (new: V)',
+    15 => '*OLD* Fort Garry North (new: R, O, G)',
+    16 => '*OLD* Fort Garry South (new: G)',
+    17 => '*OLD* Assiniboine South (new: C, W-C)',
+    18 => '*OLD* St. James-Assiniboia West (new: W-J)',
+    19 => '*OLD* St. James-Assiniboia East (new: J)',
+    20 => '*OLD* Inkster West (new: M, S)',
+    21 => '*OLD* Inkster East (new: M, S)',
+    22 => '*OLD* Seven Oaks West (new: M)',
+    23 => '*OLD* Seven Oaks East (new: N)'
+  }
+  
+  NEW_CITY_SECTIONS = {
+    24 => 'Point Douglas (A-1)',
+    25 => 'Dufferin to Selkirk (A-2)',
+    26 => 'Pritchard to Redwood (A)',
+    27 => 'Main to Balmoral (D-E)',
+    28 => 'Balmoral to Furby (D-C)',
+    29 => 'Sherbrook to Arlington (W)',
+    30 => 'Sargent, Wolseley (S-W)',
+    31 => 'Weston, Brooklands (S)',
+    32 => 'Silver Heights (J)',
+    33 => 'Sturgeon Creek (J)',
+    34 => 'West Charleswood (W-C)',
+    35 => 'Tuxedo, Charleswood (C)',
+    36 => 'River Heights (R)',
+    37 => 'Fort Garry (G)',
+    38 => 'Osborne, Fort Rouge (O)',
+    39 => 'St. Vital (V)',
+    40 => 'St. Boniface (B)',
+    41 => 'Transcona (T)',
+    42 => 'Elmwook (E)',
+    43 => 'North Kildonan (K)',
+    44 => 'West Kildonan (N)',
+    45 => 'Maples (M)'
+  }
+  
+  #def get_city_section(city_section_id)
+  #  return CITY_SECTIONS[city_section_id] if city_section_id < 24
+  #  return NEW_CITY_SECTIONS[city_section_id] if city_section_id > 23
+  #end
+  
+  # for use in edit forms
+  def city_sections_list(selected_city = nil)
+    sections_list = NEW_CITY_SECTIONS.map{|s| [s[1], s[0]]}
+    
+    # if an old city section is still set, add that to the dropdown list, so it can be shown
+    if selected_city and selected_city < 24
+      
+      sections_list << [CITY_SECTIONS[selected_city], selected_city]
+    end
+    sections_list
+  end
+  
+  # for use in search dropdowns
+  def all_city_sections_list
+    #sections_list = []
+    sections_list = NEW_CITY_SECTIONS.map{|s| [s[1], s[0]]} | ["---------------------"] | OLD_CITY_SECTIONS.map{|s| [s[1], s[0]]}
+    sections_list
   end
   
   def datetime_formatted(the_time)

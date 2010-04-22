@@ -8,13 +8,16 @@
       = button_to("Create a NEW Recipient", new_recipient_path, :method => :get)
       &nbsp; &nbsp;
     %td
-      &nbsp; &nbsp; &nbsp; &nbsp;
-    %td
-      - form_for(Recipient.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
-        %fieldset
-          Search By Last Name: 
-          = text_field_tag :search_term
-          = f.submit "Search"
+      &nbsp; &nbsp;
+      
+    -#%td
+    -#  - form_for(Recipient.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+    -#    %fieldset
+    -#      Search By Last Name: 
+    -#      = text_field_tag :search_term
+    -#      = f.submit "Search"
+
+= render(:partial => "recipient_search")
 
 = render(:partial => "shared/flashes")
 
