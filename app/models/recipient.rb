@@ -20,7 +20,7 @@ class Recipient < ActiveRecord::Base
   named_scope :with_status,  lambda{ |search_term| {:conditions => ["status = ?", search_term]} unless search_term == ''}
   #named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
   #named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
-  named_scope :health_number_like, lambda{ |search_term| {:conditions => ["health_care_number LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
+  named_scope :health_number_like, lambda{ |search_term| {:conditions => ["health_care_number = :term", {:term => "#{search_term}"}]} unless search_term.blank?}
   
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]} unless section.blank?}
   
