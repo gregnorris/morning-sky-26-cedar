@@ -101,7 +101,7 @@ Family Characteristics:
 %br
   Two parent family: 
 -# if 2 of this recipient's residents are parents, then it's a 2 parent family
-- recipients_two_parents = recipients.inject(0) {|res_sum, recip| res_sum + (recip.residents.parents.size > 1 ? recip.residents.parents.size : 0)}
+- recipients_two_parents = recipients.inject(0) {|res_sum, recip| res_sum + (recip.residents.parents.size > 1 ? 1 : 0)}
 =recipients_two_parents
 
 %b

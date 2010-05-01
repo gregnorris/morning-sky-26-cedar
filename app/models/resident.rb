@@ -15,7 +15,7 @@ class Resident < ActiveRecord::Base
   named_scope :aboriginals,  {:conditions => "aboriginal = TRUE"}
   named_scope :recent_immigrants,  {:conditions => "recent_immigrant = TRUE"}
   named_scope :disabled_people,  {:conditions => "disabled = TRUE"}
-  named_scope :not_parents,  {:conditions => "category <> 1"}
+  named_scope :not_parents,  {:conditions => "category <> 1 AND category <> 2"}
   named_scope :parents,  {:conditions => "category = 1"}
   named_scope :children,  {:conditions => "category = 2"}
   named_scope :girls,  {:conditions => "category = 2 AND gender = 'F'"}
