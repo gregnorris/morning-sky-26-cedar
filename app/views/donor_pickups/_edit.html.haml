@@ -1,0 +1,12 @@
+%div
+  - @donor_pickup = @the_thing unless @donor_pickup
+  - form_for(@donor_pickup, :url => donor_donor_pickup_path(@donor, @donor_pickup), :html => {:method => :put}) do |f|
+    %fieldset
+      %table
+        = render :partial => "donor_pickups/form", :locals => {:f => f}
+      = render :partial => "donor_pickups/edit_pickedup_items", :locals => {:f => f}
+      
+      
+      = f.submit "Save"
+      |
+      = link_to 'Edit Donor', edit_donor_path(@donor)

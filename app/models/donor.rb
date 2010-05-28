@@ -1,5 +1,8 @@
 class Donor < ActiveRecord::Base
   
+  has_many :donor_pickups, :foreign_key => :donor_id, :dependent => :destroy
+  
+  # old original way
   has_many :donor_items, :foreign_key => :donor_id, :dependent => :destroy
   accepts_nested_attributes_for :donor_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes.all? {|k,v| v.blank? || v == '0'} }
   has_many :daily_deliveries, :dependent => :destroy

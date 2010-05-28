@@ -56,9 +56,14 @@ ActionController::Routing::Routes.draw do |map|
   
   # to allow for top level index view
   map.resources :deliveries, :member => { :add_to_worksheet => :put }
+  map.resources :donor_pickups, :member => { :add_to_worksheet => :put }
   
+  # TODO: remove :member => { :add_to_worksheet => :put } 
   map.resources :donors, :member => { :add_to_worksheet => :put } do |donor|
     donor.resources :donor_items
+    donor.resources :donor_pickups, :member => { :delivery_sheet => :get } do |pickup|
+      pickup.resources :pickedup_items
+    end
   end
   
   map.resources :items

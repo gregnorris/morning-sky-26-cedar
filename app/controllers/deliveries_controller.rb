@@ -88,7 +88,7 @@ class DeliveriesController < ApplicationController
 protected
 
   def set_objects 
-    recip = (params[:recipient_id] && @reciptient.nil?) ? params[:recipient_id] : @recipient
+    recip = (params[:recipient_id] && @recipient.nil?) ? params[:recipient_id] : @recipient
     @recipient = Recipient.find(recip) if recip
   end
   

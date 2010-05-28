@@ -93,7 +93,7 @@ module ApplicationHelper
     39 => 'St. Vital (V)',
     40 => 'St. Boniface (B)',
     41 => 'Transcona (T)',
-    42 => 'Elmwook (E)',
+    42 => 'Elmwood (E)',
     43 => 'North Kildonan (K)',
     44 => 'West Kildonan (N)',
     45 => 'Maples (M)'
@@ -144,7 +144,7 @@ module ApplicationHelper
     39 => 'St. Vital (V)',
     40 => 'St. Boniface (B)',
     41 => 'Transcona (T)',
-    42 => 'Elmwook (E)',
+    42 => 'Elmwood (E)',
     43 => 'North Kildonan (K)',
     44 => 'West Kildonan (N)',
     45 => 'Maples (M)'

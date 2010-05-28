@@ -1,0 +1,13 @@
+%h3
+  = "Create New Pickup (for #{@donor.full_name})"
+%div
+  - @donor_pickup = @the_thing
+  - form_for(DonorPickup.new, :url => donor_donor_pickups_path(@donor), :html => {:method => :post}) do |f|
+    %fieldset
+      %table
+        = render :partial => "form", :locals => {:f => f}
+      = render :partial => "donor_pickups/edit_pickedup_items", :locals => {:f => f}
+      
+      = f.submit "Create"
+      |
+      = link_to 'Cancel', edit_donor_path(@donor)

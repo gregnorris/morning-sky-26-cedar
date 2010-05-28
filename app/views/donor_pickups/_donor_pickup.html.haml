@@ -1,0 +1,11 @@
+%tr
+  = table_row(donor_pickup.id)
+  = table_row(DonorPickup::PRIORITIES[donor_pickup.priority])
+  = table_row(datetime_formatted(donor_pickup.scheduled_pickup_time))
+  = table_row(datetime_formatted(donor_pickup.pickedup_on))
+  = table_row(DonorPickup::STATES[donor_pickup.state])
+  = table_row(donor_pickup.pickedup_items.andand.size)
+  %td
+    = link_to_icon(:edit, edit_polymorphic_path([@donor, donor_pickup]))
+    |
+    = link_to_icon(:delete, polymorphic_path([@donor, donor_pickup]))

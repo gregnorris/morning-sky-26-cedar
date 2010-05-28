@@ -1,0 +1,58 @@
+%tr.form_field.required
+  %td.form_label
+    = f.label 'First call at'
+  %td
+    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force
+    -#= f.datetime_select :call_recieved_at
+
+%tr.form_field
+  %td.form_label
+    = f.label :scheduled_pickup_time
+  %td  
+    = f.calendar_date_select :scheduled_pickup_time, :size => 23, :time => true, :popup => :force
+%tr.form_field
+  %td.form_label
+    = f.label 'Visit Date'
+  %td
+    = f.calendar_date_select :visited_on, :size => 23, :time => true, :popup => :force
+    -#= f.datetime_select :visited_on, {:include_blank => true, :default => nil}   
+    
+  %td.form_label
+    = f.label :visit_initialed_by
+  %td
+    = f.text_field :visit_initialed_by, :size => 5
+    
+%tr.form_field
+  %td.form_label
+    = f.label 'Picked Up On'
+  %td
+    = f.calendar_date_select :pickedup_on, :size => 23, :time => true, :popup => :force
+    -#= f.datetime_select :pickedup_on, {:include_blank => true, :default => nil}   
+    
+  %td.form_label
+    = f.label :pickup_initialed_by
+  %td
+    = f.text_field :pickup_initialed_by, :size => 5
+    
+%tr.form_field
+  %td.form_label
+    = f.label 'Pickup Notes'
+  %td{:colspan => 2}
+    = f.text_area :comments, :cols => 40, :rows => 2
+%tr.form_field
+  %td.form_label
+    = f.label :state
+  %td
+    -# reverse the values in the hash, so the dropdown will show the state strings
+    - states = DonorPickup::STATES.map{ |s| [s[1], s[0]]}
+    = f.select :state, states
+%tr.form_field
+  %td.form_label
+    = f.label 'Class'
+  %td
+    -# reverse the values in the hash, so the dropdown will show the strings
+    - priorities = DonorPickup::PRIORITIES.map{ |s| [s[1], s[0]]}
+    = f.select :priority, priorities, {:include_blank => ' '}
+    &nbsp; &nbsp;
+    <b> Pending </b>
+    = f.check_box :pending

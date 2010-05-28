@@ -20,9 +20,6 @@
     = delivery.pending? if delivery.pending?
   %td
     = datetime_formatted(delivery.scheduled_delivery_time)
-
-  %td
-    = Delivery::PRIORITIES[delivery.priority]
   %td
     - delivery.daily_deliveries.each do |dd|
       - if dd.daily_worksheet

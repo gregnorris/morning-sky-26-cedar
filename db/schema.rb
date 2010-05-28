@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100226090444) do
+ActiveRecord::Schema.define(:version => 20100528070136) do
 
   create_table "case_workers", :force => true do |t|
     t.string   "first_name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20100226090444) do
     t.date     "target_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "donor_pickup_id"
   end
 
   create_table "daily_worksheets", :force => true do |t|
@@ -82,6 +83,24 @@ ActiveRecord::Schema.define(:version => 20100226090444) do
     t.boolean  "done"
   end
 
+  create_table "donor_pickups", :force => true do |t|
+    t.integer  "donor_id"
+    t.datetime "call_recieved_at"
+    t.datetime "scheduled_pickup_time"
+    t.datetime "visited_on"
+    t.datetime "pickedup_on"
+    t.string   "visit_initialed_by",    :limit => 8
+    t.string   "pickup_initialed_by",   :limit => 8
+    t.integer  "state"
+    t.integer  "priority"
+    t.boolean  "pending"
+    t.string   "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "donor_pickups", ["donor_id"], :name => "index_donor_pickups_on_donor_id"
+
   create_table "donors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -106,7 +125,10 @@ ActiveRecord::Schema.define(:version => 20100226090444) do
     t.integer  "state"
     t.string   "pickup_comments"
     t.integer  "dwelling_type"
+    t.integer  "converted_to_pickup_id"
   end
+
+  add_index "donors", ["converted_to_pickup_id"], :name => "index_donors_on_converted_to_pickup_id"
 
   create_table "items", :force => true do |t|
     t.string   "item_code"
@@ -125,6 +147,20 @@ ActiveRecord::Schema.define(:version => 20100226090444) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pickedup_items", :force => true do |t|
+    t.integer  "donor_pickup_id"
+    t.integer  "item_id"
+    t.integer  "number_offered"
+    t.integer  "number_donated"
+    t.string   "comments"
+    t.boolean  "done"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pickedup_items", ["donor_pickup_id"], :name => "index_pickedup_items_on_donor_pickup_id"
+  add_index "pickedup_items", ["item_id"], :name => "index_pickedup_items_on_item_id"
 
   create_table "recipients", :force => true do |t|
     t.string   "first_name"

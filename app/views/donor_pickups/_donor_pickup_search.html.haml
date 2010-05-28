@@ -1,6 +1,6 @@
 %b
 #search_form
-  - form_for(Delivery.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
+  - form_for(DonorPickup.new, :url => {:action => "index"}, :html => {:method => :get}) do |f|
     %fieldset
       %b
         Search: &nbsp; 
@@ -18,16 +18,15 @@
       %br
       %br
       Delivery Time Between
-      = calendar_date_select_tag( :search_delivery_time_lowest, nil, :size => 15, :time => false, :popup => :force) 
+      = calendar_date_select_tag( :search_pickup_time_lowest, nil, :size => 15, :time => false, :popup => :force) 
       And
-      = calendar_date_select_tag( :search_delivery_time_highest, nil, :size => 15, :time => false, :popup => :force) 
+      = calendar_date_select_tag( :search_pickup_time_highest, nil, :size => 15, :time => false, :popup => :force) 
       State:
-      = select_tag :search_state, "<option value=''></option>" + options_for_select(Delivery::STATES.map{ |s| [s[1], s[0]]})
+      = select_tag :search_state, "<option value=''></option>" + options_for_select(DonorPickup::STATES.map{ |s| [s[1], s[0]]})
       Class:
-      = select_tag :search_priority, "<option value=''></option>" + options_for_select(Delivery::PRIORITIES.map{ |s| [s[1], s[0]]})
+      = select_tag :search_priority, "<option value=''></option>" + options_for_select(DonorPickup::PRIORITIES.map{ |s| [s[1], s[0]]})
       Pending:
       = select_tag :search_pending, "<option value=''></option>" + options_for_select([['TRUE', 1], ['FALSE', 0]])
       = f.submit "Search"
       -#= button_to_function "Reset", "$('#search_form form').clearForm()"
       -#<input type='reset', value='Clear Search fields'>
-

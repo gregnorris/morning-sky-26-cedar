@@ -1,0 +1,22 @@
+%tr
+  %td
+    -# ,{}, {:on_change => "alert('hello')"}
+    = items_form.select :item_id, Item.items_for_select('add')
+  %td
+    -#  :value => (items_form.object.andand.number_offered.blank? ? '1' : items_form.object.number_offered)
+    - initial_number_offered = ((items_form.object.andand.number_offered.blank? && items_form.object.item_id.nil?) ? '1' : items_form.object.number_offered)
+    -# :value => initial_number_offered,
+    = items_form.text_field(:number_offered, :size => 1 )
+  %td
+    = items_form.text_field :number_donated, :size => 1
+  %td
+    = items_form.check_box :done
+  %td
+    = items_form.text_field :comments, :size => 20, :title => "#{items_form.object.comments}"
+  - unless items_form.object.new_record?
+    %td
+      = items_form.check_box '_delete'
+      = items_form.label '_delete', "Remove"
+  - else
+    %td
+      = ''

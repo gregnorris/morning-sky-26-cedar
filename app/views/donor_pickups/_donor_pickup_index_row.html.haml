@@ -1,0 +1,45 @@
+%tr
+  - pickup = donor_pickup_index_row
+  %td
+    = pickup.id
+  -#{:style => "background-color:red"}
+  %td
+    %b
+      = link_to(pickup.donor.full_name, edit_donor_path(pickup.donor)) if pickup.donor
+    = "#{pickup.donor.phone_primary} <br>  #{pickup.donor.phone_secondary}"  if pickup.donor
+  %td
+    = pickup.donor.address if pickup.donor
+  %td
+    = pickup.donor.city_section_string if pickup.donor
+  %td
+    = DonorPickup::STATES[pickup.state]
+  %td
+    = DonorPickup::PRIORITIES[pickup.priority]
+  %td
+    -# only show TRUE if pending is true
+    = pickup.pending? if pickup.pending?
+  %td
+    = datetime_formatted(pickup.scheduled_pickup_time)
+
+  %td
+    = DonorPickup::PRIORITIES[pickup.priority]
+  %td
+    - pickup.daily_deliveries.each do |dd|
+      - if dd.daily_worksheet
+        = link_to(date_formatted(dd.daily_worksheet.worksheet_date), edit_daily_worksheet_path(dd.daily_worksheet))
+        %br
+  %td
+    = pickup.items_list
+  %td
+    = datetime_formatted(pickup.call_recieved_at)
+  %td
+    = link_to_icon(:edit, edit_donor_donor_pickup_path(pickup.donor, pickup))  if pickup.donor
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    = link_to_icon(:delete, polymorphic_path([@donor, pickup]))
+    
+    - if pickup.donor
+      -form_tag add_to_worksheet_donor_pickup_path(pickup), :method => :put do
+        = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+        = hidden_field_tag 'donor_id', pickup.donor.id
+        = submit_tag "Add to Daily Worksheet", :name => 'add_to_daily_worksheet'
+          

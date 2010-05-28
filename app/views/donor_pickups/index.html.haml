@@ -1,0 +1,10 @@
+%h2
+  Pickups &nbsp; &nbsp;
+  
+= render(:partial => "donor_pickup_search")
+
+= render(:partial => "shared/flashes")
+
+- column_titles = ['ID', 'Donor Name', 'Address', 'City Section', 'State', 'Class', 'Pending?', 'Scheduled Pickup<br>Date', 'Class', 'Worksheet', 'Items', 'Call recived at', 'Actions']
+= table_header('DonorPickup', @the_things, column_titles, 'donor_pickup_index_row')
+

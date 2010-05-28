@@ -962,3 +962,6 @@ div#bd div.mod.layout-actions li {
   border-bottom: 1px solid #e1e1e1;
   margin: 0;
   padding: 0.6em 0 0.6em 1em; }
+
+.greyed_out {
+  background-color: grey; }
