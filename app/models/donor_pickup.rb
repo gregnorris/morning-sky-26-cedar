@@ -45,8 +45,18 @@ class DonorPickup < ActiveRecord::Base
   
   # string formatted list of items and number
   def items_list
-    return self.pickuped_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_offered}) "}.join("/")
+    return self.pickedup_items.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("/")
   end
+  
+  # all items that have been offered, but have not been picked-up  << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+  def offered_items_list
+    return self.pickedup_items.that_were_offered.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_offered}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+  end
+  
+  def pickedup_items_list
+    return self.pickedup_items.that_were_donated.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+  end
+  
   
   #------------------ special import --------------------------------------------------------------
   # Special function used one time only to convert the donor pickup information from being on the 
@@ -130,6 +140,47 @@ class DonorPickup < ActiveRecord::Base
     end
     return true
   end
+  
+#8: CATHY
+#9: DEJONG
+#35: KAREN
+#38: GRANT
+#63: CHRISTINE
+#98: PAT
+#99: GERALDINE
+#104: CHERYL
+#111: BOB
+#143: MARIA
+#147: BARBARA
+#152: JOHN
+#153: PATTI & DON
+#156: SITA
+#171: MRS
+#186: KRIS
+#202: NANCY
+#204: CHRISTINE
+#217: SANDY
+#218: MARY
+#224: MELISSA
+#225: SUZANNE
+#227: SHARON
+#238: MCC
+#239: JOANNE
+#246: RENEE
+#252: MRS
+#260: MYRNA
+#271: KELLY
+#281: KATHY
+#284: RAJ & AMRIT
+#288: CHRISTINA
+#294: MICHELLE
+#297: DENNIS & BECKY
+#299: SAAID
+#309: KEITH OR JENNIFER
+#320: E
+#336: LEANN
+#339: SARAH
+
   #------------------ special import --------------------------------------------------------------
   
 end

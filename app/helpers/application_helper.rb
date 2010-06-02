@@ -345,7 +345,7 @@ module ApplicationHelper
   
   
   def table_row(value)
-    "<td>#{value}</td>"
+    "<td valign=top>#{value}</td>"
   end
   
   def index_table(items, column_titles, row_partial, row_partial_local_opts = {})

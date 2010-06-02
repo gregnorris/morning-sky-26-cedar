@@ -7,13 +7,18 @@
       %table
         = render :partial => "form", :locals => {:f => f}
         
-      = render :partial => "donors/edit_donor_items", :locals => {:f => f}
-      
+      <a href="#old_donor_area" onclick="Element.toggle('old_donor_fields')">CLICK HERE to see old donor data---></a>
+      %div#old_donor_fields{:style => "display:none"}
+        = render :partial => "old_donor_fields", :locals => {:f => f}  
+        = render :partial => "donors/edit_donor_items", :locals => {:f => f}
+      %br
+      %br
       = f.submit "Save"
       |
       = link_to 'Cancel', donors_path
 
-%div.right_half
+%div.clear_both
+  %br
   %table
     %tr
       %td

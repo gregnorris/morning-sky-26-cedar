@@ -1,5 +1,5 @@
 %div.boxtitle
   All Scheduled/Completed Pickups
 %div.boxcontent
-  - column_titles = ['ID', 'Priority', 'Scheduled Time', 'Picked up On', 'State', 'Items', 'Actions']
+  - column_titles = ['ID', 'State', 'Class', 'Pending', 'Scheduled Time', 'Picked up On', 'Items', 'Actions']
   = index_table(@donor.donor_pickups.all(:order => 'scheduled_pickup_time ASC'), column_titles, 'donor_pickups/donor_pickup')     

@@ -50,7 +50,7 @@ class Delivery < ActiveRecord::Base
   
   # string formatted list of items and number
   def items_list
-    return self.delivered_items.map{|it| " #{it.andand.item.andand.item_code} (#{it.number_requested}) "}.join("/")
+    return self.delivered_items.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_requested}] "}.join("/")
   end
   
 #  def self.total_people_served(from_date, to_date)

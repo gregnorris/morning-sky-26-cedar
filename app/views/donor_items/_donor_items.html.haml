@@ -1,5 +1,5 @@
 %div.boxtitle
   Donated Items
 %div.boxcontent
-  - column_titles = ['Item Code', 'Item Name', '', '# Donated', 'Donated On', 'Comments', 'Actions']
+  - column_titles = ['Item Code', 'Item Name', '', '# Donated', 'Donated On', 'Done', 'Comments']
   = index_table(@donor.donor_items, column_titles, 'donor_items/donor_item') 

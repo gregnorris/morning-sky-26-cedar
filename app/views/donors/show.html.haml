@@ -13,15 +13,32 @@
       = show_field(@donor.level, 'Level')
       = show_field(@donor.elevator, 'Elevator')
       = show_field(@donor.directions, 'Directions')
-      = show_field(datetime_formatted(@donor.scheduled_pickup_time), 'Scheduled Pickup Time')
       = show_field(datetime_formatted(@donor.possible_future_pickup_time), 'Possible Future Pickup')
       = show_field("$#{@donor.donation_amount}", 'Donation')
       %br
       = show_field(datetime_formatted(@donor.created_at), 'Created At')
       = show_field(datetime_formatted(@donor.updated_at), 'Updated At')
-
+ 
 %div.clear_both
+  = render "donor_pickups/donor_pickups"
+  
+%div.left_half
+  %h3 
+    = '-----------------------------'
+    Restructured data below:
+    = '-----------------------------'
+  %ul.show_list
+    = show_field(datetime_formatted(@donor.scheduled_pickup_time), 'Scheduled Pickup Time')
+    = show_field(@donor.pickup_comments, 'Pickup Comments')
+    = show_field(Donor::STATES[@donor.state], 'Status')
+    = show_field(Donor::PRIORITIES[@donor.priority], 'Class')
+    = show_field(@donor.pending, 'Pending')
+  
+  %br
   = render "donor_items/donor_items"
   = link_to 'Edit', edit_donor_path(@donor)
   |
   = link_to 'Index', donors_path
+
+
+    

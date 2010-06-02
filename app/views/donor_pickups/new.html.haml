@@ -6,7 +6,8 @@
     %fieldset
       %table
         = render :partial => "form", :locals => {:f => f}
-      = render :partial => "donor_pickups/edit_pickedup_items", :locals => {:f => f}
+      -# old way of doing it
+      -#= render :partial => "donor_pickups/edit_pickedup_items", :locals => {:f => f}
       
       = f.submit "Create"
       |

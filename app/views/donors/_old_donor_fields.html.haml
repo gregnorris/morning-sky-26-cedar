@@ -1,0 +1,38 @@
+%table
+  %tr
+    %td{:colspan => 2}
+      %b
+        IMPORTANT: Do not edit or enter any data in the grey coloured fields below!
+        %br
+        Use the "Schedule New Pickup" button, or edit an existing Pickup.
+      -# blank
+      %br
+      %br
+
+  %tr.form_field.greyed_out
+    %td.form_label
+      = f.label :scheduled_pickup_time
+    %td  
+      = f.calendar_date_select :scheduled_pickup_time, :time => true, :popup => :force
+      -#= f.datetime_select :scheduled_pickup_time, {:include_blank => true, :default => nil}
+  %tr.form_field.greyed_out
+    %td.form_label
+      = f.label :pickup_comments
+    %td  
+      = f.text_area :pickup_comments, :cols => 40, :rows => 1
+  %tr.form_field.greyed_out
+    %td.form_label
+      = f.label :status
+    %td  
+      -# reverse the values in the hash, so the dropdown will show the state strings
+      - states = Donor::STATES.map{ |s| [s[1], s[0]]}
+      = f.select :state, states
+  %tr.form_field.greyed_out
+    %td.form_label
+      = f.label 'Class'
+    %td  
+      -# reverse the values in the hash, so the dropdown will show the strings
+      - priorities = Donor::PRIORITIES.map{ |s| [s[1], s[0]]}
+      = f.select :priority, priorities, {:include_blank => ' '}
+      &nbsp;<b> Pending? </b>
+      = f.check_box :pending

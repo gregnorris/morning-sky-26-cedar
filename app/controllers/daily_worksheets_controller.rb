@@ -26,7 +26,7 @@ class DailyWorksheetsController < ApplicationController
   # special action
   def reorder
   
-    
+    # GGG not implemented yet -- and out of date
     render(:partial => "daily_delivery", :collection => @the_thing.daily_deliveries)
   end
   
@@ -39,13 +39,13 @@ class DailyWorksheetsController < ApplicationController
     d_count = 0
     
     # get all donor pickups that are schedules for this date
-    Donor.for_date(@the_thing.worksheet_date).each do |donor|
+    DonorPickup.for_date(@the_thing.worksheet_date).each do |donor_pickup|
       d_count = d_count + 1
-      @the_thing.daily_deliveries.build(:pickup_or_delivery => 1, :donor_id => donor.id, 
+      @the_thing.daily_deliveries.build(:pickup_or_delivery => 1, :donor_pickup_id => donor_pickup.id, 
                                           :position => d_count, :target_date =>  @the_thing.worksheet_date)
     end 
     
-    # get all deliveries that are schedules for this date
+    # get all deliveries that are scheduled for this date
     Delivery.for_date(@the_thing.worksheet_date).each do |delivery|
       d_count = d_count + 1
       @the_thing.daily_deliveries.build(:pickup_or_delivery => 2, :position => d_count, 

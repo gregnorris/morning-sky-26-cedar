@@ -8,8 +8,9 @@
     -#  = image_tag(donor_item.item.icon_path, :width => "50", :height =>"50")
   = table_row(donor_item.number_donated)
   = table_row(date_formatted(donor_item.donated_on))
+  = table_row(donor_item.done)
   = table_row(donor_item.comments)
-  %td
-    = link_to_icon(:edit, edit_polymorphic_path([@donor, donor_item]))
-    |
-    = link_to_icon(:delete, polymorphic_path([@donor, donor_item]))
+  -#%td
+  -#  = link_to_icon(:edit, edit_polymorphic_path([@donor, donor_item]))
+  -#  |
+  -#  = link_to_icon(:delete, polymorphic_path([@donor, donor_item]))

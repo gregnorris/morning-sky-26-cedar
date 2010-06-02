@@ -8,12 +8,10 @@
   %td
     -#= daily_worksheet.total_trips
   %td
-    = daily_worksheet.created_at
+    = datetime_formatted(daily_worksheet.created_at)
   %td
-    = daily_worksheet.updated_at
+    = datetime_formatted(daily_worksheet.updated_at)
   %td
-    = link_to_icon(:view, daily_worksheet_path(daily_worksheet))
-    |
     = link_to_icon(:edit, edit_daily_worksheet_path(daily_worksheet))
     |
     = link_to_icon(:delete, polymorphic_path([daily_worksheet]))

@@ -35,8 +35,8 @@
       - states = DailyDelivery::TARGET_TYPES.map{ |s| [s[1], s[0]]}
       = dd_form.select :pickup_or_delivery, states, {:include_blank => ''}
       %br
-      = "donor ID:"
-      = dd_form.text_field :donor_id, :size => 3
+      = "pickup ID:"
+      = dd_form.text_field :donor_pickup_id, :size => 3
       = " OR "
       %br
       = "delivery ID:"
@@ -45,7 +45,9 @@
     - else
       = DailyDelivery::TARGET_TYPES[dd_form.object.pickup_or_delivery]
       - if is_pickup && dd_form.object.target
-        = "- Donor:"
+        = " (ID: #{dd_form.object.donor_pickup.id}) " if dd_form.object.donor_pickup
+        %br
+        = "Donor:"
         = link_to_icon('edit', edit_donor_path(dd_form.object.target.id))
       - if is_delivery && dd_form.object.delivery
         = " (ID: #{dd_form.object.delivery.id}) " 

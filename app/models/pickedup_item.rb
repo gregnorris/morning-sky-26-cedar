@@ -5,5 +5,6 @@ class PickedupItem < ActiveRecord::Base
   validates_presence_of :item_id
   
   named_scope :that_were_donated,  {:conditions => ["number_donated IS NOT NULL AND number_donated > 0"]}
+  named_scope :that_were_offered,  {:conditions => ["number_offered IS NOT NULL AND number_offered > 0"]}
 
 end

@@ -38,8 +38,8 @@ class DonorPickupsController < ApplicationController
     the_worksheet = DailyWorksheet.find_by_worksheet_date(the_worksheet_date)
     
     if the_worksheet
-      the_worksheet.daily_deliveries.build(:pickup_or_delivery => 2, :position => nil, 
-                                   :donor_pickup_id => the_donor_pickup_id, :target_date => the_worksheet_date)
+      the_worksheet.daily_deliveries.build(:pickup_or_delivery => 1, :position => nil, 
+                                           :donor_pickup_id => the_donor_pickup_id, :target_date => the_worksheet_date)
       
       if the_worksheet.save!
         flash[:notice] = "Pickup # #{the_donor_pickup_id} was added to the daily worksheet for #{the_worksheet_date.andand.strftime("%a %b %d, %Y")}"
@@ -50,7 +50,7 @@ class DonorPickupsController < ApplicationController
       flash[:error] = "Pickup # #{the_donor_pickup_id} could not be added because no daily worksheet exists for #{the_worksheet_date.andand.strftime("%a %b %d, %Y")}"
     end
     respond_to do |format|
-      format.html {redirect_to deliveries_path}
+      format.html {redirect_to donor_pickups_path}
     end
   end
   
