@@ -25,14 +25,14 @@ class DailyDelivery < ActiveRecord::Base
   
   
   def visit_notes
-   return donor_pickup.comments if (self.pickup_or_delivery == PICKUP) && self.donor_pickup
-   return donor.donor_pickups.first.comments if (self.pickup_or_delivery == PICKUP) && self.donor  # accomodate old data
-   return delivery.comments if (self.pickup_or_delivery == DELIVERY) and self.delivery
+   return donor_pickup.comments if ((self.pickup_or_delivery == PICKUP) && self.donor_pickup)
+   return donor.donor_pickups.andand.first.andand.comments if ((self.pickup_or_delivery == PICKUP) && self.donor)
+   return delivery.comments if ((self.pickup_or_delivery == DELIVERY) && self.delivery)
   end
   
   def priority
      return donor_pickup.priority if (self.pickup_or_delivery == PICKUP) && self.donor_pickup
-     return donor.donor_pickups.first.priority if (self.pickup_or_delivery == PICKUP) && self.donor
+     return donor.donor_pickups.andand.first.andand.priority if (self.pickup_or_delivery == PICKUP) && self.donor
      return delivery.priority if (self.pickup_or_delivery == DELIVERY) and self.delivery
   end
   
@@ -41,8 +41,8 @@ class DailyDelivery < ActiveRecord::Base
   def items_list
     #return self.donor.donor_items.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>") if (self.pickup_or_delivery == PICKUP) && self.donor
     if (self.pickup_or_delivery == PICKUP)
-      the_pickup = (self.donor_pickup ? self.donor_pickup : self.donor.donor_pickups.first)
-      next unless the_pickup
+      the_pickup = (self.donor_pickup ? self.donor_pickup : self.donor.andand.donor_pickups.andand.first)
+      return '' unless the_pickup
       
       return "" unless self.daily_worksheet.andand.worksheet_date
       
