@@ -80,6 +80,7 @@ class DeliveriesController < ApplicationController
                           is_pending(params[:search_pending]).
                           city_section_is(params[:search_city_section]).
                           for_delivery_date_range(params[:search_delivery_time_lowest], params[:search_delivery_time_highest]).
+                          select{ |d| params[:search_item_id].blank? ? true : d.has_this_item?(params[:search_item_id].to_i)}.
                           paginate(default_pagination_params)
     
   end

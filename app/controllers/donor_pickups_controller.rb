@@ -70,8 +70,9 @@ class DonorPickupsController < ApplicationController
                           is_pending(params[:search_pending]).
                           city_section_is(params[:search_city_section]).
                           for_pickup_date_range(params[:search_pickup_time_lowest], params[:search_pickup_time_highest]).
+                          select{ |dp| params[:search_item_id].blank? ? true : dp.has_this_item?(params[:search_item_id].to_i)}.
                           paginate(default_pagination_params)
-    
+                          
   end
   
   

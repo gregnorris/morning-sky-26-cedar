@@ -34,7 +34,7 @@ class Delivery < ActiveRecord::Base
   NOT_DONE = 5
   
   STATES = { ENTERED => "Entered", SCHEDULED => "Scheduled", 
-             PARTIAL => "Partially Done", NOT_DONE => "Not Done", COMPLETED => "Done", CANCELLED => "Cancelled"}
+             PARTIAL => "Partially Done", NOT_DONE => "Not Done", COMPLETED => "Completed", CANCELLED => "Cancelled"}
              
   # priority classifications
   CLASS_A = 1
@@ -68,5 +68,9 @@ class Delivery < ActiveRecord::Base
 #  def self.total_people_served(from_date, to_date)
 #    
 #  end
+  
+  def has_this_item?(item_id)
+    item_id.blank? ? true : self.delivered_items.map(&:item_id).include?(item_id)
+  end
   
 end

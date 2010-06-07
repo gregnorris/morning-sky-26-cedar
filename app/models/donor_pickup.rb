@@ -11,16 +11,19 @@ class DonorPickup < ActiveRecord::Base
   named_scope :last_name_like,  lambda{ |search_term| {:include => :donor, :conditions => ["donors.last_name LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
   named_scope :address_like,  lambda{ |search_term| {:include => :donor, :conditions => ["donors.street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
   
-  named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
-  named_scope :with_state,  lambda{ |search_term| {:conditions => ["state = ?", search_term]} unless search_term == ''}
-  named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
-  named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
+  named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["donor_pickups.scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  named_scope :with_state,  lambda{ |search_term| {:conditions => ["donor_pickups.state = ?", search_term]} unless search_term == ''}
+  named_scope :is_pending,  lambda{ |search_term| {:conditions => ["donor_pickups.pending = ?", search_term]} unless search_term == ''}
+  named_scope :with_priority,  lambda{ |search_term| {:conditions => ["donor_pickups.priority = ?", search_term]} unless search_term == ''}
   
   named_scope :city_section_is,  lambda{ |section| {:include => :donor, :conditions => ["donors.city_section = ?", section]} unless section.blank?}
   
-  named_scope :was_pickedup,  {:conditions => ["state = 2 OR state = 3"]}
+  named_scope :was_pickedup,  {:conditions => ["donor_pickups.state = 2 OR donor_pickups.state = 3"]}
   
-  named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
+  named_scope :for_date, lambda{ |a_date| {:conditions => ["donor_pickups.scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
+  
+  # this only returns the items that match the item;  we want to find the pickup that has that item, but still see all its items
+  #named_scope :for_this_item,  lambda{ |the_item_id| {:include => :pickedup_items, :conditions => ["pickedup_items.item_id = ?", the_item_id]} unless the_item_id.blank?}
   
   ENTERED = 0
   SCHEDULED = 1
@@ -29,8 +32,9 @@ class DonorPickup < ActiveRecord::Base
   CANCELLED = 4
   NOT_DONE = 5
   
+  
   STATES = { ENTERED => "Entered", SCHEDULED => "Scheduled", 
-             PARTIAL => "Partially Done", NOT_DONE => "Not Done", COMPLETED => "Done", CANCELLED => "Cancelled"}
+             PARTIAL => "Partially Done", NOT_DONE => "Not Done", COMPLETED => "Completed", CANCELLED => "Cancelled"}
              
   # priority classifications
   CLASS_A = 1
@@ -55,6 +59,10 @@ class DonorPickup < ActiveRecord::Base
   
   def pickedup_items_list
     return self.pickedup_items.that_were_donated.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+  end
+  
+  def has_this_item?(item_id)
+    item_id.blank? ? true : self.pickedup_items.map(&:item_id).include?(item_id)
   end
   
   

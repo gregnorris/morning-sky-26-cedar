@@ -6,5 +6,7 @@ class PickedupItem < ActiveRecord::Base
   
   named_scope :that_were_donated,  {:conditions => ["number_donated IS NOT NULL AND number_donated > 0"]}
   named_scope :that_were_offered,  {:conditions => ["number_offered IS NOT NULL AND number_offered > 0"]}
+  
+  named_scope :is_this_item,  lambda{ |the_item_id| {:conditions => ["item_id = ?", the_item_id]}}
 
 end

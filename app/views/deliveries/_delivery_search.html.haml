@@ -27,6 +27,10 @@
       = select_tag :search_priority, "<option value=''></option>" + options_for_select(Delivery::PRIORITIES.map{ |s| [s[1], s[0]]})
       Pending:
       = select_tag :search_pending, "<option value=''></option>" + options_for_select([['TRUE', 1], ['FALSE', 0]])
+      
+      With Item:
+      = select_tag :search_item_id, "<option value=''></option>" + options_for_select(Item.all.map { |it| ["#{it.item_code} #{it.dashes_string} #{it.name}", it.id]})
+      
       = f.submit "Search"
       -#= button_to_function "Reset", "$('#search_form form').clearForm()"
       -#<input type='reset', value='Clear Search fields'>
