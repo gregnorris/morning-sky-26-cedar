@@ -15,14 +15,15 @@ class DonorsController < ApplicationController
       return
     end
     
+    #                      with_state(params[:search_state]).
+    #                      with_priority(params[:search_priority]).
+    #                      is_pending(params[:search_pending]).
+    #                      for_pickup_date_range(params[:search_pickup_time_lowest], params[:search_pickup_time_highest]).
+    
     @the_things = Donor.first_name_like(params[:search_first_name]).
                           last_name_like(params[:search_last_name]).
                           address_like(params[:search_address]).
-                          with_state(params[:search_state]).
-                          with_priority(params[:search_priority]).
-                          is_pending(params[:search_pending]).
                           city_section_is(params[:search_city_section]).
-                          for_pickup_date_range(params[:search_pickup_time_lowest], params[:search_pickup_time_highest]).
                           paginate(default_pagination_params)
     
   end

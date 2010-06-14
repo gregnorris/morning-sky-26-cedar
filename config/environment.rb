@@ -60,7 +60,7 @@ Rails::Initializer.run do |config|
   config.time_zone = "Central Time (US & Canada)"
 
   config.gem "calendar_date_select"
-  
+  #ENV['TZ'] = 'UTC'  # what exactly does this do? I think it's needed for rails to retrieve the db values as UTC
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]

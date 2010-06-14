@@ -17,7 +17,7 @@
       = select_tag :search_city_section, "<option value=''></option>" + options_for_select(all_city_sections_list)
       %br
       %br
-      Delivery Time Between
+      Pickup Time Between
       = calendar_date_select_tag( :search_pickup_time_lowest, nil, :size => 15, :time => false, :popup => :force) 
       And
       = calendar_date_select_tag( :search_pickup_time_highest, nil, :size => 15, :time => false, :popup => :force) 

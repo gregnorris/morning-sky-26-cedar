@@ -20,9 +20,9 @@
     = link_to_icon(:view, donor_path(donor))
     |
     = link_to_icon(:edit, edit_donor_path(donor))
-    |
-    = link_to_icon(:delete, polymorphic_path([donor]))
-    |
-    -form_tag add_to_worksheet_donor_path(donor), :method => :put do
-      = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
-      = submit_tag "Add to Daily Worksheet", :name => 'add_to_daily_worksheet'
+    -#|
+    -#= link_to_icon(:delete, polymorphic_path([donor]))
+    -#|
+    -#-form_tag add_to_worksheet_donor_path(donor), :method => :put do
+    -#  = calendar_date_select_tag( 'the_worksheet_date', Time.now.to_date, :size => 23, :time => false, :popup => :force)   
+    -#  = submit_tag "Add to Daily Worksheet", :name => 'add_to_daily_worksheet'

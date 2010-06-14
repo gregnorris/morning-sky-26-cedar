@@ -10,16 +10,15 @@ class Donor < ActiveRecord::Base
   named_scope :first_name_like,  lambda{ |search_term| {:conditions => ["first_name LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
   named_scope :last_name_like,  lambda{ |search_term| {:conditions => ["last_name LIKE :term", {:term => "#{search_term}%"}]} unless search_term.blank?}
   named_scope :address_like,  lambda{ |search_term| {:conditions => ["street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
-  named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
-  named_scope :with_state,  lambda{ |search_term| {:conditions => ["state = ?", search_term]} unless search_term == ''}
-  named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
-  named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
-  
   named_scope :city_section_is,  lambda{ |section| {:conditions => ["city_section = ?", section]} unless section.blank?}
   
-  named_scope :was_pickedup,  {:conditions => ["state = 2 OR state = 3"]}
+  #named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.utc.to_s(:db), Date.parse(date_end).end_of_day.utc.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  #named_scope :with_state,  lambda{ |search_term| {:conditions => ["state = ?", search_term]} unless search_term == ''}
+  #named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
+  #named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
+  #named_scope :was_pickedup,  {:conditions => ["state = 2 OR state = 3"]}
   
-  named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
+  #named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.utc.to_s(:db), a_date.end_of_day.utc.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
   
   # priority classifications
   CLASS_A = 1
@@ -49,12 +48,13 @@ class Donor < ActiveRecord::Base
   def city_section_string; ApplicationHelper::CITY_SECTIONS[city_section]; end
   
   # string formatted list of items and number
+  # TODO: remove after depricated items on donor are removed from donor view
   def items_list
     return self.donor_items.map{|it| " #{it.item.andand.item_code} (#{it.number_donated}) "}.join("/")
   end
   
   def self.total_households_that_donated_items(from_date, to_date)
-    return Donor.for_pickup_date_range(from_date, to_date).was_pickedup.compact.uniq
+    return DonorPickup.for_pickup_date_range(from_date, to_date).was_pickedup.compact.map{|dp| dp.donor}.uniq.size
   end
   
 end
