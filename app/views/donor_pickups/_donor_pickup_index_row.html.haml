@@ -35,7 +35,7 @@
   %td
     = link_to_icon(:edit, edit_donor_donor_pickup_path(pickup.donor, pickup))  if pickup.donor
     &nbsp;&nbsp; | &nbsp;&nbsp;
-    -#= link_to_icon(:delete, polymorphic_path([@donor, pickup]))
+    = link_to_icon(:delete, polymorphic_path([@donor, pickup]))
     
     - if pickup.donor
       -form_tag add_to_worksheet_donor_pickup_path(pickup), :method => :put do
