@@ -54,7 +54,7 @@ class Donor < ActiveRecord::Base
   end
   
   def self.total_households_that_donated_items(from_date, to_date)
-    return DonorPickup.for_pickup_date_range(from_date, to_date).was_pickedup.compact.map{|dp| dp.donor}.uniq.size
+    return DonorPickup.picked_up_between(from_date, to_date).was_pickedup.compact.map{|dp| dp.donor}.uniq.size
   end
   
 end

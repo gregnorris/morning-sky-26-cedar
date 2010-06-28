@@ -12,6 +12,8 @@ class DonorPickup < ActiveRecord::Base
   named_scope :address_like,  lambda{ |search_term| {:include => :donor, :conditions => ["donors.street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
   
   named_scope :for_pickup_date_range,  lambda{ |date_start, date_end| {:conditions => ["donor_pickups.scheduled_pickup_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.utc.to_s(:db), Date.parse(date_end).end_of_day.utc.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  named_scope :picked_up_between,  lambda{ |date_start, date_end| {:conditions => ["donor_pickups.pickedup_on BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.utc.to_s(:db), Date.parse(date_end).end_of_day.utc.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  
   named_scope :with_state,  lambda{ |search_term| {:conditions => ["donor_pickups.state = ?", search_term]} unless search_term == ''}
   named_scope :is_pending,  lambda{ |search_term| {:conditions => ["donor_pickups.pending = ?", search_term]} unless search_term == ''}
   named_scope :with_priority,  lambda{ |search_term| {:conditions => ["donor_pickups.priority = ?", search_term]} unless search_term == ''}

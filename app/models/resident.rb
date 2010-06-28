@@ -9,11 +9,13 @@ class Resident < ActiveRecord::Base
   named_scope :fifteen_to_thirty,  {:conditions => "age > 14 AND age < 31"}
   named_scope :thirtyone_to_sixtyfour,  {:conditions => "age > 30 AND age < 65"}
   named_scope :sixtyfive_plus,  {:conditions => "age > 64"}
+  named_scope :with_no_age,  {:conditions => "age IS NULL"}
   
   named_scope :males,  {:conditions => "gender = 'M'"}
   named_scope :females,  {:conditions => "gender = 'F'"}
   named_scope :aboriginals,  {:conditions => "aboriginal = TRUE"}
   named_scope :recent_immigrants,  {:conditions => "recent_immigrant = TRUE"}
+  named_scope :not_aboriginal_or_recent_immigrants,  {:conditions => "recent_immigrant = FALSE AND aboriginal = FALSE"}
   named_scope :disabled_people,  {:conditions => "disabled = TRUE"}
   named_scope :not_parents,  {:conditions => "category <> 1 AND category <> 2"}
   named_scope :parents,  {:conditions => "category = 1"}

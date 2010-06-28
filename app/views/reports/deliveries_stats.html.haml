@@ -21,8 +21,11 @@
 
 %b
   Total number of households furniture was picked up from: 
-- num_total_pickups = Donor::total_households_that_donated_items(from_date, to_date)
+- num_total_pickups = DonorPickup.picked_up_between(from_date, to_date).was_pickedup.compact.size
 = num_total_pickups
+
+- num_unique_household_pickups = Donor::total_households_that_donated_items(from_date, to_date)
+= "(unique households picked up from: #{num_unique_household_pickups})"
 
 %br
 %br
@@ -47,6 +50,12 @@ Breakdown of Age Ranges:
 %b
   65+ &nbsp; : 
 = recipients_sixtyfive_plus
+%br
+- recipients_with_no_age = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.with_no_age.size}
+%b
+  age not given &nbsp; : 
+= recipients_with_no_age
+
 
 %br
 %br
@@ -74,7 +83,12 @@ Breakdown of Other Categories:
 - recipients_recent_immigrants = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.recent_immigrants.size}
 %b
   Recent Immigrant: 
-=recipients_recent_immigrants
+= recipients_recent_immigrants
+%br
+- recipients_not_aboriginal_or_recent_immigrants = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.not_aboriginal_or_recent_immigrants.size}
+%b
+  Neither Aborinal nor a Recent Immigrant: 
+= recipients_not_aboriginal_or_recent_immigrants
 %br
 - recipients_disabled_people = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.disabled_people.size}
 %b
