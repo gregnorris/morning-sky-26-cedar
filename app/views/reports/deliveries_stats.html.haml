@@ -6,11 +6,14 @@
   
 
 - recipients = Delivery::total_households_served(from_date, to_date)
+- num_total_deliveries = Delivery.for_delivery_date_range(from_date, to_date).was_delivered_to.compact.size
 
 %b
-  Total number of households delivered to: 
-= recipients.size
+  Total number of deliveries: 
+= num_total_deliveries
+= " (unique households served: #{recipients.size})"
 %br
+
 - num_total_recipients = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.size}
 %b
   Total Unique People served (including family members): 
@@ -25,7 +28,7 @@
 = num_total_pickups
 
 - num_unique_household_pickups = Donor::total_households_that_donated_items(from_date, to_date)
-= "(unique households picked up from: #{num_unique_household_pickups})"
+= " (unique households picked up from: #{num_unique_household_pickups})"
 
 %br
 %br
