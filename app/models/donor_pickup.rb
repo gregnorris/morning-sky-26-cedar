@@ -49,8 +49,15 @@ class DonorPickup < ActiveRecord::Base
 #    self.pickuped_items.that_were_donated.size
 #  end
   
-  # string formatted list of items and number
+  # gg" Modified to make the list sorted by Item Category
   def items_list
+    return self.pickedup_items.map{|it| 
+      " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")
+      }.join("/").sort{ |a,b| a.andand.item.category_string <=> b.andand.item.category_string }
+  end
+  
+  # string formatted list of items and number
+  def items_list_gg_old
     return self.pickedup_items.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("/")
   end
   
@@ -72,6 +79,8 @@ class DonorPickup < ActiveRecord::Base
   # Special function used one time only to convert the donor pickup information from being on the 
   # donor, to be in the donor_pickups table in a similar way a recipient has many deliveries
   def self.convert_to_donor_pickups
+    return  # nevef run this again
+    
     Donor.all.each do |the_d|
       
       different_donation_dates = the_d.donor_items.map{|di| di.donated_on}.uniq

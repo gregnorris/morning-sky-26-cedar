@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100528070136) do
+ActiveRecord::Schema.define(:version => 20120206035535) do
 
   create_table "case_workers", :force => true do |t|
     t.string   "first_name"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(:version => 20100528070136) do
     t.string   "last_name"
     t.string   "phone_primary"
     t.string   "phone_secondary"
-    t.integer  "donation_amount",             :limit => 10, :precision => 10, :scale => 0
+    t.integer  "donation_amount"
     t.integer  "city_section"
     t.string   "street_1"
     t.string   "street_2"
@@ -130,6 +130,12 @@ ActiveRecord::Schema.define(:version => 20100528070136) do
 
   add_index "donors", ["converted_to_pickup_id"], :name => "index_donors_on_converted_to_pickup_id"
 
+  create_table "item_categories", :force => true do |t|
+    t.string   "category_name", :limit => 28
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "items", :force => true do |t|
     t.string   "item_code"
     t.string   "name"
@@ -138,6 +144,8 @@ ActiveRecord::Schema.define(:version => 20100528070136) do
     t.string   "image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
+    t.boolean  "obsolete"
   end
 
   create_table "organizations", :force => true do |t|
@@ -187,7 +195,7 @@ ActiveRecord::Schema.define(:version => 20100528070136) do
     t.date     "move_in_date"
     t.string   "previous_address"
     t.string   "work_school_schedule"
-    t.integer  "donation",                :limit => 10, :precision => 10, :scale => 0
+    t.integer  "donation"
     t.string   "additional_information"
     t.date     "intake_date"
     t.string   "referred_by"

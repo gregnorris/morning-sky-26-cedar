@@ -1,7 +1,9 @@
 %tr
   = table_row(item.id)
+  = table_row(item.category_string)
   = table_row(item.item_code)
   = table_row(item.name)
+  = table_row(item.obsolete)
   = table_row(item.description)
   %td
     = image_tag(item.icon_path, :width => "50", :height =>"50") unless item.icon_path.blank?
@@ -9,5 +11,7 @@
     = link_to_icon(:view, item_path(item))
     |
     = link_to_icon(:edit, edit_item_path(item))
-    |
-    = link_to_icon(:delete, polymorphic_path([item]))
+    -#gg: only allowing deletion of item by admin
+    - if (current_user.login == 'gnorris')
+      |
+      = link_to_icon(:delete, polymorphic_path([item]))

@@ -1,31 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-#  CITY_SECTIONS = {
-#    'Downtown East' => 1,
-#    'Downtown West' => 2,
-#    'Point Douglas North' => 3,
-#    'Point Douglas South' => 4,
-#    'St. Boniface West' => 5,
-#    'St. Boniface East' => 6,
-#    'River Heights East' => 7,
-#    'River Heights West' => 8,
-#    'River East South' => 9,
-#    'River East West' => 10,
-#    'River East East' => 11,
-#    'Transcona' => 12,
-#    'St. Vital North' => 13,
-#    'St. Vital South' => 14,
-#    'Fort Garry North' => 15,
-#    'Fort Garry South' => 16,
-#    'Assiniboine South' => 17,
-#    'St. James-Assiniboia West' => 18,
-#    'St. James-Assiniboia East' => 19,
-#    'Inkster West' => 20,
-#    'Inkster East' => 21,
-#    'Seven Oaks West' => 22,
-#    'Seven Oaks East' => 23
-#  }
 
   DOWNTOWN_EAST = 1
   DOWNTOWN_WEST = 2
@@ -334,6 +309,7 @@ module ApplicationHelper
   end
   #--------------------------------------------------------------------------
   
+  #--------------------------------------------------------------------------
   def show_field(field, title)
     src = ''
     src << '<li>'
@@ -342,12 +318,15 @@ module ApplicationHelper
     src << '&nbsp;</li>'
     src
   end
+  #--------------------------------------------------------------------------
   
-  
+  #--------------------------------------------------------------------------
   def table_row(value)
     "<td valign=top>#{value}</td>"
   end
+  #--------------------------------------------------------------------------
   
+  #--------------------------------------------------------------------------
   def index_table(items, column_titles, row_partial, row_partial_local_opts = {})
     src = ''
     src << "<table class='data'>"
@@ -367,7 +346,9 @@ module ApplicationHelper
     src << '</table>'
     src
   end
+  #--------------------------------------------------------------------------
   
+  #--------------------------------------------------------------------------
   def table_header(item_name, items, column_titles, row_partial, row_partial_local_opts = {})
     src = ''
     src << "<table class='data'>"
@@ -392,7 +373,9 @@ module ApplicationHelper
     src << '</table>'
     src
   end
+  #--------------------------------------------------------------------------
   
+  #--------------------------------------------------------------------------
   def generate_breadcrumbs(request)
     s = ""
     url = request.path.split('?')  #remove extra query string parameters
@@ -415,36 +398,7 @@ module ApplicationHelper
     end
     s
   end
-  
-  #
-  # <button type="submit" class="button positive">
-  #    <img src="/stylesheets/blueprint/plugins/buttons/icons/key.png" alt=""/> Sign Up
-  # </button>
-  #
-#  def button_tag(name, icon, options={})
-#    icon_path = '/stylesheets/blueprint/plugins/buttons/icons/'
-#    icon_path += icon
-#    img = tag("img", :src => icon_path,
-#                     :alt =>"", :open => false)
-#    img << ' ' + name
-#    options.merge!("type" => 'submit') unless options[:type]
-#    content_tag(:button, img, options)
-#  end
-
-  #
-  #  <a class="button negative" href="/">
-  #     <img src="/stylesheets/blueprint/plugins/buttons/icons/cross.png" alt=""/> Cancel
-  #  </a>
-  #
-#  def img_link_tag(name, icon, options={})
-#    icon_path = '/stylesheets/blueprint/plugins/buttons/icons/'
-#    icon_path += icon
-#    img = tag("img", :src => icon_path,
-#                     :alt =>"", :open => false)
-#    img << ' ' + name
-#    options.merge!(:href => 'root') unless options[:href]
-#    content_tag(:a, img, options)
-#  end
+  #--------------------------------------------------------------------------
 
 
 

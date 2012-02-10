@@ -90,7 +90,7 @@ Breakdown of Other Categories:
 %br
 - recipients_not_aboriginal_or_recent_immigrants = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.not_aboriginal_or_recent_immigrants.size}
 %b
-  Neither Aborinal nor a Recent Immigrant: 
+  Neither Aboriginal nor a Recent Immigrant: 
 = recipients_not_aboriginal_or_recent_immigrants
 %br
 - recipients_disabled_people = recipients.inject(0) {|res_sum, recip| res_sum + recip.residents.disabled_people.size}

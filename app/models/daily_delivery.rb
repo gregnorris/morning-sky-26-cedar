@@ -51,7 +51,8 @@ class DailyDelivery < ActiveRecord::Base
       return items_to_show
       #return items_to_show.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_offered}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
     elsif ((self.pickup_or_delivery == DELIVERY) and self.delivery)
-      return self.delivery.delivered_items.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_requested}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+      # was delivered_items.reject{|it| it.done?}
+      return self.delivery.delivered_items.still_to_deliver.ordered_by_item_category.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_requested}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
     end
   end
 
