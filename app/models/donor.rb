@@ -53,9 +53,10 @@ class Donor < ActiveRecord::Base
     return self.donor_items.map{|it| " #{it.item.andand.item_code} (#{it.number_donated}) "}.join("/")
   end
   
-  def sorted_donor_items
-    self.donor_items.sort{ |a,b| a.andand.item.category_string <=> b.andand.item.category_string }
-  end
+  # use ordered_by_item_category instead
+  #def sorted_donor_items
+  #  self.donor_items.sort{ |a,b| a.andand.item.category_string <=> b.andand.item.category_string }
+  #end
   
   def self.total_households_that_donated_items(from_date, to_date)
     return DonorPickup.picked_up_between(from_date, to_date).was_pickedup.compact.map{|dp| dp.donor}.uniq.size

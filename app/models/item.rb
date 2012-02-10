@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
 
-  named_scope :that_are_valid,  {:conditions => {:obsolete => (false || nil)}}
+  named_scope :that_are_valid,  {:conditions => ["obsolete IS NOT TRUE"]}
   named_scope :ordered_by_category, :order => "category_id ASC"
   
 

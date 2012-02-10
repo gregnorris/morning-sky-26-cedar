@@ -49,11 +49,11 @@ class DonorPickup < ActiveRecord::Base
 #    self.pickuped_items.that_were_donated.size
 #  end
   
-  # gg" Modified to make the list sorted by Item Category
+  # ggg Modified to make the list sorted by Item Category
   def items_list
-    return self.pickedup_items.map{|it| 
+    return self.pickedup_items.ordered_by_item_category.map{|it| 
       " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")
-      }.join("/").sort{ |a,b| a.andand.item.category_string <=> b.andand.item.category_string }
+      }.join("/")
   end
   
   # string formatted list of items and number
@@ -63,11 +63,11 @@ class DonorPickup < ActiveRecord::Base
   
   # all items that have been offered, but have not been picked-up  << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
   def offered_items_list
-    return self.pickedup_items.that_were_offered.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_offered}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+    return self.pickedup_items.that_were_offered.still_to_pickup.ordered_by_item_category.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_offered}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
   end
   
   def pickedup_items_list
-    return self.pickedup_items.that_were_donated.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
+    return self.pickedup_items.that_were_donated.ordered_by_item_category.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_donated}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")
   end
   
   def has_this_item?(item_id)
