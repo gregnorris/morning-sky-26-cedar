@@ -2,24 +2,26 @@
   %td.form_label
     = f.label 'First call at'
   %td
-    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force
+    - call_received_at_value = datetime_formatted(@delivery.call_recieved_at || Time.now) if @delivery.new_record?
+    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force, :value => call_received_at_value
     -#= f.datetime_select :call_recieved_at
 %tr.form_field
   %td.form_label
     = f.label :latest_call_at
   %td
-    = f.calendar_date_select :latest_call_at, :size => 23, :time => true, :popup => :force
+    - latest_call_at_value = datetime_formatted(@delivery.latest_call_at || Time.now) if @delivery.new_record?
+    = f.calendar_date_select :latest_call_at, :size => 23, :time => true, :popup => :force, :value => latest_call_at_value
 %tr.form_field
   %td.form_label
     = f.label :scheduled_delivery_time
   %td  
-    = f.calendar_date_select :scheduled_delivery_time, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :scheduled_delivery_time, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :scheduled_delivery_time 
 %tr.form_field
   %td.form_label
     = f.label 'Visit Date'
   %td
-    = f.calendar_date_select :visited_on_1, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :visited_on_1, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :visited_on_1, {:include_blank => true, :default => nil}   
     
   %td.form_label
@@ -30,7 +32,7 @@
   %td.form_label
     = f.label 'Visit 2 (if required)'
   %td
-    = f.calendar_date_select :visited_on_2, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :visited_on_2, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :visited_on_2, {:include_blank => true, :default => nil}
   
   %td.form_label
@@ -42,7 +44,7 @@
   %td.form_label
     = f.label :delivered_on
   %td
-    = f.calendar_date_select :delivered_on, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :delivered_on, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :delivered_on, {:include_blank => true, :default => nil}
   
 %tr.form_field

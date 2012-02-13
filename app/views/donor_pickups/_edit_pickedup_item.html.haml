@@ -12,6 +12,9 @@
   %td
     = items_form.check_box :done
   %td
+    - declined_reasons = PickedupItem::DECLINED_REASONS.map{ |s| [s[1], s[0]]}.unshift(["", nil])
+    = items_form.select :declined_reason, declined_reasons
+  %td
     = items_form.text_field :comments, :size => 20, :title => "#{items_form.object.comments}"
   - unless items_form.object.new_record?
     %td

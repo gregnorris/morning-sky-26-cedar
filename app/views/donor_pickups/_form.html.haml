@@ -2,19 +2,20 @@
   %td.form_label
     = f.label 'First call at'
   %td
-    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force
+    - call_received_at_value = datetime_formatted(@donor_pickup.call_recieved_at || Time.now) if @donor_pickup.new_record?
+    = f.calendar_date_select :call_recieved_at, :size => 23, :time => true, :popup => :force, :value => call_received_at_value
     -#= f.datetime_select :call_recieved_at
 
 %tr.form_field
   %td.form_label
     = f.label :scheduled_pickup_time
   %td  
-    = f.calendar_date_select :scheduled_pickup_time, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :scheduled_pickup_time, :size => 23, :time => false, :popup => :force
 %tr.form_field
   %td.form_label
     = f.label 'Visit Date'
   %td
-    = f.calendar_date_select :visited_on, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :visited_on, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :visited_on, {:include_blank => true, :default => nil}   
     
   %td.form_label
@@ -26,7 +27,7 @@
   %td.form_label
     = f.label 'Picked Up On'
   %td
-    = f.calendar_date_select :pickedup_on, :size => 23, :time => true, :popup => :force
+    = f.calendar_date_select :pickedup_on, :size => 23, :time => false, :popup => :force
     -#= f.datetime_select :pickedup_on, {:include_blank => true, :default => nil}   
     
   %td.form_label

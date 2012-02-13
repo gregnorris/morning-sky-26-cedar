@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120206035535) do
+ActiveRecord::Schema.define(:version => 20120213022224) do
 
   create_table "case_workers", :force => true do |t|
     t.string   "first_name"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120206035535) do
     t.boolean  "done"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "declined_reason"
   end
 
   add_index "pickedup_items", ["donor_pickup_id"], :name => "index_pickedup_items_on_donor_pickup_id"

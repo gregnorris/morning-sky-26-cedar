@@ -33,7 +33,8 @@ class Item < ActiveRecord::Base
     
     # sort by category, and have nil category items appear at the end
     #sorted_items = Item.that_are_valid.sort{ |a,b| (a.category_id && b.category_id) ? a.category_id <=> b.category_id : ( a.category_id ? -1 : 1 ) }
-    Item.that_are_valid.ordered_by_category.map { |it| ["#{it.category_string[0..3]} -- #{it.item_code} #{it.dashes_string} #{it.name}", it.id] }.unshift([the_prompt_text, nil])
+    # #{it.category_string[0..3]} -- 
+    Item.that_are_valid.ordered_by_category.map { |it| ["#{it.item_code} #{it.dashes_string} #{it.name}", it.id] }.unshift([the_prompt_text, nil])
     
     
     #Item.all.map { |it| ["#{it.item_code} #{it.dashes_string} #{it.name}", it.id]}.unshift([the_prompt_text, nil])

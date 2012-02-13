@@ -59,6 +59,7 @@
                 = " Girls: #{dd.target.number_of_girls} (#{dd.target.girls_ages})" if dd.target.number_of_girls > 0
             %tr
               %td
+                = dd.target.other_adults_string
                 &nbsp;
               %td
                 = " Boys: &nbsp;#{dd.target.number_of_boys} (#{dd.target.boys_ages})" if dd.target.number_of_boys > 0

@@ -69,6 +69,14 @@ class Recipient < ActiveRecord::Base
     "SPOUSE: #{the_spouse.gender} (#{the_spouse.age})"
   end
   
+  def other_adults_string
+    adults_string = residents.other_adults.any? ? "OTHER ADULTS: " : ""
+    for adult in residents.other_adults
+      adults_string << "#{adult.gender} (#{adult.age}) "
+    end
+    adults_string
+  end
+  
   def boys_ages
     the_boys = residents.boys
     return "" unless the_boys

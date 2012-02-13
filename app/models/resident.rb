@@ -24,6 +24,7 @@ class Resident < ActiveRecord::Base
   named_scope :boys,  {:conditions => "category = 2 AND gender = 'M'"}
   named_scope :the_recipient,  {:conditions => "is_recipient = true"}
   named_scope :the_spouse, {:conditions => "is_recipient = false AND category = 1"}  # is not the recipient, but is a parent
+  named_scope :other_adults, {:conditions => "category <> 1 AND category <> 2 AND is_recipient = false"} # everyone except parents and children
   
   
   GENDERS = { 'M' => 'Male', 'F' => 'Female'}
