@@ -38,7 +38,7 @@
 
 %b
   Number of pickups requested (but not yet started or completed):
-= DonorPickup.picked_up_between(from_date, to_date).not_pickedup_yet.compact.size
+= DonorPickup.for_pickup_date_range(from_date, to_date).not_pickedup_yet.compact.size
 
 %br
 %br
