@@ -30,8 +30,7 @@
 
 %b
   Total number of households furniture was picked up from: 
-- total_pickups = DonorPickup.picked_up_between(from_date, to_date)
-= total_pickups.was_pickedup.compact.size
+= DonorPickup.picked_up_between(from_date, to_date).was_pickedup.compact.size
 
 - num_unique_household_pickups = Donor::total_households_that_donated_items(from_date, to_date)
 = " (unique households picked up from: #{num_unique_household_pickups})"
@@ -39,7 +38,7 @@
 
 %b
   Number of pickups requested (but not yet started or completed):
-= total_pickups.not_pickedup_yet.compact.size
+= DonorPickup.picked_up_between(from_date, to_date).not_pickedup_yet.compact.size
 
 %br
 %br
