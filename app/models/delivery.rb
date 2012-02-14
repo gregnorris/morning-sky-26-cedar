@@ -20,6 +20,7 @@ class Delivery < ActiveRecord::Base
   named_scope :city_section_is,  lambda{ |section| {:include => :recipient, :conditions => ["recipients.city_section = ?", section]} unless section.blank?}
   
   named_scope :was_delivered_to,  {:conditions => ["state = 2 OR state = 3"]}
+  named_scope :not_yet_delivered,  {:conditions => ["state <> 2 AND state <> 3"]}
   
   named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
   named_scope :by_oldest_uncompleted,  {:conditions => ["state <> 3 AND state <> 4"], :order => 'scheduled_delivery_time ASC'}
@@ -59,6 +60,12 @@ class Delivery < ActiveRecord::Base
   def self.total_households_served(from_date, to_date)
     return Delivery.for_delivery_date_range(from_date, to_date).was_delivered_to.map{|del| del.recipient}.compact.uniq
   end
+  
+  def self.total_households_requesting(from_date, to_date)
+    return Delivery.for_delivery_date_range(from_date, to_date).not_yet_delivered.map{|del| del.recipient}.compact.uniq
+  end
+  
+  
 #  
 #  def self.total_people_served(from_date, to_date)
 #    

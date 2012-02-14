@@ -11,6 +11,7 @@ class PickedupItem < ActiveRecord::Base
   named_scope :ordered_by_item_category, {:include => :item, :order => "items.category_id ASC"}
   named_scope :still_to_pickup, :conditions => ["done IS NOT TRUE"]
   
+  
   PET_HAIR = 1
   NEEDS_CLEANING = 2
   NEEDS_REPAIR = 3

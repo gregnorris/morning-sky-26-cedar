@@ -21,6 +21,7 @@ class DonorPickup < ActiveRecord::Base
   named_scope :city_section_is,  lambda{ |section| {:include => :donor, :conditions => ["donors.city_section = ?", section]} unless section.blank?}
   
   named_scope :was_pickedup,  {:conditions => ["donor_pickups.state = 2 OR donor_pickups.state = 3"]}
+  named_scope :not_pickedup_yet,  {:conditions => ["donor_pickups.state <> 2 AND donor_pickups.state <> 3"]}
   
   named_scope :for_date, lambda{ |a_date| {:conditions => ["donor_pickups.scheduled_pickup_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_pickup_time DESC'}}
   

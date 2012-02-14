@@ -22,7 +22,7 @@
   %td
     = datetime_formatted_2_line(oldest_uncompleted_delivery.andand.latest_call_at)
   %td
-    = datetime_formatted_2_line(oldest_uncompleted_delivery.andand.scheduled_delivery_time)
+    = date_formatted(oldest_uncompleted_delivery.andand.scheduled_delivery_time)
   %td
     = recipient.deliveries.size
   %td

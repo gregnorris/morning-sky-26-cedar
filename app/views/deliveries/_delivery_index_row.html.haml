@@ -19,7 +19,7 @@
     -# only show TRUE if pending is true
     = delivery.pending? if delivery.pending?
   %td
-    = datetime_formatted(delivery.scheduled_delivery_time)
+    = date_formatted(delivery.scheduled_delivery_time)
   %td
     - delivery.daily_deliveries.each do |dd|
       - if dd.daily_worksheet

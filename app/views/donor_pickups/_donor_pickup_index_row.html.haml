@@ -19,7 +19,7 @@
     -# only show TRUE if pending is true
     = pickup.pending? if pickup.pending?
   %td
-    = datetime_formatted(pickup.scheduled_pickup_time)
+    = date_formatted(pickup.scheduled_pickup_time)
 
   %td
     = DonorPickup::PRIORITIES[pickup.priority]
