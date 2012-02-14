@@ -47,6 +47,7 @@ class DailyDelivery < ActiveRecord::Base
       return "" unless self.daily_worksheet.andand.worksheet_date
       
       # show items we've already picked up, if the current date is newer than the date of this "DailyDelivery"
+      # TODO: make sure this date comparison works properly
       items_to_show = ((Time.now.beginning_of_day > Time.parse(self.daily_worksheet.worksheet_date.to_s)) ? the_pickup.pickedup_items_list : the_pickup.offered_items_list)
       return items_to_show
       #return items_to_show.reject{|it| it.done?}.map{|it| " #{it.andand.item.andand.item_code} [#{it.number_offered}] " << (it.comments.blank? ? "" : "(#{it.comments}) ")}.join("<b>/</b>")

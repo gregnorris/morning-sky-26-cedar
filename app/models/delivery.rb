@@ -12,7 +12,7 @@ class Delivery < ActiveRecord::Base
   named_scope :address_like,  lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.street_1 LIKE :term", {:term => "%#{search_term}%"}]} unless search_term.blank?}
   named_scope :health_number_like, lambda{ |search_term| {:include => :recipient, :conditions => ["recipients.health_care_number = :term", {:term => "#{search_term}"}]} unless search_term.blank?}
   
-  named_scope :for_delivery_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_delivery_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.utc.to_s(:db), Date.parse(date_end).end_of_day.utc.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
+  named_scope :for_delivery_date_range,  lambda{ |date_start, date_end| {:conditions => ["scheduled_delivery_time BETWEEN ? and ?", Date.parse(date_start).beginning_of_day.to_s(:db), Date.parse(date_end).end_of_day.to_s(:db)]} unless (date_start.blank? || date_end.blank?)}
   named_scope :with_state,  lambda{ |search_term| {:conditions => ["state = ?", search_term]} unless search_term == ''}
   named_scope :is_pending,  lambda{ |search_term| {:conditions => ["pending = ?", search_term]} unless search_term == ''}
   named_scope :with_priority,  lambda{ |search_term| {:conditions => ["priority = ?", search_term]} unless search_term == ''}
@@ -23,7 +23,7 @@ class Delivery < ActiveRecord::Base
   
   named_scope :by_newest_delivery_date,  lambda{ |recipient_id| {:conditions => ["recipient_id = ?", recipient_id], :order => 'scheduled_delivery_time DESC'}}
   named_scope :by_oldest_uncompleted,  {:conditions => ["state <> 3 AND state <> 4"], :order => 'scheduled_delivery_time ASC'}
-  named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_delivery_time BETWEEN ? AND ?", a_date.beginning_of_day.utc.to_s(:db), a_date.end_of_day.utc.to_s(:db)], :order => 'scheduled_delivery_time DESC'}}
+  named_scope :for_date, lambda{ |a_date| {:conditions => ["scheduled_delivery_time BETWEEN ? AND ?", a_date.beginning_of_day.to_s(:db), a_date.end_of_day.to_s(:db)], :order => 'scheduled_delivery_time DESC'}}
   
   ENTERED = 0
   SCHEDULED = 1
