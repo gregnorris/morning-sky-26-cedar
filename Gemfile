@@ -8,8 +8,8 @@ ruby "1.8.7"
 gem "andand", "1.3.1"
 gem "calendar_date_select", "1.15"
 gem "authlogic", "2.1.3"
-gem "mislav-will_paginate", "2.3.11"
-gem "ryanb-acts-as-list", "0.1.2"
+gem "mislav-will_paginate", "2.3.11", :require => 'will_paginate'
+gem "ryanb-acts-as-list", "0.1.2", :require => 'acts_as_list'
 
 gem "formtastic", "0.9.1"
 gem "haml", "2.2.6"
