@@ -1,0 +1,50 @@
+GEM
+  remote: http://rubygems.org/
+  remote: http://gems.github.com/
+  specs:
+    actionmailer (2.3.5)
+      actionpack (= 2.3.5)
+    actionpack (2.3.5)
+      activesupport (= 2.3.5)
+      rack (~> 1.0.0)
+    activerecord (2.3.5)
+      activesupport (= 2.3.5)
+    activeresource (2.3.5)
+      activesupport (= 2.3.5)
+    activesupport (2.3.5)
+    andand (1.3.1)
+    authlogic (2.1.3)
+      activesupport
+    calendar_date_select (1.15)
+    daemons (1.1.9)
+    eventmachine (1.0.0)
+    mislav-will_paginate (2.3.11)
+    pg (0.8.0)
+    rack (1.0.1)
+    rails (2.3.5)
+      actionmailer (= 2.3.5)
+      actionpack (= 2.3.5)
+      activerecord (= 2.3.5)
+      activeresource (= 2.3.5)
+      activesupport (= 2.3.5)
+      rake (>= 0.8.3)
+    rake (10.0.2)
+    ryanb-acts-as-list (0.1.2)
+    thin (1.2.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  andand (= 1.3.1)
+  authlogic (= 2.1.3)
+  calendar_date_select (= 1.15)
+  mislav-will_paginate (= 2.3.11)
+  pg (= 0.8.0)
+  rack (= 1.0.1)
+  rails (= 2.3.5)
+  ryanb-acts-as-list (= 0.1.2)
+  thin (= 1.2.1)
