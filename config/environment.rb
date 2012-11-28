@@ -69,10 +69,10 @@ Rails::Initializer.run do |config|
   #config.gem 'daemons'
   
 
-  #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
+  config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
   
-  #config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
-  #           :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
+             :source => 'http://gems.github.com'
   
   config.active_record.default_timezone = :utc
 
