@@ -30,8 +30,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   
   # This is for gem-bundler to find all our gems
-  require 'vendor/bundler_gems/environment.rb' # add dependenceies to load paths
-  Bundler.require_env :optional_environment    # actually require the files
+  #require 'vendor/bundler_gems/environment.rb' # add dependenceies to load paths
+  #Bundler.require_env :optional_environment    # actually require the files
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
