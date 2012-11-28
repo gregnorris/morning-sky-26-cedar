@@ -11,6 +11,11 @@ gem "authlogic", "2.1.3"
 gem "mislav-will_paginate", "2.3.11"
 gem "ryanb-acts-as-list", "0.1.2"
 
+gem "formtastic", "0.9.1"
+gem "haml", "2.2.6"
+
+
+
 # aspen gems
 gem "pg", "0.8.0"
 gem "rack", "1.0.1"
