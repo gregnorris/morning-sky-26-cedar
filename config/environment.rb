@@ -5,7 +5,7 @@
 
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.17' unless defined? RAILS_GEM_VERSION  # was 2.3.5
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -69,10 +69,10 @@ Rails::Initializer.run do |config|
   #config.gem 'daemons'
   
 
-  config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
+  config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'https://rubygems.org'
   
-  config.gem 'mislav-will_paginate', :version => '>= 2.3.8', :lib => 'will_paginate', 
-             :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate', :version => '>= 2.3.10', :lib => 'will_paginate', 
+             :source => 'https://rubygems.org'
   
   config.active_record.default_timezone = :utc
 

@@ -1,25 +1,36 @@
 source :rubygems
-source 'http://gems.github.com'
+#source 'http://gems.github.com'  # appears to be abandoned
+source 'https://rubygems.org'
+
+# IMPORTANT: on Cloud 9, need to do bundle install as:  bundle install --jobs=1
 
 # ruby
 ruby "1.8.7"
 
+gem "rake", "0.8.7"
+
 # .gems
 gem "andand", "1.3.1"
 gem "calendar_date_select", "1.15"
+gem "hoe", "1.12.1"  # bundler said calendar_date_select depended on 
+
 gem "authlogic", "2.1.3"
-gem "mislav-will_paginate", "2.3.11", :require => 'will_paginate'
+gem "mislav-will_paginate", "2.3.10", :require => 'will_paginate' # according to rubygems.org, 2.3.11 was "yanked"
 gem "ryanb-acts-as-list", "0.1.2", :require => 'acts_as_list'
 
 gem "formtastic", "0.9.1"
 gem "haml", "2.2.6"
 
+gem "rdoc"  # not sure what version this should be (maybe an older one)
 
+
+# IMPORTANT: on Cloud 9, run rails server with:  ruby script/server -b $IP -p $PORT
+# then the app will be running at:  https://hoh-inventory-gregnorris.c9users.io/account
 
 # aspen gems
 gem "pg", "0.8.0"
-gem "rack", "1.0.1"
-gem "rails", "2.3.5"
+gem "rack", "1.1.0"   # was 1.0.1
+gem "rails", "2.3.17"  # was 2.3.5
 gem "thin", "1.2.1"
 
 # gem "abstract", "1.0.0"
